@@ -199,6 +199,7 @@ def recursively_install_submodules(root, p=ALL):
 # ------------------------------------------------------------------------------
 # If you have to map or filter here, you're doing it _wrong_.
 # This is the Duplo layer of the code.
+# Best if sequence doesn't matter.
 
 # Github hosted config packages go in $HOME
 
@@ -300,6 +301,9 @@ def set_vc():
 # ------------------------------------------------------------------------------
 # Run
 # ------------------------------------------------------------------------------
+
+noninteractive_funs = [ set_peda ]
+
 command_to_fun = { 'zsh'   : set_zsh
                  , 'ssh'   : set_ssh
                  , 'osx'   : set_osx
@@ -325,7 +329,7 @@ def main(c=None):
         except: return          # get rid of nasty stacktrace on Ctrl-D
 
     if   c == 'all':
-        do  ( command_to_fun.values() )
+        map(do, [ command_to_fun.values(), noninteractive_funs ])
     elif c == 'list':
         print command_to_fun.keys()
         main()
