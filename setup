@@ -70,7 +70,7 @@ def delete(path):
     try:
         if   islink(path): os.unlink(path)     # leaves actual file untouched
         elif isfile(path): os.remove(path)     # calling this on link tries to remove actual file
-        elif isdir(path):  shutil.rmtree(path) # roughly equiv to rm -rf
+        elif isdir(path) : shutil.rmtree(path) # roughly equiv to rm -rf
     except:  return
 
 # PATHS DO NOT HAVE TRAILING SLASHES
