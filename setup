@@ -114,7 +114,7 @@ def delete(path):
     except:  return
 
 # PATHS DO NOT HAVE TRAILING SLASHES
-# link_one : basename abs_path abs_path -> ()
+#   link_one : basename abs_path abs_path -> ()
 def link_one(fname, frompath=DOTFILES, topath=HOME):
     src = join(frompath, fname)
     dst = join(topath, FHIDE(fname))
@@ -127,7 +127,7 @@ def link_one(fname, frompath=DOTFILES, topath=HOME):
         raise InvalidPath(src)
 
 # link everything inside a directory
-# link_dir : abs_path abs_path (basename -> bool) -> ()
+#   link_dir : abs_path abs_path (basename -> bool) -> ()
 def link_dir(frompath, topath=HOME, pred=is_dotfile):
     files = filter(pred, os.listdir(frompath))
     map(lambda fname: link_one(fname,frompath,topath), files)
