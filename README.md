@@ -1,0 +1,1 @@
+Run `./setup all` or just `./setup` for interactive mode.
