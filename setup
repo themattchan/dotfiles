@@ -2,6 +2,7 @@
 #
 # setup
 # Setup dotfiles the modern way. Why bother with bash scripts?
+# Use default libraries only to ensure compatibility on new systems
 #
 # Author:  Matthew Chan <matt@themattchan.com>
 # Date:    January 2015
@@ -31,23 +32,36 @@ VERBOSE  = False
 # Utilities
 # ------------------------------------------------------------------------------
 
-def run_cmd(cmd):
-    if VERBOSE:
-        subprocess.call(cmd,
-                        shell=True,
-                        executable=SHELL)
-    else:
-        subprocess.call(cmd,
-                        shell=True,
-                        executable=SHELL,
-                        stdout=open(os.devnull, "w"),
-                        stderr=subprocess.STDOUT)
+class Cmd:
+    def run(cmd):
+        if VERBOSE:
+            subprocess.call(cmd,
+                            shell=True,
+                            executable=SHELL)
+        else:
+            subprocess.call(cmd,
+                            shell=True,
+                            executable=SHELL,
+                            stdout=open(os.devnull, "w"),
+                            stderr=subprocess.STDOUT)
 
-def do(funs): map(apply, funs)            # takes a list of nullary functions
+    def git(repo, action='clone', dst="", flags=""):
+        gitcmd = 'git '+action+' '+flags+' '+repo+' '+dst
+        return gitcmd
 
-# Wrap print in a function so we can map it.
-# Don't import from future because I like 2.7 print syntax for everything else.
-def show(x): print x
+    def run_git(repo, action='clone', dst="", flags=""):
+        gitcmd = 'git '+action+' '+flags+' '+repo+' '+dst
+        self.run(gitcmd)
+
+    def run_seq(*cmds):
+        self.run(cmds.join("; "))
+
+cmd = Cmd()
+run_cmd = cmd.run               # backwards compatibility for now
+
+class InvalidPath(Exception):
+    def __init__(self, value): self.value = value
+    def __str__(self):         return "Error: invalid filepath "+self.value
 
 # Always use FHIDE, makes it easier to see which files are being dotted.
 def FHIDE(fname):
@@ -62,21 +76,34 @@ def FSHOW(fname):
     else:
         return fname
 
+# Wrap print in a function so we can map it.
+# Don't import from future because I like 2.7 print syntax for everything else.
+def show(x): print x
 
-def exists_path(path): return (isfile(path) or isdir(path) or is_link(path))
+def do(funs): map(apply, funs)  # takes a list of nullary functions
+
+# predicates for filtering
+def ALL(x): return True
+
+def equal(obj): return (lambda x: x == obj)
+
+def exists_path(path): return (isfile(path) or isdir(path) or islink(path))
+
+def is_commented_line(string) = return (string[0] == '#')
 
 # Aside from the beginning period, dotfile names do not contain dots.
-# dotfiles stored in DOTFILES do not begin with dots
+# dotfiles stored in DOTFILES do not begin with dots.
 def is_dotfile(fname):
+    included_files = ['emacs.d']
     excluded_files = ['readme']
+    assert set(included_files).intersection(set(excluded_files)) == set([])
+
     excluded_chars = set(['.', '#', '~'])
     fname_chars    = set(fname.lower())
-    return (fname.lower() not in excluded_files
-            and fname_chars == fname_chars.difference(excluded_chars))
 
-class InvalidPath(Exception):
-    def __init__(self, value): self.value = value
-    def __str__(self):         return "Error: invalid filepath "+self.value
+    return (   (fname.lower() in included_files
+            or  fname.lower() not in excluded_files)
+            and fname_chars == fname_chars.difference(excluded_chars))
 
 def delete(path):
     try:
@@ -98,19 +125,19 @@ def link_one(fname, frompath=DOTFILES, topath=HOME):
         raise InvalidPath(src)
 
 # link everything inside a directory
-def link_dir(frompath, topath=HOME, p=is_dotfile):
+def link_dir(frompath, topath=HOME, pred=is_dotfile):
     # p : filename -> bool
-    files = filter(p, os.listdir(frompath))
+    files = filter(pred, os.listdir(frompath))
     map(lambda fname: link_one(fname,frompath,topath), files)
 
 # Tree-fold over the directory structure.
 #   dir_fold : (a -> abs_path -> a) a abs_path -> a
 #def dir_fold(f, a, root): show("undefined")
 
-
-# Tree-map over the directory structure. f has to test for dir/file
+# Tree-map over the directory structure.
+# f has to test for dir/file
 #   dir_map : (abs_path -> ()) abs_path -> ()
-def dir_map(f,root):
+def dir_map(f, root):
     f(root)
     if not isdir(root): return
     else:
@@ -122,20 +149,24 @@ def dir_map(f,root):
 # ------------------------------------------------------------------------------
 
 # submodule file name   is '.submodules'
-# submodule file syntax is '<git_repo> <dir_name>', separated by whitespace
+# submodule file syntax is '<id> <git_repo> <dir_name>', separated by whitespace
 # comment out lines with '#' (space optional)
-def install_submodules(path):
-    def get(loc):
-        url = loc[0]
-        if len(loc)>1: name = loc[1]
-        else:          name = ""
+def install_submodules(path, pred=ALL):
+    def get(entry):
+        uid = entry[0]
+        url = entry[1]
+        if len(entry)>2: todir = entry[2]
+        else:            todir = ""
 
-        if url != '#' and url[0] != '#':
+        if pred(uid) and not is_commented_line(uid):
             # cd into dir because we can't be sure if there is a
             # specified name for the repo
-            run_cmd("cd %(dir)s; git clone %(url)s %(name)s" % \
-                { "dir": path, "url": url, "name": name })
+            run_cmd("cd %(cwd)s; git clone %(url)s %(todir)s" % \
+                { "cwd": path, "url": url, "todir": todir })
 
+    # better to filter on os.listdir(path)!!
+    # there's got to  be a list.exists function...
+    # but then again, isfile is good because it rules out wrong types...
     modlst = join(path, FHIDE("submodules"))
     if isfile(modlst):
         f       = open(modlst, 'r')
@@ -143,10 +174,13 @@ def install_submodules(path):
         map(get, modules)
         f.close()
 
-def recursively_install_submodules(root):
-    dir_map(install_submodules, root)
+def recursively_install_submodules(root, p=ALL):
+    dir_map(lambda path: install_submodules(path,p), root)
 
-# move old dotfiles to a directory ~/dotfiles_old
+# list all submodules
+# def
+
+# copy old dotfiles to a directory ~/dotfiles_old
 # def backup_dotfiles():
 
 # get rid of all old symlinks of or actual dotfiles in HOME
@@ -155,10 +189,16 @@ def recursively_install_submodules(root):
 # initialise a ~/dotfiles directory if not already
 # def init_dotfiles(use_old=False):
 
+# update all repos in this tree
+# def update(root):
+#     dir_map(update_fun,root)
+
 # ------------------------------------------------------------------------------
 # Link!
 # ------------------------------------------------------------------------------
-# If you have to map or filter here, you're doing it wrong.
+# If you have to map or filter here, you're doing it _wrong_.
+# This is the Duplo layer of the code.
+
 # Github hosted config packages go in $HOME
 
 def set_zsh(clean=True):
@@ -212,7 +252,7 @@ def set_emacs():
         if EDITOR == 'emacs':
             install_submodules(DOTFILES) # only top level submodule is emacs.d
         else:
-             raise ValueError('vi user')
+            raise ValueError('vi user')
         link_one("emacs.d")
     except:
         print "... you don't have it.\n"
@@ -259,16 +299,16 @@ def set_vc():
 # ------------------------------------------------------------------------------
 # Run
 # ------------------------------------------------------------------------------
-command_to_fun = {  'zsh'   : set_zsh
-                  , 'ssh'   : set_ssh
-                  , 'osx'   : set_osx
-                  , 'linux' : set_linux
-                  , 'emacs' : set_emacs
-                  , 'vc'    : set_vc
-                  }
+command_to_fun = { 'zsh'   : set_zsh
+                 , 'ssh'   : set_ssh
+                 , 'osx'   : set_osx
+                 , 'linux' : set_linux
+                 , 'emacs' : set_emacs
+                 , 'vc'    : set_vc
+                 }
 
 def prompt():
-    title = "Setup ~/.dotfiles"
+    title = "Setup ~/dotfiles"
     print  (80 * '-')
     print ((80 - len(title))/2 * ' ') + title
     print  (80 * '-')
