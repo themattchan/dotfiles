@@ -90,7 +90,7 @@ def equal(obj): return (lambda x: x == obj)
 
 def exists_path(path): return (isfile(path) or isdir(path) or islink(path))
 
-def is_commented_line(string) = return (string[0] == '#')
+def is_commented_line(string): return (string[0] == '#')
 
 # Aside from the beginning period, dotfile names do not contain dots.
 # dotfiles stored in DOTFILES do not begin with dots.
