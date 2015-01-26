@@ -1,6 +1,6 @@
 #! /usr/bin/python
 #
-# setup
+# setup.py
 # Setup dotfiles the modern way. Why bother with bash scripts?
 # Use default libraries only to ensure compatibility on new systems
 #
