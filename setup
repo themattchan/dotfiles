@@ -81,7 +81,11 @@ def FSHOW(fname):
 # Don't import from future because I like 2.7 print syntax for everything else.
 def show(x): print x
 
+#   do : [ (() -> ()) ] -> ()
 def do(funs): map(apply, funs)  # takes a list of nullary functions
+
+#   join_do : [[ (() -> ()) ]] -> ()
+def join_do(more_funs): map(do, more_funs) # join_do(*funs) would be yet another type...
 
 # predicates for filtering
 def ALL(x): return True
@@ -133,7 +137,7 @@ def link_dir(frompath, topath=HOME, pred=is_dotfile):
     map(lambda fname: link_one(fname,frompath,topath), files)
 
 # Tree-fold over the directory structure.
-#   dir_fold : (a -> abs_path -> a) a abs_path -> a
+#   dir_fold : (a abs_path -> a) a abs_path -> a
 #def dir_fold(f, a, root): show("undefined")
 
 # Tree-map over the directory structure.
@@ -330,7 +334,7 @@ def main(c=None):
         except: return          # get rid of nasty stacktrace on Ctrl-D
 
     if   c == 'all':
-        map(do, [ command_to_fun.values(), noninteractive_funs ])
+        join_do([ command_to_fun.values(), noninteractive_funs ])
     elif c == 'list':
         print command_to_fun.keys()
         main()
