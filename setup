@@ -85,6 +85,7 @@ def link_one(fname, frompath=DOTFILES, topath=HOME):
     else:
         raise InvalidPath(src)
 
+# link everything inside a directory
 def link_dir(frompath, topath=HOME, p=is_dotfile):
     # p : filename -> bool
     files = filter(p, os.listdir(frompath))
