@@ -1,0 +1,34 @@
+[user]
+	name = Matthew Chan
+	email = matt@themattchan.com
+[core]
+	excludesfile = ~/.gitignore_global
+	autocrlf = input
+	editor = emacs
+	safecrlf = true
+[diff]
+    tool = ediff
+    guitool = ediff
+[merge]
+	tool = emerge
+[push]
+	default = matching
+[branch]
+	autosetuprebase = always
+[color]
+	status = auto
+	branch = auto
+[credential]
+	helper = osxkeychain
+[alias]
+	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	unstage = reset HEAD --
+	last = log -1 HEAD
+[filter "media"]
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f

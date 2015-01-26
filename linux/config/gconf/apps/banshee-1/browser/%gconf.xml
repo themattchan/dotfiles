@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="position" mtime="1417654273" type="string">
+		<stringvalue>left</stringvalue>
+	</entry>
+	<entry name="visible" mtime="1417654275" type="bool" value="true"/>
+</gconf>

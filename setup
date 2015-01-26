@@ -1,0 +1,284 @@
+#! /usr/bin/python
+#
+# setup
+# Setup dotfiles the modern way. Why bother with bash scripts?
+#
+# Author:  Matthew Chan <matt@themattchan.com>
+# Date:    January 2015
+# License: GNU
+#
+import os, sys, shutil, subprocess
+from os.path import isfile, isdir, islink, join
+
+# ------------------------------------------------------------------------------
+# Constants
+# ------------------------------------------------------------------------------
+
+IS_MAC   = sys.platform == 'darwin'
+IS_LINUX = sys.platform == 'linux' or sys.platform == 'linux2'
+
+HOME     = os.environ['HOME']                             # /Users/matt
+DOTFILES = os.getcwd()                                    # /Users/matt/dotfiles
+
+SHELL    = '/bin/zsh'
+EDITOR   = 'emacs -Q -nw'       # In case I need to edit something
+
+VERBOSE  = True
+
+# ------------------------------------------------------------------------------
+# Utilities
+# ------------------------------------------------------------------------------
+
+def run_cmd(cmd): subprocess.call(cmd, shell=True, executable=SHELL)
+
+def do(funs): map(apply, funs)            # takes a list of nullary functions
+
+# Wrap print in a function so we can map it.
+# Don't import from future because I like 2.7 print syntax everything else.
+def show(x): print x
+
+# Always use FHIDE, makes it easier to see which files are being dotted.
+def FHIDE(fname):
+    if fname[0] != '.':
+        return '.'+fname
+    else:
+        return     fname
+
+def FSHOW(fname):
+    if fname[0] == '.':
+        return fname[1:]
+    else:
+        return fname
+
+
+def exists_path(path): return (isfile(path) or isdir(path) or is_link(path))
+
+# Aside from the beginning period, dotfile names do not contain dots.
+# dotfiles stored in DOTFILES do not begin with dots
+def is_dotfile(fname):
+    excluded_files = ['readme']
+    excluded_chars = set(['.', '#', '~'])
+    fname_chars    = set(fname.lower())
+    return (fname.lower() not in excluded_files
+            and fname_chars == fname_chars.difference(excluded_chars))
+
+class InvalidPath(Exception):
+    def __init__(self, value): self.value = value
+    def __str__(self):         return "Error: invalid filepath "+self.value
+
+def delete(path):
+    try:
+        if   islink(path): os.unlink(path)     # leaves actual file untouched
+        elif isfile(path): os.remove(path)     # calling this on link tries to remove actual file
+        elif isdir(path):  shutil.rmtree(path) # roughly equiv to rm -rf
+    except:  return
+
+# PATHS DO NOT HAVE TRAILING SLASHES
+def link_one(fname, frompath=DOTFILES, topath=HOME):
+    src = join(frompath, fname)
+    dst = join(topath, FHIDE(fname))
+    if exists_path(src):
+        delete(dst)        # always try and delete existing symlinks/files first
+        os.symlink(src,dst)
+        if VERBOSE:
+             print ("    link: %s -> %s" % (src,dst)) # I give up aligning this shit
+    else:
+        raise InvalidPath(src)
+
+def link_dir(frompath, topath=HOME, p=is_dotfile):
+    # p : filename -> bool
+    files = filter(p, os.listdir(frompath))
+    map(lambda fname: link_one(fname,frompath,topath), files)
+
+# Tree-fold over the directory structure.
+#   dir_fold : (a -> abs_path -> a) a abs_path -> a
+#def dir_fold(f, a, root): show("undefined")
+
+
+# Tree-map over the directory structure. f has to test for dir/file
+#   dir_map : (abs_path -> ()) abs_path -> ()
+def dir_map(f,root):
+    f(root)
+    if not isdir(root): return
+    else:
+        subpaths = map(lambda fn: join(root,fn), os.listdir(root))
+        map(lambda sp: dir_map(f,sp), subpaths)
+
+# ------------------------------------------------------------------------------
+# Specifics
+# ------------------------------------------------------------------------------
+
+# submodule file name   is '.submodules'
+# submodule file syntax is '<git_repo> <dir_name>', separated by whitespace
+# comment out lines with '#' (space optional)
+def install_submodules(path):
+    def get(loc):
+        url = loc[0]
+        if len(loc)>1: name = loc[1]
+        else:          name = ""
+
+        if url != '#' and url[0] != '#':
+            # cd into dir because we can't be sure if there is a
+            # specified name for the repo
+            run_cmd("cd %(dir)s; git clone %(url)s %(name)s" % \
+                { "dir": path, "url": url, "name": name })
+
+    modlst = join(path, FHIDE("submodules"))
+    if isfile(modlst):
+        f       = open(modlst, 'r')
+        modules = map(lambda l: l.split(), f.readlines())
+        map(get, modules)
+        f.close()
+
+def recursively_install_submodules(root):
+    dir_map(install_submodules, root)
+
+# move old dotfiles to a directory ~/dotfiles_old
+# def backup_dotfiles():
+
+# get rid of all old symlinks of or actual dotfiles in HOME
+# def clean_dotfiles():
+
+# initialise a ~/dotfiles directory if not already
+# def init_dotfiles(use_old=False):
+
+# ------------------------------------------------------------------------------
+# Link!
+# ------------------------------------------------------------------------------
+# If you have to map or filter here, you're doing it wrong.
+# Github hosted config packages go in $HOME
+
+def set_zsh(clean=True):
+    # use zprezto
+    zp_dir           = join(HOME, FHIDE("zprezto"))
+    zp_default_confs = join(zp_dir, "runcoms")
+    my_zsh_confs     = join(DOTFILES, "term")
+
+    def reinstall_zp():
+        print "(Re)installing zprezto...\t",
+        delete(zp_dir)
+        run_cmd("git clone --recursive https://github.com/sorin-ionescu/prezto.git "
+                +zp_dir)
+        print "zprezto updated!"
+
+    if clean: reinstall_zp()
+
+    print "Symlinking zprezto default config files..."
+    link_dir(zp_default_confs)
+
+    print "Symlinking my config files..."
+    link_dir(my_zsh_confs)
+
+    print "Done!"
+
+def set_peda():
+    print "Installing peda...\t",
+    delete(join(HOME, FHIDE("peda")))
+    run_cmd("git clone https://github.com/longld/peda.git ~/.peda")
+
+    with open(join(HOME, FHIDE("gdbinit")),'w') as f:
+        f.write("source ~/.peda/peda.py")
+
+    print "Done!"
+
+def set_osx():
+    if IS_MAC:
+        print "Running OS X setup script...\t",
+        run_cmd(join(DOTFILES,"osx/osx"))
+        print "Done!"
+
+def set_linux():
+    if IS_LINUX:
+        print "Linking Linux configs...\t",
+        link_dir(join(DOTFILES,"linux"))
+        print "Done!"
+
+def set_emacs():
+    print "Emacs power...\t",
+    try: link_one("emacs.d")
+    except:
+        print "... you don't have it.\n"
+        print "It's dangerous to go alone. Take this"
+        run_cmd("git clone https://gist.github.com/112f4a71294aec281fa9.git "+
+                join(DOTFILES,"emacs.d"))
+        set_emacs()
+        print "Welcome to the Church of Emacs."
+        return
+    recursively_install_submodules(join(DOTFILES,"emacs.d"))
+    print "Engage!"
+
+def set_ssh():
+    print "Linking your ssh keys...\t",
+    try: link_one("ssh")
+    except:
+        print "\n\tYou don't have your keys here.\nAborting."
+        return
+    print "Done!"
+
+def set_vc():
+    print "Linking version control settings...\t"
+    try:
+        link_dir(join(DOTFILES, "vc"))
+    except:
+       print "\n\tSettings not found."
+       return
+    print "Done!"
+
+# def set_misc():
+
+# def set_rest():
+
+# ------------------------------------------------------------------------------
+# Tests
+# ------------------------------------------------------------------------------
+#TEST dir_map(show, DOTFILES)
+
+#TEST def foo(): print "foo"
+#TEST do([foo for i in range(10)])
+#TEST print join(DOTFILES,"emacs.d")
+#TEST print join(DOTFILES,FHIDE("emacs.d"))
+
+# ------------------------------------------------------------------------------
+# Run
+# ------------------------------------------------------------------------------
+command_to_fun = {  'zsh'   : set_zsh
+                  , 'ssh'   : set_ssh
+                  , 'osx'   : set_osx
+                  , 'linux' : set_linux
+                  , 'emacs' : set_emacs
+                  , 'vc'    : set_vc
+                  }
+
+def prompt():
+    title = "Setup ~/.dotfiles"
+    print  (80 * '-')
+    print ((80 - len(title))/2 * ' ') + title
+    print  (80 * '-')
+
+    print "all      Everything"
+    print "list     List available commands/directories to setup"
+    print "(cmd)    Run command"
+    print "exit     Bye!"
+
+def main(c=None):
+    if c == None:
+        try:    c = raw_input("\nEnter command: ")
+        except: return          # get rid of nasty stacktrace on Ctrl-D
+
+    if   c == 'all':
+        do  ( command_to_fun.values() )
+    elif c == 'list':
+        print command_to_fun.keys()
+        main()
+    else:
+        try:  command_to_fun.get(c)()
+        except: return
+        main()
+    return
+
+if __name__ == "__main__":
+    if len(sys.argv) == 2 and sys.argv[1] == 'all':
+        main(sys.argv[1])
+    else:
+        prompt()
+        main()

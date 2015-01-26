@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="file_pattern" mtime="1417654049" type="string">
+		<stringvalue>{%track_number%. }%title%</stringvalue>
+	</entry>
+	<entry name="folder_pattern" mtime="1417654049" type="string">
+		<stringvalue>%album_artist%%path_sep%%album%</stringvalue>
+	</entry>
+</gconf>

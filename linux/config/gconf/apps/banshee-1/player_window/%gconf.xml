@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="show_cover_art" mtime="1417654742" type="bool" value="false"/>
+	<entry name="open_location_history" mtime="1417653861" type="list" ltype="string">
+		<li type="string">
+			<stringvalue>file:///run/media/matt/Media/iTunes/Music/</stringvalue>
+		</li>
+		<li type="string">
+			<stringvalue></stringvalue>
+		</li>
+	</entry>
+	<entry name="last_file_chooser_uri" mtime="1417654026" type="string">
+		<stringvalue>file:///run/media/matt/Media/iTunes/Music</stringvalue>
+	</entry>
+	<entry name="height" mtime="1395534483" type="int" value="730"/>
+	<entry name="width" mtime="1395534483" type="int" value="1022"/>
+	<entry name="y_pos" mtime="1395534483" type="int" value="18"/>
+	<entry name="x_pos" mtime="1395534483" type="int" value="0"/>
+	<entry name="maximized" mtime="1417656022" type="bool" value="true"/>
+	<entry name="disable_album_grid" mtime="1417653990" type="bool" value="false"/>
+	<entry name="seek_slider_width" mtime="1417653990" type="int" value="175"/>
+	<entry name="source_view_width" mtime="1417656025" type="int" value="175"/>
+</gconf>

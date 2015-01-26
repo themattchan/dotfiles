@@ -1,0 +1,29 @@
+settings = {
+  core = { real_name = "Matt Chan"; user_name = "matt"; nick = "mach"; };
+  "fe-text" = { actlist_sort = "refnum"; };
+};
+servers = (
+  {
+    address = "162.248.141.245";
+    port = "1701";
+	chatnet = "freenode";
+    password = "matt/freenode:CRBafC8Cy2";
+    use_ssl = "yes";
+    ssl_verify = "no";
+    autoconnect = "yes";
+  },
+  {
+	address = "162.248.141.245";
+    port = "1701";
+	chatnet = "eve"
+    password = "matt/eve:CRBafC8Cy2";
+    use_ssl = "yes";
+    ssl_verify = "no";
+    autoconnect = "yes";
+	}
+);
+chatnets = {
+freenode = {type = "IRC";};
+eve = {type = "IRC";};
+};
+logs = { };

@@ -1,0 +1,4 @@
+export CC="/usr/bin/i686-apple-darwin11-llvm-gcc-4.2"
+export CFLAGS="-O2 -arch x86_64"
+export LDFLAGS="-L/opt/local/lib"
+export CPPFLAGS="-I/opt/local/include"

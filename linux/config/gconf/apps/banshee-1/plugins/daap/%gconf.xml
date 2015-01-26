@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="open_remote_server_history" mtime="1395534623" type="list" ltype="string">
+		<li type="string">
+			<stringvalue>ganymede.local</stringvalue>
+		</li>
+		<li type="string">
+			<stringvalue></stringvalue>
+		</li>
+	</entry>
+</gconf>

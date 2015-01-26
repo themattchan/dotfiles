@@ -1,0 +1,20 @@
+mode_in_use=0
+mode_default=3
+web_url=http://www.merriam-webster.com/dictionary/{word}
+show_panel_entry=false
+panel_entry_size=150
+port=2628
+server=dict.org
+dict=* (use all)
+spell_bin=/usr/bin/enchant
+spell_dictionary=he
+link_color=#0000FF
+phonetic_color=#006300
+error_color=#800000
+success_color=#107000
+geometry=0;21;580;360;0;
+speedreader_font=Sans 32
+speedreader_wpm=400
+speedreader_grouping=1
+speedreader_mark_paragraphs=false
+
