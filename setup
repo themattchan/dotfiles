@@ -14,22 +14,34 @@ from os.path import isfile, isdir, islink, join
 # Constants
 # ------------------------------------------------------------------------------
 
+EDITOR   = 'emacs'
+
 IS_MAC   = sys.platform == 'darwin'
 IS_LINUX = sys.platform == 'linux' or sys.platform == 'linux2'
 
-HOME     = os.environ['HOME']                             # /Users/matt
-DOTFILES = os.getcwd()                                    # /Users/matt/dotfiles
+HOME     = os.environ['HOME']   # /Users/matt
+DOTFILES = os.getcwd()          # /Users/matt/dotfiles
 
-SHELL    = '/bin/zsh'
-EDITOR   = 'emacs -Q -nw'       # In case I need to edit something
+SHELL      = '/bin/zsh'         # Use zsh
+EDITOR_EXE = 'emacs -Q -nw'     # In case I need to edit something
 
-VERBOSE  = True
+VERBOSE  = False
 
 # ------------------------------------------------------------------------------
 # Utilities
 # ------------------------------------------------------------------------------
 
-def run_cmd(cmd): subprocess.call(cmd, shell=True, executable=SHELL)
+def run_cmd(cmd):
+    if VERBOSE:
+        subprocess.call(cmd,
+                        shell=True,
+                        executable=SHELL)
+    else:
+        subprocess.call(cmd,
+                        shell=True,
+                        executable=SHELL,
+                        stdout=open(os.devnull, "w"),
+                        stderr=subprocess.STDOUT)
 
 def do(funs): map(apply, funs)            # takes a list of nullary functions
 
@@ -81,7 +93,7 @@ def link_one(fname, frompath=DOTFILES, topath=HOME):
         delete(dst)        # always try and delete existing symlinks/files first
         os.symlink(src,dst)
         if VERBOSE:
-             print ("    link: %s -> %s" % (src,dst)) # I give up aligning this shit
+             print ("    link: %s -> %s" % (src,dst)) # I give up on aligning this shit
     else:
         raise InvalidPath(src)
 
@@ -196,7 +208,12 @@ def set_linux():
 
 def set_emacs():
     print "Emacs power...\t",
-    try: link_one("emacs.d")
+    try:
+        if EDITOR == 'emacs':
+            install_submodules(DOTFILES) # only top level submodule is emacs.d
+        else:
+             raise ValueError('vi user')
+        link_one("emacs.d")
     except:
         print "... you don't have it.\n"
         print "It's dangerous to go alone. Take this"
