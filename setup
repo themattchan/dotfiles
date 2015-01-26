@@ -54,6 +54,7 @@ class Cmd:
         self.run(gitcmd)
 
     def run_seq(*cmds):
+        # might end up with separate terminal instances if we map over the list
         self.run(cmds.join("; "))
 
 cmd = Cmd()
