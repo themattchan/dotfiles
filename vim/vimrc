@@ -1,0 +1,104 @@
+" Emacs keys please
+:cnoremap <C-a>  <Home>
+:cnoremap <C-b>  <Left>
+:cnoremap <C-f>  <Right>
+:cnoremap <C-d>  <Delete>
+:cnoremap <M-b>  <S-Left>
+:cnoremap <M-f>  <S-Right>
+:cnoremap <M-d>  <S-right><Delete>
+:cnoremap <Esc>b <S-Left>
+:cnoremap <Esc>f <S-Right>
+:cnoremap <Esc>d <S-right><Delete>
+:cnoremap <C-g>  <C-c>
+
+" interface
+colorscheme wombat
+set guifont=Monaco:h12
+set guioptions+=c
+set title
+set modeline
+set modelines=2
+set switchbuf=usetab
+set ruler
+set shortmess+=I
+set nocompatible
+set background=dark
+"set cursorline
+set lazyredraw
+set number
+set showcmd
+set showmatch  " highlight matching parens
+let g:session_autosave = 'no'
+" put viminfo inside the vim directory
+set viminfo+=n~/.vim/viminfo
+
+" highlight 80 chars overflow
+set colorcolumn=80
+
+" basic editing setup
+set smartindent
+set autoindent
+
+set tabstop=4
+set tw=74
+set softtabstop=4
+set expandtab "tabs to spaces
+
+" delete trailing whitespace on save
+autocmd BufWritePre <buffer> :%s/\s\+$//e
+
+set shiftwidth=4
+
+set ignorecase
+set smartcase
+
+set hidden
+set history=1000
+
+set linebreak
+set wrap
+
+filetype indent on
+
+set foldenable
+set foldlevelstart=10
+set foldnestmax=10
+
+" default is unix
+set fileformats=unix,mac,dos
+
+" stfu, dont beep
+set noeb vb t_vb=
+
+" Intuitive backspacing in insert mode
+set backspace=indent,eol,start
+
+" File-type highlighting and configuration.
+" Run :filetype (without args) to see what you may have
+" to turn on yourself, or just set them all to be sure.
+syntax on
+filetype on
+filetype plugin on
+filetype indent on
+
+" Highlight search terms...
+set hlsearch
+set incsearch " ...dynamically as they are typed.
+
+nnoremap ' `
+nnoremap ` '
+let mapleader = ","
+
+" mouse in terminal?
+set mouse=a
+set mousehide
+set mousem=popup
+
+" tab complete
+set wildchar=<Tab>
+set wildmenu
+set wildmode=longest:full,list:full
+set wildignore+=*.a,*.o
+set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
+set wildignore+=.DS_Store,.git,.hg,.svn
+set wildignore+=*~,*.swp,*.tmp

@@ -1,0 +1,13 @@
+*.ln
+*.sw*
+*~
+*.*~
+\#*
+.\#*
+.DS_Store
+
+*.o
+*.hi
+*.class
+a.out
+core
