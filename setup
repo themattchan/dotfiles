@@ -34,7 +34,7 @@ def run_cmd(cmd): subprocess.call(cmd, shell=True, executable=SHELL)
 def do(funs): map(apply, funs)            # takes a list of nullary functions
 
 # Wrap print in a function so we can map it.
-# Don't import from future because I like 2.7 print syntax everything else.
+# Don't import from future because I like 2.7 print syntax for everything else.
 def show(x): print x
 
 # Always use FHIDE, makes it easier to see which files are being dotted.
