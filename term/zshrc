@@ -27,7 +27,7 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 #export MITSCHEME_LIBRARY_PATH=/Applications/mit-scheme.app/Contents/Resources
 #export MIT_SCHEME_EXE=/usr/local/scheme/
 #export DYLD_LIBRARY_PATH=/opt/local/lib/:/opt/local/bin/lib
-export PYTHONPATH=/opt/local/bin/lib/python2.7/dist-packages
+export PYTHONPATH=/opt/local/bin/lib/python2.7/dist-packages:/Users/matt/LeapSDK
 export OPAM_BIN=~/.opam/system/bin
 export OCAML_TOPLEVEL_PATH=~/.opam/system/lib/toplevel
 export CAML_LD_LIBRARY_PATH=~/.opam/system/lib/stublibs:/usr/lib/ocaml/stublibs
@@ -46,14 +46,14 @@ function setjdk() {
 function removeFromPath() {
     export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
 }
-setjdk 1.7
+setjdk 1.8
 
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
-export CLASSPATH=.:$HOME/.jars/
+export CLASSPATH=$HOME/.jars/:.
 export SCALA_HOME=/Library/Scala/
 export TS_ACTIVATOR=$HOME/activator/ #typesafe activator
 
-export PATH=/Library/Developer:/Applications/Racket/bin:$OPAM_BIN:$OCAML_TOPLEVEL_PATH:$SCALA_HOME:$TS_ACTIVATOR:$CABAL_BINDIR:$PATH
+export PATH=/Library/Developer:/Applications/Racket/bin:$HOME/.bin/:$OPAM_BIN:$OCAML_TOPLEVEL_PATH:$SCALA_HOME:$TS_ACTIVATOR:$CABAL_BINDIR:$PATH
 export MANPATH=$MANPATH:/opt/local/share/man/
 export INFOPATH=$INFOPATH:/opt/local/share/info/
 export PKG_CONFIG_PATH=/usr/X11/lib/pkgconfig/:/usr/local/lib/pkgconfig:/usr/local/opt/libxml2/lib/pkgconfig/
@@ -74,8 +74,8 @@ fi
 #alias emacs="emacsclient -t"
 alias em="emacsclient -t"
 alias qem="emacs -Q -nw"
-alias vi="em"
-alias vim="em"
+#alias vi="em"
+#alias vim="em"
 alias nano="qem"
 
 export EDITOR="emacsclient"

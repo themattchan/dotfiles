@@ -35,26 +35,25 @@ VERBOSE  = False
 class Cmd:
     def run(cmd):
         if VERBOSE:
-            subprocess.call(cmd,
-                            shell=True,
-                            executable=SHELL)
+            out = subprocess.STDOUT
         else:
-            subprocess.call(cmd,
-                            shell=True,
-                            executable=SHELL,
-                            stdout=open(os.devnull, "w"),
-                            stderr=subprocess.STDOUT)
+            out = open(os.devnull, 'w')
+
+        subprocess.call(cmd,
+                        shell=True,
+                        executable=SHELL,
+                        stdout=out,
+                        stderr=subprocess.STDOUT)       # intermix errors
 
     def git(repo, action='clone', dst="", flags=""):
         gitcmd = 'git '+action+' '+flags+' '+repo+' '+dst
         return gitcmd
 
     def run_git(repo, action='clone', dst="", flags=""):
-        gitcmd = 'git '+action+' '+flags+' '+repo+' '+dst
-        self.run(gitcmd)
+        self.run(git(repo,action,dst,flags))
 
     def run_seq(*cmds):
-        # might end up with separate shell instances if we map over the list
+        # might end up with separate shell instances if we instead map over the list
         self.run(cmds.join("; "))
 
 cmd = Cmd()
@@ -62,24 +61,23 @@ run_cmd = cmd.run               # backwards compatibility for now
 
 class InvalidPath(Exception):
     def __init__(self, value): self.value = value
-    def __str__(self):         return "Error: invalid filepath "+self.value
+    def __str__ (self):        return "Error: invalid filepath "+self.value
 
 # Always use FHIDE, makes it easier to see which files are being dotted.
 def FHIDE(fname):
-    if fname[0] != '.':
-        return '.'+fname
-    else:
-        return     fname
+    if fname[0] != '.': return '.'+fname
+    else:               return     fname
 
 def FSHOW(fname):
-    if fname[0] == '.':
-        return fname[1:]
-    else:
-        return fname
+    if fname[0] == '.': return fname[1:]
+    else:               return fname
 
 # Wrap print in a function so we can map it.
 # Don't import from future because I like 2.7 print syntax for everything else.
 def show(x): print x
+
+# def let(ident, expr1, expr2):
+#     return (lambda ident: expr2)(expr1)
 
 #   do : [ (() -> ()) ] -> ()
 def do(funs): map(apply, funs)  # takes a list of nullary functions
@@ -99,16 +97,17 @@ def is_commented_line(string): return (string[0] == '#')
 # Aside from the beginning period, dotfile names do not contain dots.
 # dotfiles stored in DOTFILES do not begin with dots.
 def is_dotfile(fname):
-    included_files = ['emacs.d']
-    excluded_files = ['readme']
-    assert set(included_files).intersection(set(excluded_files)) == set([])
+    with fname.lower() as fname:
+        included_files = ['emacs.d']
+        excluded_files = ['readme']
+        assert set(included_files).intersection(set(excluded_files)) == set([])
 
-    excluded_chars = set(['.', '#', '~'])
-    fname_chars    = set(fname.lower())
+        excluded_chars = set(['.', '#', '~'])
+        fname_chars    = set(fname)
 
-    return (   (fname.lower() in included_files
-            or  fname.lower() not in excluded_files)
-            and fname_chars == fname_chars.difference(excluded_chars))
+        return (   (fname in included_files
+                or  fname not in excluded_files)
+                and fname_chars == fname_chars.difference(excluded_chars))
 
 def delete(path):
     try:
@@ -130,15 +129,15 @@ def link_one(fname, frompath=DOTFILES, topath=HOME):
     else:
         raise InvalidPath(src)
 
+# TODO abstract this into dir_map_one_level
 # link everything inside a directory
 #   link_dir : abs_path abs_path (basename -> bool) -> ()
-def link_dir(frompath, topath=HOME, pred=is_dotfile):
-    files = filter(pred, os.listdir(frompath))
+def link_dir(frompath, topath=HOME, p=is_dotfile):
+    files = filter(p, os.listdir(frompath))
     map(lambda fname: link_one(fname,frompath,topath), files)
 
 # Tree-fold over the directory structure.
 #   dir_fold : (a abs_path -> a) a abs_path -> a
-#def dir_fold(f, a, root): show("undefined")
 
 # Tree-map over the directory structure.
 # f has to test for dir/file
@@ -157,14 +156,14 @@ def dir_map(f, root):
 # submodule file name   is '.submodules'
 # submodule file syntax is '<id> <git_repo> <dir_name>', separated by whitespace
 # comment out lines with '#' (space optional)
-def install_submodules(path, pred=ALL):
+def install_submodules(path, p=ALL):
     def get(entry):
         uid = entry[0]
         url = entry[1]
         if len(entry)>2: todir = entry[2]
         else:            todir = ""
 
-        if pred(uid) and not is_commented_line(uid):
+        if p(uid) and not is_commented_line(uid):
             # cd into dir because we can't be sure if there is a
             # specified name for the repo
             run_cmd("cd %(cwd)s; git clone %(url)s %(todir)s" % \
@@ -309,7 +308,7 @@ def set_vc():
 
 noninteractive_funs = [ set_peda ]
 
-command_to_fun = { 'zsh'   : set_zsh
+command_to_fun = { 'shell' : set_zsh
                  , 'ssh'   : set_ssh
                  , 'osx'   : set_osx
                  , 'linux' : set_linux
@@ -334,7 +333,9 @@ def main(c=None):
         except: return          # get rid of nasty stacktrace on Ctrl-D
 
     if   c == 'all':
-        join_do([ command_to_fun.values(), noninteractive_funs ])
+        join_do([ command_to_fun.values()
+                , noninteractive_funs     ])
+
     elif c == 'list':
         print command_to_fun.keys()
         main()
@@ -344,9 +345,9 @@ def main(c=None):
         main()
     return
 
-if __name__ == "__main__":
-    if len(sys.argv) == 2 and sys.argv[1] == 'all':
-        main(sys.argv[1])
-    else:
-        prompt()
-        main()
+# if __name__ == "__main__":
+#     if len(sys.argv) == 2 and sys.argv[1] == 'all':
+#         main(sys.argv[1])
+#     else:
+#         prompt()
+#         main()
