@@ -6,24 +6,24 @@ servers = (
   {
     address = "162.248.141.245";
     port = "1701";
-	chatnet = "freenode";
+    chatnet = "freenode";
     password = "matt/freenode:CRBafC8Cy2";
     use_ssl = "yes";
     ssl_verify = "no";
     autoconnect = "yes";
   },
   {
-	address = "162.248.141.245";
+    address = "162.248.141.245";
     port = "1701";
-	chatnet = "eve"
+    chatnet = "eve"
     password = "matt/eve:CRBafC8Cy2";
     use_ssl = "yes";
     ssl_verify = "no";
     autoconnect = "yes";
-	}
+    }
 );
 chatnets = {
-freenode = {type = "IRC";};
-eve = {type = "IRC";};
+	 freenode = {type = "IRC";};
+	 eve = {type = "IRC";};
 };
 logs = { };
