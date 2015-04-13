@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#! /bin/python
 #
 # setup.py
 # Setup dotfiles the modern way. Why bother with bash scripts?
@@ -26,35 +26,36 @@ DOTFILES = os.getcwd()          # /Users/matt/dotfiles
 SHELL      = '/bin/zsh'         # Use zsh
 EDITOR_EXE = 'emacs -Q -nw'     # In case I need to edit something
 
-VERBOSE  = False
+VERBOSE  = True
 
 # ------------------------------------------------------------------------------
 # Utilities
 # ------------------------------------------------------------------------------
 
 class Cmd:
-    def run(cmd):
-        if VERBOSE:
+    VERBOSE = True
+    def run(self,cmd):
+        if self.VERBOSE:
             out = subprocess.STDOUT
         else:
             out = open(os.devnull, 'w')
-
+#        print "RUN COMMAND: " + cmd
         subprocess.call(cmd,
                         shell=True,
                         executable=SHELL,
                         stdout=out,
                         stderr=subprocess.STDOUT)       # intermix errors
 
-    def git(repo, action='clone', dst="", flags=""):
+    def git(self,repo, action='clone', dst="", flags=""):
         gitcmd = 'git '+action+' '+flags+' '+repo+' '+dst
         return gitcmd
 
-    def run_git(repo, action='clone', dst="", flags=""):
+    def run_git(self,repo, action='clone', dst="", flags=""):
         self.run(git(repo,action,dst,flags))
 
-    def run_seq(*cmds):
+    def run_seq(self,*cmds):
         # might end up with separate shell instances if we instead map over the list
-        self.run(cmds.join("; "))
+        self.run("; ".join(cmds))
 
 cmd = Cmd()
 run_cmd = cmd.run               # backwards compatibility for now
@@ -97,17 +98,20 @@ def is_commented_line(string): return (string[0] == '#')
 # Aside from the beginning period, dotfile names do not contain dots.
 # dotfiles stored in DOTFILES do not begin with dots.
 def is_dotfile(fname):
-    with fname.lower() as fname:
-        included_files = ['emacs.d']
-        excluded_files = ['readme']
-        assert set(included_files).intersection(set(excluded_files)) == set([])
+  #  print "IN ISDOTFILE"
+    fname = fname.lower()
+    included_files = ['emacs.d']
+    excluded_files = ['readme']
+    #assert set(included_files).intersection(set(excluded_files)) == set([])
 
-        excluded_chars = set(['.', '#', '~'])
-        fname_chars    = set(fname)
+    excluded_chars = set(['.', '#', '~'])
+    fname_chars    = set(fname)
 
-        return (   (fname in included_files
-                or  fname not in excluded_files)
-                and fname_chars == fname_chars.difference(excluded_chars))
+    x= (   (fname in included_files
+            or  fname not in excluded_files)
+            and fname_chars == fname_chars.difference(excluded_chars))
+ #   print x
+    return x
 
 def delete(path):
     try:
@@ -133,8 +137,12 @@ def link_one(fname, frompath=DOTFILES, topath=HOME):
 # link everything inside a directory
 #   link_dir : abs_path abs_path (basename -> bool) -> ()
 def link_dir(frompath, topath=HOME, p=is_dotfile):
-    files = filter(p, os.listdir(frompath))
-    map(lambda fname: link_one(fname,frompath,topath), files)
+    print "linking "+frompath+" to " +topath
+    print os.listdir(frompath)
+    ffff = [f for f in os.listdir(frompath) if p(f)]   #filter(p, os.listdir(frompath))
+    print ffff
+    map(lambda fname: link_one(fname,frompath,topath), ffff)
+    print "DONE LINKDIR"
 
 # Tree-fold over the directory structure.
 #   dir_fold : (a abs_path -> a) a abs_path -> a
@@ -153,31 +161,48 @@ def dir_map(f, root):
 # Specifics
 # ------------------------------------------------------------------------------
 
+
 # submodule file name   is '.submodules'
 # submodule file syntax is '<id> <git_repo> <dir_name>', separated by whitespace
 # comment out lines with '#' (space optional)
 def install_submodules(path, p=ALL):
-    def get(entry):
+    def git_get(entry):
+#    print "DOWNLOADING SUBMODULE: "+entry
         uid = entry[0]
         url = entry[1]
+        todir = ""
         if len(entry)>2: todir = entry[2]
-        else:            todir = ""
-
+        print uid
+        print url
+        print todir
         if p(uid) and not is_commented_line(uid):
             # cd into dir because we can't be sure if there is a
             # specified name for the repo
-            run_cmd("cd %(cwd)s; git clone %(url)s %(todir)s" % \
-                { "cwd": path, "url": url, "todir": todir })
+            cmd = "cd %(cwd)s; git clone %(url)s %(todir)s" % {"cwd": path, "url": url, "todir": todir }
 
+            run_cmd(cmd)
+            #cmd.run_seq(cd,git)
     # better to filter on os.listdir(path)!!
     # there's got to  be a list.exists function...
     # but then again, isfile is good because it rules out wrong types...
+
     modlst = join(path, FHIDE("submodules"))
+    #print modlst
     if isfile(modlst):
-        f       = open(modlst, 'r')
-        modules = map(lambda l: l.split(), f.readlines())
-        map(get, modules)
-        f.close()
+        #print "ISFILE"
+        f = open(modlst, 'r')
+        #print f
+        try:
+            modules = map(lambda l: l.split(), f.readlines())#[l.split() for l in f.readlines()]
+            #print modules
+            for e in modules:
+#                print "get" +e
+                git_get(e)
+                #map(get, modules)
+        except Exception as e:
+            print e
+        finally:
+            f.close()
 
 def recursively_install_submodules(root, p=ALL):
     dir_map(lambda path: install_submodules(path,p), root)
@@ -215,12 +240,12 @@ def set_zsh(clean=True):
 
     def reinstall_zp():
         print "(Re)installing zprezto...\t",
-        delete(zp_dir)
+        #delete(zp_dir)
         run_cmd("git clone --recursive https://github.com/sorin-ionescu/prezto.git "
                 +zp_dir)
         print "zprezto updated!"
 
-    if clean: reinstall_zp()
+   # if clean: reinstall_zp()
 
     print "Symlinking zprezto default config files..."
     link_dir(zp_default_confs)
@@ -254,13 +279,11 @@ def set_linux():
 
 def set_emacs():
     print "Emacs power...\t",
-    try:
-        if EDITOR == 'emacs':
-            install_submodules(DOTFILES) # only top level submodule is emacs.d
-        else:
-            raise ValueError('vi user')
+    if EDITOR == 'emacs':
+    #    install_submodules(DOTFILES) # only top level submodule is emacs.d
         link_one("emacs.d")
-    except:
+    else:
+        raise ValueError('vi user')
         print "... you don't have it.\n"
         print "It's dangerous to go alone. Take this"
         run_cmd("git clone https://gist.github.com/112f4a71294aec281fa9.git "+
@@ -268,7 +291,7 @@ def set_emacs():
         set_emacs()
         print "Welcome to the Church of Emacs."
         return
-    recursively_install_submodules(join(DOTFILES,"emacs.d"))
+    #recursively_install_submodules(join(DOTFILES,"emacs.d"))
     print "Engage!"
 
 def set_ssh():
@@ -345,9 +368,9 @@ def main(c=None):
         main()
     return
 
-# if __name__ == "__main__":
-#     if len(sys.argv) == 2 and sys.argv[1] == 'all':
-#         main(sys.argv[1])
-#     else:
-#         prompt()
-#         main()
+if __name__ == "__main__":
+    if len(sys.argv) == 2 and sys.argv[1] == 'all':
+        main(sys.argv[1])
+    else:
+        prompt()
+        main()
