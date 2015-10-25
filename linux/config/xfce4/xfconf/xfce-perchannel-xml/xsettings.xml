@@ -3,7 +3,7 @@
 <channel name="xsettings" version="1.0">
   <property name="Net" type="empty">
     <property name="ThemeName" type="string" value="Clearlooks"/>
-    <property name="IconThemeName" type="string" value="gnome"/>
+    <property name="IconThemeName" type="string" value="Fedora"/>
     <property name="DoubleClickTime" type="empty"/>
     <property name="DoubleClickDistance" type="empty"/>
     <property name="DndDragThreshold" type="empty"/>
@@ -25,7 +25,7 @@
     <property name="ColorPalette" type="empty"/>
     <property name="FontName" type="empty"/>
     <property name="IconSizes" type="empty"/>
-    <property name="KeyThemeName" type="empty"/>
+    <property name="KeyThemeName" type="string" value="emacs"/>
     <property name="ToolbarStyle" type="empty"/>
     <property name="ToolbarIconSize" type="empty"/>
     <property name="MenuImages" type="empty"/>
@@ -33,5 +33,6 @@
     <property name="MenuBarAccel" type="empty"/>
     <property name="CursorThemeName" type="empty"/>
     <property name="CursorThemeSize" type="empty"/>
+    <property name="DecorationLayout" type="string" value="close,minimize,maximize,menu:"/>
   </property>
 </channel>
