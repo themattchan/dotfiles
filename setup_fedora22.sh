@@ -2,7 +2,7 @@
 
 cd;
 
-# full system upate
+# full system update
 sudo dnf update -y
 
 # add repos
@@ -46,3 +46,6 @@ sudo yum install thunarx-python Thunar-devel libthunarx-2-dev
 
 # setup things
 chsh -s /bin/zsh $(whoami)
+
+gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
+xfconf-query -c xsettings -p /Gtk/KeyThemeName -s Emacs

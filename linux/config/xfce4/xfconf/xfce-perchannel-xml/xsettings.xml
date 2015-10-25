@@ -25,7 +25,7 @@
     <property name="ColorPalette" type="empty"/>
     <property name="FontName" type="empty"/>
     <property name="IconSizes" type="empty"/>
-    <property name="KeyThemeName" type="string" value="emacs"/>
+    <property name="KeyThemeName" type="string" value="Emacs"/>
     <property name="ToolbarStyle" type="empty"/>
     <property name="ToolbarIconSize" type="empty"/>
     <property name="MenuImages" type="empty"/>
