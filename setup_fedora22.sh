@@ -17,9 +17,10 @@ sudo dnf install -y xfce4-battery-plugin xfce4-cellmodem-plugin xfce4-clipman-pl
 
 # dev tools and command line things
 sudo dnf groupinstall -y "Development Tools"
-sudo dnf install -y zsh git emacs gcc gdb kernel-devel java ghc
+sudo dnf install -y zsh git emacs gcc gdb kernel-devel java node
+sudo dnf install -y ghc @ocaml coq z3 sbcl
 sudo dnf install -y elinks irssi wget curl
-
+sudo dnf install -y powertop thinkfan
 
 # LaTeX
 sudo dnf install -y \
@@ -28,6 +29,9 @@ sudo dnf install -y \
 
 # pdf viewer
 sudo dnf install -y evince
+
+# dock
+sudo dnf install -y gnome-do
 
 # web things
 sudo dnf install -y firefox transmission

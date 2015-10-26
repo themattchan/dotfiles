@@ -46,7 +46,7 @@ function setjdk() {
 function removeFromPath() {
     export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
 }
-setjdk 1.8
+#setjdk 1.8
 
 #export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
 export CLASSPATH=$HOME/.jars/:.
