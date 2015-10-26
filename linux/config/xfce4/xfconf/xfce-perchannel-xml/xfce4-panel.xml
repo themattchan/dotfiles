@@ -16,7 +16,7 @@
         <value type="int" value="15"/>
         <value type="int" value="6"/>
         <value type="int" value="16"/>
-        <value type="int" value="5"/>
+        <value type="int" value="22"/>
         <value type="int" value="2"/>
       </property>
     </property>
@@ -25,8 +25,8 @@
       <property name="position-locked" type="bool" value="true"/>
       <property name="plugin-ids" type="array">
         <value type="int" value="7"/>
-        <value type="int" value="14"/>
         <value type="int" value="10"/>
+        <value type="int" value="14"/>
         <value type="int" value="8"/>
         <value type="int" value="17"/>
         <value type="int" value="9"/>
@@ -37,6 +37,8 @@
         <value type="int" value="21"/>
         <value type="int" value="18"/>
         <value type="int" value="20"/>
+        <value type="int" value="19"/>
+        <value type="int" value="24"/>
       </property>
       <property name="size" type="uint" value="50"/>
       <property name="nrows" type="uint" value="1"/>
@@ -65,10 +67,6 @@
     </property>
     <property name="plugin-4" type="string" value="pager">
       <property name="rows" type="uint" value="2"/>
-    </property>
-    <property name="plugin-5" type="string" value="clock">
-      <property name="digital-format" type="string" value="%I:%M %p"/>
-      <property name="mode" type="uint" value="2"/>
     </property>
     <property name="plugin-6" type="string" value="systray">
       <property name="names-visible" type="array">
@@ -116,5 +114,8 @@
     <property name="plugin-20" type="string" value="xfce4-sensors-plugin"/>
     <property name="plugin-21" type="string" value="netload"/>
     <property name="plugin-23" type="string" value="netload"/>
+    <property name="plugin-19" type="string" value="weather"/>
+    <property name="plugin-22" type="string" value="clock"/>
+    <property name="plugin-24" type="string" value="datetime"/>
   </property>
 </channel>
