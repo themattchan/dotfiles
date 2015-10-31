@@ -1,29 +1,45 @@
+" Matt's .vimrc
+" must be symlinked to $HOME/.vimrc for Vundle
+"
+
+" fix yosemite bullshit
+if has("gui_macvim")
+    set shell=/bin/bash\ -l
+endif
+
+set nocompatible              " be iMproved, required
+
+
 " Emacs keys please
-:cnoremap <C-a>  <Home>
-:cnoremap <C-b>  <Left>
-:cnoremap <C-f>  <Right>
-:cnoremap <C-d>  <Delete>
-:cnoremap <M-b>  <S-Left>
-:cnoremap <M-f>  <S-Right>
-:cnoremap <M-d>  <S-right><Delete>
-:cnoremap <Esc>b <S-Left>
-:cnoremap <Esc>f <S-Right>
-:cnoremap <Esc>d <S-right><Delete>
-:cnoremap <C-g>  <C-c>
+" use vimacs instead
+" cnoremap <C-a>  <Home>
+" noremap <C-e>  <End>
+" noremap <C-b>  <Left>
+" noremap <C-f>  <Right>
+" noremap <C-d>  <Delete>
+" noremap <M-b>  <S-Left>
+" noremap <M-f>  <S-Right>
+" noremap <M-d>  <S-right><Delete>
+" noremap <Esc>b <S-Left>
+" noremap <Esc>f <S-Right>
+" noremap <Esc>d <S-right><Delete>
+" noremap <C-g>  <C-c>
 
 " interface
 colorscheme wombat
 set guifont=Monaco:h12
 set guioptions+=c
+set guioptions-=T  "remove toolbar
+set guioptions-=r  "remove right-hand scroll bar
+set guioptions-=L  "remove left-hand scroll bar
 set title
 set modeline
 set modelines=2
 set switchbuf=usetab
 set ruler
 set shortmess+=I
-set nocompatible
 set background=dark
-"set cursorline
+set cursorline
 set lazyredraw
 set number
 set showcmd
@@ -33,16 +49,32 @@ let g:session_autosave = 'no'
 set viminfo+=n~/.vim/viminfo
 
 " highlight 80 chars overflow
-set colorcolumn=80
+" set colorcolumn=80
+set textwidth=79
 
 " basic editing setup
 set smartindent
 set autoindent
 
 set tabstop=4
-set tw=74
 set softtabstop=4
-set expandtab "tabs to spaces
+" set expandtab "tabs to spaces
+
+au FileType c setl sw=8 sts=8
+au FileType java setl sw=4 sts=4
+
+au FileType haskell sw=4 sts=4 et
+au FileType lithaskell sw=4 sts=4 et
+
+au FileType sh setl sw=2 sts=2 et
+au FileType javascript setl sw=2 sts=2 et
+au FileType ruby setl sw=2 sts=2 et
+au FileType eruby setl sw=2 sts=2 et
+au FileType css setl sw=2 sts=2 et
+au FileType scss setl sw=2 sts=2 et
+au FileType html setl sw=2 sts=2 et wrap tw=0 wrapmargin=0 lbr
+au FileType jade setl sw=2 sts=2 et wrap tw=0 wrapmargin=0 lbr
+au FileType coffee setl sw=2 et
 
 " delete trailing whitespace on save
 autocmd BufWritePre <buffer> :%s/\s\+$//e
@@ -55,8 +87,8 @@ set smartcase
 set hidden
 set history=1000
 
-set linebreak
-set wrap
+" set linebreak
+" set wrap
 
 filetype indent on
 
@@ -68,7 +100,15 @@ set foldnestmax=10
 set fileformats=unix,mac,dos
 
 " stfu, dont beep
+set visualbell
 set noeb vb t_vb=
+
+set mouse=a
+
+set cmdheight=1
+
+set laststatus=2
+set t_Co=256
 
 " Intuitive backspacing in insert mode
 set backspace=indent,eol,start
@@ -102,3 +142,35 @@ set wildignore+=*.a,*.o
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
 set wildignore+=.DS_Store,.git,.hg,.svn
 set wildignore+=*~,*.swp,*.tmp
+
+" Vundle
+"if !isdirectory(expand("~/.vim/bundle/vundle/.git"))
+"   !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+"endif
+
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Emacs keys are a must
+" Plugin 'andrep/vimacs'
+
+" VimMarkDown: syntax for markdown
+Plugin 'plasticboy/vim-markdown'
+
+" Powerline: fancy command line
+Plugin 'Lokaltog/vim-powerline'
+
+" Plugin 'kien/ctrlp.vim'
+
+" Yankstack: add a kill ring
+Plugin 'maxbrunsfeld/vim-yankstack'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+" init powerline
+let g:Powerline_symbols = 'compatible'
