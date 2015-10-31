@@ -341,7 +341,10 @@ defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
 defaults write com.apple.dock launchanim -bool false
 
 # Speed up Mission Control animations
-defaults write com.apple.dock expose-animation-duration -float 0
+defaults write com.apple.dock expose-animation-duration -int 0
+
+# no animation
+defaults write com.apple.dock workspaces-swoosh-animation-off -bool true
 
 # Don’t group windows by application in Mission Control
 # (i.e. use the old Exposé behavior instead)

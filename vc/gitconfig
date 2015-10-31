@@ -25,7 +25,10 @@
 	co = checkout
 	br = branch
 	ci = commit
+	cam = commit -am
 	st = status
+	pl = pull
+	pu = push
 	unstage = reset HEAD --
 	last = log -1 HEAD
 [filter "media"]
