@@ -32,7 +32,8 @@ export PYTHONPATH=/opt/local/bin/lib/python2.7/dist-packages:/Users/matt/LeapSDK
 export OPAM_BIN=~/.opam/system/bin/
 export OCAML_TOPLEVEL_PATH=~/.opam/system/lib/toplevel/
 export CAML_LD_LIBRARY_PATH=~/.opam/system/lib/stublibs:/usr/lib/ocaml/stublibs/
-export CABAL_BINDIR=/Users/matt/Library/Haskell/bin/
+export CABAL_BIN=/Users/matt/Library/Haskell/bin/
+export STACK_BIN=/Users/matt/.local/bin/
 export ANDROID_HOME=/Users/matt/Library/Android/sdk/
 #export COQBIN=/Applications/coq.app/Contents/Resources/bin/
 
@@ -60,7 +61,7 @@ export SCALA_HOME=/Library/Scala/
 export TS_ACTIVATOR=$HOME/activator/ #typesafe activator
 
 
-export PATH=/Library/Developer:/Applications/Racket/bin:$HOME/.bin/:$OPAM_BIN:$OCAML_TOPLEVEL_PATH:$SCALA_HOME:$TS_ACTIVATOR:$CABAL_BINDIR:$PATH
+export PATH=/Library/Developer:/Applications/Racket/bin:$HOME/.bin/:$OPAM_BIN:$OCAML_TOPLEVEL_PATH:$SCALA_HOME:$TS_ACTIVATOR:$CABAL_BIN:$STACK_BIN:$PATH
 export MANPATH=$MANPATH:/opt/local/share/man/
 export INFOPATH=$INFOPATH:/opt/local/share/info/
 export PKG_CONFIG_PATH=/usr/X11/lib/pkgconfig/:/usr/local/lib/pkgconfig:/usr/local/opt/libxml2/lib/pkgconfig/
@@ -176,3 +177,7 @@ function pygmentize_cat {
 }
 ## check that pygmentize is installed, then alias cats
 command -v pygmentize > /dev/null && alias cats=pygmentize_cat
+
+# OPAM configuration
+. /Users/matt/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+eval `opam config env`
