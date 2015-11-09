@@ -19,6 +19,7 @@
         <value type="int" value="22"/>
         <value type="int" value="2"/>
       </property>
+      <property name="nrows" type="uint" value="1"/>
     </property>
     <property name="panel-2" type="empty">
       <property name="position" type="string" value="p=10;x=0;y=0"/>
@@ -71,6 +72,8 @@
     <property name="plugin-6" type="string" value="systray">
       <property name="names-visible" type="array">
         <value type="string" value="networkmanager applet"/>
+        <value type="string" value="xfce4-power-manager"/>
+        <value type="string" value="seapplet"/>
         <value type="string" value="clipman"/>
       </property>
       <property name="names-hidden" type="array">
