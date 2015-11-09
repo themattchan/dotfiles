@@ -27,7 +27,13 @@ set nocompatible              " be iMproved, required
 
 " interface
 colorscheme wombat
-set guifont=Monaco:h12
+if has("gui_running")
+	if has("gui_gtk2")
+		set guifont=Monospace\ 10 
+	elseif has("gui_macvim")
+		set guifont=Monaco:h12
+	endif
+endif
 set guioptions+=c
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
