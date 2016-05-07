@@ -183,6 +183,6 @@ command -v pygmentize > /dev/null && alias cats=pygmentize_cat
 eval `opam config env`
 
 # launch tmux
-if command -v tmux>/dev/null; then
-  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
-fi
+# if command -v tmux>/dev/null; then
+#   [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
+# fi
