@@ -13,3 +13,62 @@
 # Last Substitute String:
 $
 
+# Command Line History (newest to oldest):
+:q
+:'<,'>q
+
+# Search String History (newest to oldest):
+
+# Expression History (newest to oldest):
+
+# Input Line History (newest to oldest):
+
+# Input Line History (newest to oldest):
+
+# Registers:
+
+# File marks:
+'0  1  0  ~/code/FPS_Workspace_New/fps-main/src/main/resources/OSGI-INF/blueprint/blueprint.xml
+'1  1  0  ~/code/FPS_Workspace_New/FPSNode/Scripts/fps_data_includingcontents.sql
+'2  16  15  /Volumes/Untitled/FPS_workspace/consumer-ui-trunk/.project
+'3  166  17  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
+
+# Jumplist (newest first):
+-'  1  0  ~/code/FPS_Workspace_New/fps-main/src/main/resources/OSGI-INF/blueprint/blueprint.xml
+-'  1  0  ~/code/FPS_Workspace_New/FPSNode/Scripts/fps_data_includingcontents.sql
+-'  16  15  /Volumes/Untitled/FPS_workspace/consumer-ui-trunk/.project
+-'  1  0  /Volumes/Untitled/FPS_workspace/consumer-ui-trunk/.project
+-'  166  17  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
+-'  1  0  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
+-'  166  17  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
+-'  1  0  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
+-'  16  15  /Volumes/Untitled/FPS_workspace/consumer-ui-trunk/.project
+-'  1  0  /Volumes/Untitled/FPS_workspace/consumer-ui-trunk/.project
+-'  166  17  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
+-'  1  0  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
+-'  166  17  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
+-'  1  0  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
+-'  1  0  ~/code/FPS_Workspace_New/FPSNode/Scripts/fps_data_includingcontents.sql
+-'  16  15  /Volumes/Untitled/FPS_workspace/consumer-ui-trunk/.project
+-'  1  0  /Volumes/Untitled/FPS_workspace/consumer-ui-trunk/.project
+-'  166  17  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
+-'  1  0  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
+-'  166  17  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
+-'  1  0  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
+-'  16  15  /Volumes/Untitled/FPS_workspace/consumer-ui-trunk/.project
+-'  1  0  /Volumes/Untitled/FPS_workspace/consumer-ui-trunk/.project
+-'  166  17  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
+-'  1  0  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
+-'  166  17  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
+-'  1  0  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
+
+# History of marks within files (newest to oldest):
+
+> ~/code/FPS_Workspace_New/fps-main/src/main/resources/OSGI-INF/blueprint/blueprint.xml
+	"	1	0
+
+> /Volumes/Untitled/FPS_workspace/consumer-ui-trunk/.project
+	"	16	15
+
+> ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
+	"	166	17
