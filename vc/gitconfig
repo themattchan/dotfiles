@@ -6,7 +6,7 @@
 	excludesfile = ~/.gitignore_global
 	autocrlf = input
 	editor = emacs
-	safecrlf = true
+	safecrlf = false
 [diff]
     tool = ediff
     guitool = ediff

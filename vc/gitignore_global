@@ -1,5 +1,5 @@
 *.ln
-*.sw*
+*.swp*
 *~
 *.*~
 \#*
@@ -10,4 +10,4 @@
 *.hi
 *.class
 a.out
-core
+core/

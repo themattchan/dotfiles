@@ -54,8 +54,7 @@ function removeFromPath() {
 
 #setjdk 1.8
 
-#export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
-
+export JAVA_HOME="$(/usr/libexec/java_home)"
 export CLASSPATH=$HOME/.jars/:.
 export SCALA_HOME=/Library/Scala/
 export TS_ACTIVATOR=$HOME/activator/ #typesafe activator
