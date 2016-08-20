@@ -10,6 +10,9 @@ sudo dnf install -y --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmf
 sudo rpm -ivh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm
 sudo rpm -ivh http://rpm.livna.org/livna-release.rpm
 
+# system utilities
+sudo dnf install -y htop ntp pavucontrol util-linux-user
+
 # xfce
 sudo dnf group install -y "Xfce Desktop"
 # xfce panel plugins, why the fuck aren't these bundled together
@@ -46,10 +49,11 @@ su -c "curl https://satya164.github.io/fedy/fedy-installer -o fedy-installer && 
 # dropbox
 sudo dnf install -y nautilus nautilus-dropbox libgnome hfsplus-tools
 sudo yum install thunarx-python Thunar-devel libthunarx-2-dev
-#cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
 
 # setup things
 chsh -s /bin/zsh $(whoami)
 
 gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
 xfconf-query -c xsettings -p /Gtk/KeyThemeName -s Emacs
+/usr/bin/setxkbmap -option '' -option 'ctrl:nocaps'
