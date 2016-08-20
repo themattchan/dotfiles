@@ -25,13 +25,14 @@ function install_dotfiles
 
 function install_zprezto
 {
-    ZP_DIR='~/.zprezto'
+    ZP_DIR="${ZDOTDIR:-$HOME}/.zprezto"
     
     git clone --recursive https://github.com/sorin-ionescu/prezto.git $ZP_DIR
 
-    for default in $ZP_DIR/runcoms/*
+    setopt EXTENDED_GLOB
+    for rcfile in $ZP_DIR/runcoms/^README.md(.N)
     do
-	ln -s $default ~/.$(basename $default)
+	ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
     done
 }
 
