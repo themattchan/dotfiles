@@ -1,0 +1,45 @@
+#! /bin/sh
+
+function install_dotfiles
+{
+    DOTFILES="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+    declare -a TO_LINK=('irssi' 'vim' 'emacs.d')
+    declare -a TO_LINK_SUBDIR=('term' 'vc' 'linux')
+    
+    for subdir in "${TO_LINK_SUBDIR[@]}"
+    do
+        echo "linking files in $subdir into home"
+        for file in $DOTFILES/$subdir/*
+        do
+    	ln -s $file ~/.$(basename $file)
+        done
+    done
+    
+    for file in "${TO_LINK[@]}"
+    do
+        echo "Linking file in $file into home"
+        ln -s $DOTFILES/$file ~/.$file
+    done
+}
+
+function install_zprezto
+{
+    ZP_DIR='~/.zprezto'
+    
+    git clone --recursive https://github.com/sorin-ionescu/prezto.git $ZP_DIR
+
+    for default in $ZP_DIR/runcoms/*
+    do
+	ln -s $default ~/.$(basename $default)
+    done
+}
+
+function install_peda
+{
+    git clone https://github.com/longld/peda.git ~/.peda
+    echo "source ~/.peda/peda.py" >> ~/.gdbinit
+}
+
+install_zprezto
+install_dotfiles
