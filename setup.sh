@@ -41,5 +41,12 @@ function install_peda
     echo "source ~/.peda/peda.py" >> ~/.gdbinit
 }
 
-install_zprezto
-install_dotfiles
+function set_zsh
+{
+#    sudo usermod -s $(which zsh) $(whoami)
+    sudo chsh -s $(which zsh) $(whoami)
+}
+
+# install_zprezto
+# install_dotfiles
+set_zsh
