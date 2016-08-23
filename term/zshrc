@@ -48,16 +48,18 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
     'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 #### Aliases ###################################################################
+
 ## emacs ##
+export EDITOR="emacsclient"
 export ALTERNATE_EDITOR="emacs"
+export GIT_EDITOR="emacs -nw -Q"
+export VISUAL="emacs"
+
 alias emacs="emacs -nw"
 alias em="emacsclient -t"
 alias qem="emacs -Q -nw"
 alias nano="qem"
 
-export EDITOR="emacsclient"
-export GIT_EDITOR="emacs -nw -Q"
-export VISUAL="emacs"
 
 # unfuck irssi scrolling
 alias irssi='TERM=screen-256color irssi'
