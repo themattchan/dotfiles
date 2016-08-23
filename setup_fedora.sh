@@ -11,7 +11,7 @@ sudo rpm -ivh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-
 sudo rpm -ivh http://rpm.livna.org/livna-release.rpm
 
 # system utilities
-sudo dnf install -y htop ntp pavucontrol util-linux-user
+sudo dnf install -y htop ntp pavucontrol util-linux-user gdouros-symbola-fonts
 
 # xfce
 sudo dnf group install -y "Xfce Desktop"
@@ -30,13 +30,13 @@ sudo dnf install -y \
 
 # dev tools and command line things
 sudo dnf groupinstall -y "Development Tools"
-sudo dnf install -y zsh git emacs
+sudo dnf install -y zsh git emacs the_silver_searcher aspell
 sudo dnf install -y elinks irssi wget curl
 #sudo dnf install -y powertop thinkfan
 
 # compilers, etc
 sudo dnf install -y gcc gdb kernel-devel
-sudo dnf install -y java scala node
+sudo dnf install -y java scala
 sudo dnf install -y haskell-platform
 curl -sSL https://s3.amazonaws.com/download.fpcomplete.com/fedora/24/fpco.repo |
 	sudo tee /etc/yum.repos.d/fpco.repo
@@ -45,41 +45,58 @@ sudo dnf install -y @ocaml
 sudo dnf install -y coq
 sudo dnf install -y z3
 sudo dnf install -y sbcl
-sudo dnf install -y racket
+
+curl --silent --location https://rpm.nodesource.com/setup_6.x | sudo bash -
+sudo dnf install -y nodejs
+sudo npm install -g purescript pulp bower
 
 # LaTeX
 sudo dnf install -y \
 	 texlive-scheme-basic \
-	 texlive-collection-latex texlive-collection-latexextra \
+	 texlive-collection-latex \
+	 texlive-collection-latexextra \
 	 texlive-collection-latexrecommended \
-	 texlive-collection-mathextra texlive-collection-genericextra \
+	 texlive-collection-mathextra \
+	 texlive-collection-genericextra \
 	 texlive-collection-genericrecommended \
 	 texlive-collection-bibtexextra \
-	 texlive-collection-basic texlive-collection-binextra \
-	 texlive-collection-fontsextra texlive-collection-fontsrecommended \
-	 texlive-collection-fontutils texlive-collection-formatsextra
+	 texlive-collection-basic \
+	 texlive-collection-binextra \
+	 texlive-collection-fontsextra \
+	 texlive-collection-fontsrecommended \
+	 texlive-collection-fontutils \
+	 texlive-collection-formatsextra \
+	 latexmk
 
+# media player + codecs
+sudo dnf install -y \
+	 vlc \
+	 gstreamer-ffmpeg \
+	 gstreamer-plugins-base-tools \
+	 gstreamer-plugins-bad \
+	 gstreamer-plugins-bad-free-extras \
+	 gstreamer-plugins-ugly \
+	 gstreamer1 \
+	 gstreamer1-libav \
+	 gstreamer1-plugins-base \
+	 gstreamer1-plugins-ugly \
+	 gstreamer1-plugins-bad-free \
+	 gstreamer1-plugins-bad-free-extras \
+	 gstreamer1-plugins-bad-freeworld \
+	 gstreamer1-plugins-good \
+	 gstreamer1-plugins-good-extras \
+
+# fedy
+su -c "curl https://satya164.github.io/fedy/fedy-installer -o fedy-installer && chmod +x fedy-installer && ./fedy-installer"
+
+# useful apps
+sudo dnf install -y cheese keepassx
 
 # pdf viewer
 sudo dnf install -y evince
 
 # web things
 sudo dnf install -y firefox transmission
-
-# media player + codecs
-sudo dnf install -y vlc \
-	 gstreamer-plugins-bad gstreamer-plugins-bad-free-extras \
-	 gstreamer-plugins-ugly gstreamer-ffmpeg gstreamer1-libav \
-	 gstreamer1-plugins-bad-free-extras gstreamer1-plugins-bad-freeworld \
-	 gstreamer-plugins-base-tools gstreamer1-plugins-good-extras \
-	 gstreamer1-plugins-ugly gstreamer1-plugins-bad-free gstreamer1-plugins-good \
-	 gstreamer1-plugins-base gstreamer1
-
-# useful apps
-sudo dnf install -y cheese keepass
-
-# fedy
-su -c "curl https://satya164.github.io/fedy/fedy-installer -o fedy-installer && chmod +x fedy-installer && ./fedy-installer"
 
 # dropbox
 sudo dnf install -y nautilus nautilus-dropbox libgnome hfsplus-tools
