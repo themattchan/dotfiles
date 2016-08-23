@@ -37,7 +37,8 @@ sudo dnf install -y elinks irssi wget curl
 
 # compilers, etc
 sudo dnf install -y gcc gdb kernel-devel
-sudo dnf install -y java scala
+sudo dnf install -y java-devel maven
+sudo dnf install -y scala sbt
 sudo dnf install -y haskell-platform
 curl -sSL https://s3.amazonaws.com/download.fpcomplete.com/fedora/24/fpco.repo |
 	sudo tee /etc/yum.repos.d/fpco.repo
