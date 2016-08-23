@@ -85,7 +85,7 @@ alias sl='ls'
 # cats - cat with syntax highlighting
 function pygmentize_cat {
     for arg in "$@"; do
-	pygmentize -g "${arg}" 2> /dev/null || /bin/cat "${arg}"
+    pygmentize -g "${arg}" 2> /dev/null || /bin/cat "${arg}"
     done
 }
 ## check that pygmentize is installed, then alias cats
@@ -114,36 +114,36 @@ export INFOPATH="/opt/local/share/info/$INFOPATH"
 export PKG_CONFIG_PATH="/usr/X11/lib/pkgconfig/:/usr/local/lib/pkgconfig:/usr/local/opt/libxml2/lib/pkgconfig/"
 
 if [[ $systype == "Darwin" ]]; then
-	MAC_ONLY=$(join ':'
-			   "/Library/Developer"
-			   "/opt/local/bin"			# macports
-			   "/opt/local/sbin"
-			)
-	RACKET_BIN="/Applications/Racket/bin/"
+    MAC_ONLY=$(join ':'
+               "/Library/Developer"
+               "/opt/local/bin"             # macports
+               "/opt/local/sbin"
+            )
+    RACKET_BIN="/Applications/Racket/bin/"
 elif [[ $systype == "Linux" ]]; then
-	MAC_ONLY=""
-	RACKET_BIN="/usr/local/racket/"
+    MAC_ONLY=""
+    RACKET_BIN="/usr/local/racket/"
 fi
 
 typeset -U path
 path=(
-	$RACKET_BIN
-	$OPAM_BIN
-	$OPAM_BIN
-	$OCAML_TOPLEVEL_PATH
-	$SCALA_HOME
-	$TS_ACTIVATOR
-	$CABAL_BIN
-	$STACK_BIN
-	$MAC_ONLY
-	$path
+    $RACKET_BIN
+    $OPAM_BIN
+    $OPAM_BIN
+    $OCAML_TOPLEVEL_PATH
+    $SCALA_HOME
+    $TS_ACTIVATOR
+    $CABAL_BIN
+    $STACK_BIN
+    $MAC_ONLY
+    $path
 )
 export PATH
 
 # Load opam if installed
 if [[ -s "$HOME/.opam/opam-init/init.zsh" ]]; then
     . "$HOME/.opam/opam-init/init.sh" > /dev/null 2> /dev/null || true
-	eval `opam config env`
+    eval `opam config env`
 fi
 
 # launch tmux
