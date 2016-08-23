@@ -1,95 +1,15 @@
 ## matt's .zshrc
 ## -------------
 
-## zsh frameworks
-# ## oh-my-zsh
-# export ZSH=$HOME/dotfiles/oh-my-zsh
-
-# # my customisations here
-# export ZSH_CUSTOM=$HOME/dotfiles/zsh-matt
-# DEFAULT_USER="matt"
-# ZSH_THEME="matt" #from avit
-# plugins=(git)
-# source $ZSH/oh-my-zsh.sh
+systype=$(uname -s)
+function join { local d=$1; shift; echo -n "$1"; shift; printf "%s" "${@/#/$d}"; }
 
 ## prezto
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-
-## PATHS ##
-# MacPorts Installer addition on 2012-07-29_at_22:12:03: adding an appropriate PATH variable for use with MacPorts.
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-# Finished adapting your PATH environment variable for use with MacPorts.
-
-# programming languages
-#export MITSCHEME_LIBRARY_PATH=/Applications/mit-scheme.app/Contents/Resources
-#export MIT_SCHEME_EXE=/usr/local/scheme/
-#export DYLD_LIBRARY_PATH=/opt/local/lib/:/opt/local/bin/lib
-
-#export PYTHONPATH=/opt/local/bin/lib/python2.7/dist-packages:/Users/matt/LeapSDK/
-export OPAM_BIN=~/.opam/system/bin/
-export OCAML_TOPLEVEL_PATH=~/.opam/system/lib/toplevel/
-export CAML_LD_LIBRARY_PATH=~/.opam/system/lib/stublibs:/usr/lib/ocaml/stublibs/
-export CABAL_BIN=/Users/matt/Library/Haskell/bin/
-export STACK_BIN=$HOME/.local/bin/
-export ANDROID_HOME=/Users/matt/Library/Android/sdk/
-#export COQBIN=/Applications/coq.app/Contents/Resources/bin/
-
-
-function setjdk() {
-    if [ $# -ne 0 ]; then
-	removeFromPath '/System/Library/Frameworks/JavaVM.framework/Home/bin'
-	if [ -n "${JAVA_HOME+x}" ]; then
-	    removeFromPath $JAVA_HOME
-	fi
-	export JAVA_HOME=`/usr/libexec/java_home -v $@`
-	export PATH=$JAVA_HOME/bin:$PATH
-    fi
-}
-function removeFromPath() {
-    export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
-}
-
-#setjdk 1.8
-
-#export JAVA_HOME="$(/usr/libexec/java_home)"
-export CLASSPATH=$HOME/.jars/:.
-export SCALA_HOME=/Library/Scala/
-export TS_ACTIVATOR=$HOME/activator/ #typesafe activator
-
-
-export PATH=/Library/Developer:/Applications/Racket/bin:$HOME/.bin/:$OPAM_BIN:$OCAML_TOPLEVEL_PATH:$SCALA_HOME:$TS_ACTIVATOR:$CABAL_BIN:$STACK_BIN:$PATH
-export MANPATH=$MANPATH:/opt/local/share/man/
-export INFOPATH=$INFOPATH:/opt/local/share/info/
-export PKG_CONFIG_PATH=/usr/X11/lib/pkgconfig/:/usr/local/lib/pkgconfig:/usr/local/opt/libxml2/lib/pkgconfig/
-
-#### emacs ####
-export ALTERNATE_EDITOR="emacs"
-# make sure to autoload emacs --daemon at startup
-# set terminal gui emacs on linux, get rid of gvim
-if [[ $(uname) = "Linux" ]]; then
-    #gui emacs if i want it
-    alias gemacs="emacsclient -c -a=emacs"
-    alias gem="gemacs"
-
-    alias gvim="gemacs"
-fi
-
-#damn gui emacs
-#alias emacs="emacsclient -t"
-alias em="emacsclient -t"
-alias qem="emacs -Q -nw"
-#alias vi="em"
-#alias vim="em"
-alias nano="qem"
-
-export EDITOR="emacsclient"
-export GIT_EDITOR="emacs -nw -Q"
-export VISUAL="emacs"
-
-#set emacs keybindings
+# set emacs keybindings
 bindkey -e
 
 # set the terminal type
@@ -109,17 +29,10 @@ unsetopt caseglob
 # colors
 autoload -U colors && colors
 autoload -U promptinit && promptinit
-#PS1="%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg[yellow]%}%~ %{$reset_color%}%% "
 
 # Set some ZSH styles
 zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
 zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
-
-
-## Customize prompt (depreciated, use matt.zsh-theme)
-
-#PROMPT='%n %2d%# '
-#RPROMPT='%t %W '#$(battery_status)%
 
 # history
 HISTFILE=~/.zsh-history
@@ -135,15 +48,17 @@ compinit -C
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
     'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
+#### Aliases ###################################################################
+## emacs ##
+export ALTERNATE_EDITOR="emacs"
+alias emacs="emacs -nw"
+alias em="emacsclient -t"
+alias qem="emacs -Q -nw"
+alias nano="qem"
 
-##Aliases
-# directories
-alias doc="~/Documents"
-alias db="~/Dropbox"
-
-# commands
-## octopress compatibility
-#alias rake="noglob rake"
+export EDITOR="emacsclient"
+export GIT_EDITOR="emacs -nw -Q"
+export VISUAL="emacs"
 
 # unfuck irssi scrolling
 alias irssi='TERM=screen-256color irssi'
@@ -166,7 +81,6 @@ alias fuckoff='killall -KILL'
 alias hist='history | cut -c8- | sort | uniq -c | sort -rn | head'
 alias ducks='du -cks * |sort -rn |head -11'
 alias sl='ls'
-#alias tka='tx ls | awk '{print $1}' | sed 's/://g' | xargs -I{} tmux kill-session -t {}'
 
 # cats - cat with syntax highlighting
 function pygmentize_cat {
@@ -177,9 +91,60 @@ function pygmentize_cat {
 ## check that pygmentize is installed, then alias cats
 command -v pygmentize > /dev/null && alias cats=pygmentize_cat
 
-# OPAM configuration
-#. /Users/matt/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-#eval `opam config env`
+
+#### Paths #####################################################################
+
+#export MITSCHEME_LIBRARY_PATH=/Applications/mit-scheme.app/Contents/Resources
+#export MIT_SCHEME_EXE=/usr/local/scheme/
+#export DYLD_LIBRARY_PATH=/opt/local/lib/:/opt/local/bin/lib
+
+OPAM_BIN="$HOME/.opam/system/bin/"
+OCAML_TOPLEVEL_PATH="$HOME/.opam/system/lib/toplevel/"
+CAML_LD_LIBRARY_PATH="$HOME/.opam/system/lib/stublibs:/usr/lib/ocaml/stublibs/"
+CABAL_BIN="$HOME/Library/Haskell/bin/"
+STACK_BIN="$HOME/.local/bin/"
+ANDROID_HOME="$HOME/Library/Android/sdk/"
+
+export CLASSPATH="$HOME/.jars/:."
+SCALA_HOME="/Library/Scala/"
+TS_ACTIVATOR="$HOME/activator/"
+
+export MANPATH="/opt/local/share/man/:$MANPATH"
+export INFOPATH="/opt/local/share/info/$INFOPATH"
+export PKG_CONFIG_PATH="/usr/X11/lib/pkgconfig/:/usr/local/lib/pkgconfig:/usr/local/opt/libxml2/lib/pkgconfig/"
+
+if [[ $systype == "Darwin" ]]; then
+	MAC_ONLY=$(join ':'
+			   "/Library/Developer"
+			   "/opt/local/bin"			# macports
+			   "/opt/local/sbin"
+			)
+	RACKET_BIN="/Applications/Racket/bin/"
+elif [[ $systype == "Linux" ]]; then
+	MAC_ONLY=""
+	RACKET_BIN="/usr/local/racket/"
+fi
+
+typeset -U path
+path=(
+	$RACKET_BIN
+	$OPAM_BIN
+	$OPAM_BIN
+	$OCAML_TOPLEVEL_PATH
+	$SCALA_HOME
+	$TS_ACTIVATOR
+	$CABAL_BIN
+	$STACK_BIN
+	$MAC_ONLY
+	$path
+)
+export PATH
+
+# Load opam if installed
+if [[ -a "$HOME/.opam/opam-init/init.zsh" ]]; then
+    . "$HOME/.opam/opam-init/init.sh" > /dev/null 2> /dev/null || true
+	eval `opam config env`
+fi
 
 # launch tmux
 # if command -v tmux>/dev/null; then
