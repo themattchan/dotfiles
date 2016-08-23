@@ -60,7 +60,6 @@ alias em="emacsclient -t"
 alias qem="emacs -Q -nw"
 alias nano="qem"
 
-
 # unfuck irssi scrolling
 alias irssi='TERM=screen-256color irssi'
 
@@ -69,6 +68,8 @@ alias .='cd ../'
 alias ..='cd ../../'
 alias ...='cd ../../../'
 alias ....='cd ../../../../'
+alias .....='cd ../../../../../'
+alias ......='cd ../../../../../../'
 
 alias pu='pushd'
 alias po='popd'
