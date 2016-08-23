@@ -141,7 +141,7 @@ path=(
 export PATH
 
 # Load opam if installed
-if [[ -a "$HOME/.opam/opam-init/init.zsh" ]]; then
+if [[ -s "$HOME/.opam/opam-init/init.zsh" ]]; then
     . "$HOME/.opam/opam-init/init.sh" > /dev/null 2> /dev/null || true
 	eval `opam config env`
 fi
