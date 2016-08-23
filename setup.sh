@@ -1,18 +1,22 @@
 #! /bin/sh
 
+DOTFILES="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 function install_dotfiles
 {
-    DOTFILES="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
-    declare -a TO_LINK=('irssi' 'vim' 'emacs.d')
-    declare -a TO_LINK_SUBDIR=('term' 'vc' 'linux')
+    local declare -a TO_LINK=('irssi' 'vim' 'emacs.d')
+    local declare -a TO_LINK_SUBDIR=('term' 'vc' 'linux')
 
     for subdir in "${TO_LINK_SUBDIR[@]}"
     do
-        echo "linking files in $subdir into home"
+      	if [[ $(uname -s) != "Linux" && $subdir  == 'linux' ]]; then
+			continue
+		fi
+
+		echo "linking files in $subdir into home"
         for file in $DOTFILES/$subdir/*
         do
-    	ln -s $file ~/.$(basename $file)
+        ln -s $file ~/.$(basename $file)
         done
     done
 
@@ -25,14 +29,15 @@ function install_dotfiles
 
 function install_zprezto
 {
-    ZP_DIR="${ZDOTDIR:-$HOME}/.zprezto"
+	local ZP_DIR="${ZDOTDIR:-$HOME}/.zprezto"
 
     git clone --recursive https://github.com/sorin-ionescu/prezto.git $ZP_DIR
 
-    setopt EXTENDED_GLOB
-    for rcfile in $ZP_DIR/runcoms/^README.md(.N)
+    #setopt EXTENDED_GLOB
+    shopt -s extglob
+    for rcfile in "$ZP_DIR/runcoms/!(README*)"
     do
-	ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+        ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
     done
 }
 
@@ -46,6 +51,14 @@ function set_zsh
 {
 #    sudo usermod -s $(which zsh) $(whoami)
     sudo chsh -s $(which zsh) $(whoami)
+}
+
+function install_osx
+{
+    if [[ $(uname -s) == "Darwin" ]]; then
+        source "$DOTFILES/osx/osx"
+        cp -R "$DOTFILES/osx/KeyBindings" "$HOME/Library/"
+    fi
 }
 
 # install_zprezto
