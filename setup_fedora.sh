@@ -8,7 +8,8 @@ sudo dnf update -y
 # add repos
 sudo dnf install -y --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-24.noarch.rpm
 sudo rpm -ivh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm
-sudo rpm -ivh http://rpm.livna.org/livna-release.rpm
+su -c "curl https://satya164.github.io/fedy/fedy-installer -o fedy-installer && chmod +x fedy-installer && ./fedy-installer"
+rm ./fedy-installer
 
 # system utilities
 sudo dnf install -y htop ntp pavucontrol util-linux-user gdouros-symbola-fonts
@@ -85,9 +86,6 @@ sudo dnf install -y \
 	 gstreamer1-plugins-bad-freeworld \
 	 gstreamer1-plugins-good \
 	 gstreamer1-plugins-good-extras \
-
-# fedy
-su -c "curl https://satya164.github.io/fedy/fedy-installer -o fedy-installer && chmod +x fedy-installer && ./fedy-installer"
 
 # useful apps
 sudo dnf install -y cheese keepassx
