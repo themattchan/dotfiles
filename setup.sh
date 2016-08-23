@@ -9,11 +9,11 @@ function install_dotfiles
 
     for subdir in "${TO_LINK_SUBDIR[@]}"
     do
-      	if [[ $(uname -s) != "Linux" && $subdir  == 'linux' ]]; then
-			continue
-		fi
+        if [[ $(uname -s) != "Linux" && $subdir  == 'linux' ]]; then
+            continue
+        fi
 
-		echo "linking files in $subdir into home"
+        echo "linking files in $subdir into home"
         for file in $DOTFILES/$subdir/*
         do
         ln -s $file ~/.$(basename $file)
@@ -29,7 +29,7 @@ function install_dotfiles
 
 function install_zprezto
 {
-	local ZP_DIR="${ZDOTDIR:-$HOME}/.zprezto"
+    local ZP_DIR="${ZDOTDIR:-$HOME}/.zprezto"
 
     git clone --recursive https://github.com/sorin-ionescu/prezto.git $ZP_DIR
 
