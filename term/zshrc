@@ -1,7 +1,11 @@
 #### matt's .zshrc #############################################################
 
 systype=$(uname -s)
-function join { local d=$1; shift; echo -n "$1"; shift; printf "%s" "${@/#/$d}"; }
+
+function join {
+    local strs=( "$@" )
+    echo ${(j<:>)strs}
+}
 
 ## prezto
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -63,7 +67,7 @@ alias nano="qem"
 # unfuck irssi scrolling
 alias irssi='TERM=screen-256color irssi'
 
-#cd, because typing the backslash is A LOT of work!!
+# cd, because typing the backslash is A LOT of work!!
 alias .='cd ../'
 alias ..='cd ../../'
 alias ...='cd ../../../'
@@ -102,7 +106,9 @@ command -v pygmentize > /dev/null && alias cats=pygmentize_cat
 
 OPAM_BIN="$HOME/.opam/system/bin/"
 OCAML_TOPLEVEL_PATH="$HOME/.opam/system/lib/toplevel/"
-CAML_LD_LIBRARY_PATH="$HOME/.opam/system/lib/stublibs:/usr/lib/ocaml/stublibs/"
+CAML_LD_LIBRARY_PATH=$(join \
+					   "$HOME/.opam/system/lib/stublibs" \
+					   "/usr/lib/ocaml/stublibs/" )
 CABAL_BIN="$HOME/Library/Haskell/bin/"
 STACK_BIN="$HOME/.local/bin/"
 ANDROID_HOME="$HOME/Library/Android/sdk/"
@@ -112,14 +118,18 @@ SCALA_HOME="/Library/Scala/"
 TS_ACTIVATOR="$HOME/activator/"
 
 export MANPATH="/opt/local/share/man/:$MANPATH"
-export INFOPATH="/opt/local/share/info/$INFOPATH"
-export PKG_CONFIG_PATH="/usr/X11/lib/pkgconfig/:/usr/local/lib/pkgconfig:/usr/local/opt/libxml2/lib/pkgconfig/"
+export INFOPATH="/opt/local/share/info/:$INFOPATH"
+export PKG_CONFIG_PATH=$(join                                    \
+                         '/usr/X11/lib/pkgconfig/'               \
+                         '/usr/local/lib/pkgconfig'              \
+                         '/usr/local/opt/libxml2/lib/pkgconfig/' \
+                         )
 
 if [[ $systype == "Darwin" ]]; then
-    MAC_ONLY=$(join ':'
-               "/Library/Developer"
-               "/opt/local/bin"             # macports
-               "/opt/local/sbin"
+    MAC_ONLY=$(join                 \
+               "/Library/Developer" \
+               "/opt/local/bin"     \          # macports
+               "/opt/local/sbin"    \
             )
     RACKET_BIN="/Applications/Racket/bin/"
 elif [[ $systype == "Linux" ]]; then
@@ -131,8 +141,8 @@ typeset -U path
 path=(
     $RACKET_BIN
     $OPAM_BIN
-    $OPAM_BIN
     $OCAML_TOPLEVEL_PATH
+	$CAML_LD_LIBRARY_PATH
     $SCALA_HOME
     $TS_ACTIVATOR
     $CABAL_BIN
