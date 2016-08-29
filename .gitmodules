@@ -7,3 +7,6 @@
 [submodule "vim/bundle/Vundle.vim"]
 	path = vim/bundle/Vundle.vim
 	url = https://github.com/VundleVim/Vundle.vim.git
+[submodule "linux/xmonad"]
+	path = linux/xmonad
+	url = git@github.com:themattchan/xmonad-config.git

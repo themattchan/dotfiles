@@ -107,8 +107,8 @@ command -v pygmentize > /dev/null && alias cats=pygmentize_cat
 OPAM_BIN="$HOME/.opam/system/bin/"
 OCAML_TOPLEVEL_PATH="$HOME/.opam/system/lib/toplevel/"
 CAML_LD_LIBRARY_PATH=$(join \
-					   "$HOME/.opam/system/lib/stublibs" \
-					   "/usr/lib/ocaml/stublibs/" )
+                      "$HOME/.opam/system/lib/stublibs" \
+                      "/usr/lib/ocaml/stublibs/" )
 CABAL_BIN="$HOME/Library/Haskell/bin/"
 STACK_BIN="$HOME/.local/bin/"
 ANDROID_HOME="$HOME/Library/Android/sdk/"
@@ -134,7 +134,7 @@ if [[ $systype == "Darwin" ]]; then
     RACKET_BIN="/Applications/Racket/bin/"
 elif [[ $systype == "Linux" ]]; then
     MAC_ONLY=""
-    RACKET_BIN="/usr/local/racket/"
+    RACKET_BIN="/usr/local/racket/bin"
 fi
 
 typeset -U path
@@ -142,7 +142,7 @@ path=(
     $RACKET_BIN
     $OPAM_BIN
     $OCAML_TOPLEVEL_PATH
-	$CAML_LD_LIBRARY_PATH
+    $CAML_LD_LIBRARY_PATH
     $SCALA_HOME
     $TS_ACTIVATOR
     $CABAL_BIN
