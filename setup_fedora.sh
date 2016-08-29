@@ -31,7 +31,7 @@ sudo dnf install -y \
 
 # dev tools and command line things
 sudo dnf groupinstall -y "Development Tools"
-sudo dnf install -y zsh git emacs the_silver_searcher aspell
+sudo dnf install -y zsh git emacs the_silver_searcher aspell aspell-en
 sudo dnf install -y elinks irssi wget curl
 #sudo dnf install -y powertop thinkfan
 
