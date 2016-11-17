@@ -1,6 +1,0 @@
-[Added Associations]
-application/pdf=evince.desktop;
-text/plain=calligrawords_ascii.desktop;
-x-scheme-handler/http=exo-web-browser.desktop
-x-scheme-handler/https=exo-web-browser.desktop
-
