@@ -137,6 +137,8 @@ elif [[ $systype == "Linux" ]]; then
     RACKET_BIN="/usr/local/racket/bin"
 fi
 
+export GOPATH="$HOME/go"
+
 typeset -U path
 path=(
     $RACKET_BIN
@@ -147,6 +149,7 @@ path=(
     $TS_ACTIVATOR
     $CABAL_BIN
     $STACK_BIN
+    "$GOPATH/bin"
     $MAC_ONLY
     $path
 )
@@ -162,3 +165,6 @@ fi
 # if command -v tmux>/dev/null; then
 #   [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
 # fi
+
+export NVM_DIR="/home/matt/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
