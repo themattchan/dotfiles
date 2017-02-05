@@ -16,7 +16,7 @@ pacaur -Syu --needed \
 sudo pacman -Syu --needed \
      emacs htop the_silver_searcher ntp htop pavucontrol \
      zsh git aspell aspell-en \
-     elinks irssi wget curl \
+     elinks irssi wget curl openssh rsync \
      jdk8-openjdk \
      scala sbt \
      haskell-stack \
