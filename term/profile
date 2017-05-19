@@ -1,1 +1,7 @@
 export LDFLAGS="-L/opt/local/lib"
+export SSH_ASKPASS="/usr/bin/ksshaskpass"
+
+# if [ -z "$SSH_AUTH_SOCK" ] ; then
+#   eval `ssh-agent -s`
+#   ssh-add
+# fi

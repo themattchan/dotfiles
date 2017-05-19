@@ -18,17 +18,12 @@
         <value type="int" value="9"/>
         <value type="int" value="3"/>
         <value type="int" value="15"/>
-        <value type="int" value="26"/>
         <value type="int" value="4"/>
-        <value type="int" value="18"/>
-        <value type="int" value="17"/>
-        <value type="int" value="19"/>
-        <value type="int" value="24"/>
+        <value type="int" value="7"/>
+        <value type="int" value="12"/>
         <value type="int" value="6"/>
-        <value type="int" value="25"/>
         <value type="int" value="5"/>
         <value type="int" value="2"/>
-        <value type="int" value="7"/>
       </property>
       <property name="nrows" type="uint" value="1"/>
       <property name="length-adjust" type="bool" value="true"/>
@@ -54,21 +49,26 @@
     </property>
     <property name="plugin-5" type="string" value="clock">
       <property name="timezone" type="string" value="America/Los_Angeles"/>
+      <property name="digital-format" type="string" value="%a %e %b, %I:%M %p"/>
     </property>
     <property name="plugin-6" type="string" value="systray">
       <property name="names-visible" type="array">
+        <value type="string" value="google-chrome"/>
         <value type="string" value="networkmanager applet"/>
-        <value type="string" value="google-chrome-stable"/>
         <value type="string" value="telegramdesktop"/>
+        <value type="string" value="clementine"/>
         <value type="string" value="do"/>
-        <value type="string" value="messenger"/>
+        <value type="string" value="amazon cloud player"/>
         <value type="string" value="seapplet"/>
         <value type="string" value="pidgin"/>
+        <value type="string" value="messenger"/>
+        <value type="string" value="kgpg"/>
         <value type="string" value="xfce4-power-manager"/>
         <value type="string" value="skypeforlinux"/>
         <value type="string" value="telegram"/>
       </property>
       <property name="names-hidden" type="array">
+        <value type="string" value="google-chrome-stable"/>
         <value type="string" value="blueman-applet"/>
       </property>
       <property name="show-frame" type="bool" value="false"/>
@@ -78,7 +78,7 @@
     <property name="plugin-19" type="string" value="systemload"/>
     <property name="plugin-20" type="string" value="launcher">
       <property name="items" type="array">
-        <value type="string" value="14716712725.desktop"/>
+        <value type="string" value="14863408111.desktop"/>
       </property>
     </property>
     <property name="plugin-21" type="string" value="launcher">
@@ -96,7 +96,6 @@
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
     </property>
     <property name="plugin-26" type="string" value="places"/>
-    <property name="plugin-7" type="string" value="launcher"/>
     <property name="plugin-8" type="string" value="launcher">
       <property name="items" type="array">
         <value type="string" value="14776335891.desktop"/>
@@ -109,5 +108,7 @@
         <value type="string" value="14776346682.desktop"/>
       </property>
     </property>
+    <property name="plugin-7" type="string" value="systemload"/>
+    <property name="plugin-12" type="string" value="battery"/>
   </property>
 </channel>

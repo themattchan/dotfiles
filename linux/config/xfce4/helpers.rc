@@ -1,4 +1,4 @@
-TerminalEmulator=custom-TerminalEmulator
+TerminalEmulator=xfce4-terminal
 FileManager=Thunar
+WebBrowser=chromium
 
-WebBrowser=google-chrome

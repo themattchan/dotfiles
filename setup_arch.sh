@@ -8,11 +8,15 @@ cd;
 sudo pacman -Syu --needed \
      plasma-meta \
      xfce4 \
-     xmonad xmonad-contrib 
+     xmonad xmonad-contrib
+
+sudo pacman -S \
+     cups cups-filters ghostscript gsfonts cups-pdf
 
 pacaur -Syu --needed \
-     xfce4-goodies xfce4-notifyd
-     
+       xfce4-goodies xfce4-notifyd \
+       libcups
+
 sudo pacman -Syu --needed \
      emacs htop the_silver_searcher ntp htop pavucontrol \
      zsh git aspell aspell-en \
@@ -21,7 +25,7 @@ sudo pacman -Syu --needed \
      scala sbt \
      haskell-stack \
      ocaml \
-     racket 
+     racket
 
 sudo pacman -Syu --needed \
      vlc \
@@ -29,11 +33,11 @@ sudo pacman -Syu --needed \
      gst-libav gst-plugins-bad gst-plugins-base gst-plugins-good gst-plugins-ugly \
      evince \
      firefox transmission-gtk \
-     
+
 
 # sudo pacman -Syu --needed \
 #      libreoffice-fresh \
-#      texlive-most 
+#      texlive-most
 
 pacaur -Syu --needed \
      google-chrome \
@@ -44,3 +48,9 @@ pacaur -Syu --needed \
 gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
 xfconf-query -c xsettings -p /Gtk/KeyThemeName -s Emacs
 /usr/bin/setxkbmap -option '' -option 'ctrl:nocaps'
+
+
+tllocalmgr install cm-super lm lmodern mdframed etoolbox needspace secdot tabu \
+           varwidth multirow units siunitx algorithmicx hyphenat enumitem \
+           paralist biblatex biblatex-ieee logreq xstring
+sudo texhash

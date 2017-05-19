@@ -170,3 +170,7 @@ fi
 
 export NVM_DIR="/home/matt/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# if [[ $systype == "Linux" ]]; then
+#     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+# fi

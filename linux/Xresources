@@ -1,9 +1,12 @@
-		!.Xresources
+!.Xresources
 
 ! X org settings
+Xft.dpi: 96
 Xft.rgba: rgb
 Xft.hinting: true
+Xft.autohint: 0
 Xft.antialias: true
+Xft.lcdfilter: lcddefault
 Xcursor.theme: DMZ-White
 Xft.hintstyle: hintslight
 

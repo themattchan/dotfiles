@@ -11,10 +11,10 @@ critical_percentage=15
 action_on_low=1
 action_on_critical=1
 hide_when_full=0
-colorA=#8888FF
-colorH=#00FF00
-colorL=#FFFF00
-colorC=#FF0000
+colorA=rgb(136,136,255)
+colorH=rgb(0,255,0)
+colorL=rgb(255,255,0)
+colorC=rgb(255,0,0)
 command_on_low=
 command_on_critical=
 
