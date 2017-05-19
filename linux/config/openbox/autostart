@@ -1,4 +1,0 @@
-mmaker -vf OpenBox3 &
-xterm &
-xfce4-panel &
-dropboxd &

@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<gconf>
-	<entry name="equalizer_preset" mtime="1417653990" type="string">
-		<stringvalue>Rock</stringvalue>
-	</entry>
-	<entry name="volume" mtime="1388050931" type="int" value="80"/>
-</gconf>
