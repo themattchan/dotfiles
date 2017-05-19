@@ -8,16 +8,43 @@
 # hlsearch on (H) or off (h):
 ~h
 # Last Search Pattern:
-~MSle0~/hello
+~MSle0~/filety
+
+# Last Substitute Search Pattern:
+~MSle0&4
 
 # Last Substitute String:
 $
 
 # Command Line History (newest to oldest):
+::q
+:a
+:syntax on
 :q
+:w
+:close
+:Lexplore
+:edit
+:e
+:filetype plugin indent on
+:filetype on
+:Explore
+:PluginInstall
+:s/4/2/g
+:s/4/2
+:e .vimrc
+:h vundle
 :'<,'>q
 
 # Search String History (newest to oldest):
+? \s\+$
+?/filety
+? @$
+?/pures
+?/Drop
+??\a
+? 4
+?/4
 
 # Expression History (newest to oldest):
 
@@ -26,43 +53,164 @@ $
 # Input Line History (newest to oldest):
 
 # Registers:
+""0	CHAR	0
+	4
+"1	LINE	0
+	" ============================================================================
+	" Netrw Directory Listing                                        (netrw v153)
+	"   /Users/matt/dotfiles/vim
+	"   Sorted by      name
+	"   Sort sequence: [\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\~\=\*$,*,\.o$,\.obj$,\.info$,\.swp$,\.bak$,\~$
+	"   Quick Help: <F1>:help  -:go up dir  D:delete  R:rename  s:sort-by  x:special
+	" ==============================================================================
+	../
+	./
+	bundle/
+	colors/
+	doc/
+	plugin/
+	.netrwhist
+	viminfo
+	vimrc
+	.vimrc.swp
+"2	LINE	0
+	au FileType lithaskell sw=24 sts=4 et
+"-	CHAR	0
+	4
 
 # File marks:
-'0  1  0  ~/code/FPS_Workspace_New/fps-main/src/main/resources/OSGI-INF/blueprint/blueprint.xml
-'1  1  0  ~/code/FPS_Workspace_New/FPSNode/Scripts/fps_data_includingcontents.sql
-'2  16  15  /Volumes/Untitled/FPS_workspace/consumer-ui-trunk/.project
-'3  166  17  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
+'0  72  6  ~/Dropbox/purescript-sokoban/src/Parser.purs
+'1  99  8  ~/dotfiles/vim/vimrc
+'2  1  0  ~/code/FPS_Workspace_New/fps-main/src/main/resources/OSGI-INF/blueprint/blueprint.xml
+'3  1  0  ~/code/FPS_Workspace_New/FPSNode/Scripts/fps_data_includingcontents.sql
+'4  16  15  /Volumes/Untitled/FPS_workspace/consumer-ui-trunk/.project
+'5  166  17  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
 
 # Jumplist (newest first):
+-'  72  6  ~/Dropbox/purescript-sokoban/src/Parser.purs
+-'  1  0  ~/Dropbox/purescript-sokoban/src/Parser.purs
+-'  99  8  ~/dotfiles/vim/vimrc
+-'  101  1  ~/dotfiles/vim/vimrc
+-'  95  0  ~/dotfiles/vim/vimrc
+-'  92  0  ~/dotfiles/vim/vimrc
+-'  89  0  ~/dotfiles/vim/vimrc
+-'  87  0  ~/dotfiles/vim/vimrc
+-'  84  0  ~/dotfiles/vim/vimrc
+-'  74  0  ~/dotfiles/vim/vimrc
+-'  98  0  ~/dotfiles/vim/vimrc
+-'  102  0  ~/dotfiles/vim/vimrc
+-'  106  0  ~/dotfiles/vim/vimrc
+-'  109  0  ~/dotfiles/vim/vimrc
+-'  113  0  ~/dotfiles/vim/vimrc
+-'  115  0  ~/dotfiles/vim/vimrc
+-'  117  0  ~/dotfiles/vim/vimrc
+-'  120  0  ~/dotfiles/vim/vimrc
+-'  123  0  ~/dotfiles/vim/vimrc
+-'  131  0  ~/dotfiles/vim/vimrc
+-'  135  0  ~/dotfiles/vim/vimrc
+-'  139  0  ~/dotfiles/vim/vimrc
+-'  144  0  ~/dotfiles/vim/vimrc
+-'  153  0  ~/dotfiles/vim/vimrc
+-'  158  0  ~/dotfiles/vim/vimrc
+-'  160  0  ~/dotfiles/vim/vimrc
+-'  164  0  ~/dotfiles/vim/vimrc
+-'  167  0  ~/dotfiles/vim/vimrc
+-'  170  0  ~/dotfiles/vim/vimrc
+-'  173  0  ~/dotfiles/vim/vimrc
+-'  175  0  ~/dotfiles/vim/vimrc
+-'  178  0  ~/dotfiles/vim/vimrc
+-'  181  0  ~/dotfiles/vim/vimrc
+-'  185  0  ~/dotfiles/vim/vimrc
+-'  187  0  ~/dotfiles/vim/vimrc
+-'  182  1  ~/dotfiles/vim/vimrc
+-'  71  0  ~/dotfiles/vim/vimrc
+-'  68  0  ~/dotfiles/vim/vimrc
+-'  64  0  ~/dotfiles/vim/vimrc
+-'  60  0  ~/dotfiles/vim/vimrc
+-'  56  0  ~/dotfiles/vim/vimrc
+-'  32  2  ~/dotfiles/vim/vimrc
+-'  73  32  ~/dotfiles/vim/vimrc
+-'  72  0  ~/dotfiles/vim/vimrc
+-'  27  0  ~/dotfiles/vim/vimrc
+-'  26  0  ~/dotfiles/vim/vimrc
+-'  1  0  ~/dotfiles/vim/vimrc
 -'  1  0  ~/code/FPS_Workspace_New/fps-main/src/main/resources/OSGI-INF/blueprint/blueprint.xml
 -'  1  0  ~/code/FPS_Workspace_New/FPSNode/Scripts/fps_data_includingcontents.sql
 -'  16  15  /Volumes/Untitled/FPS_workspace/consumer-ui-trunk/.project
 -'  1  0  /Volumes/Untitled/FPS_workspace/consumer-ui-trunk/.project
--'  166  17  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
--'  1  0  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
--'  166  17  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
--'  1  0  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
--'  16  15  /Volumes/Untitled/FPS_workspace/consumer-ui-trunk/.project
--'  1  0  /Volumes/Untitled/FPS_workspace/consumer-ui-trunk/.project
--'  166  17  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
--'  1  0  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
--'  166  17  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
--'  1  0  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
--'  1  0  ~/code/FPS_Workspace_New/FPSNode/Scripts/fps_data_includingcontents.sql
--'  16  15  /Volumes/Untitled/FPS_workspace/consumer-ui-trunk/.project
--'  1  0  /Volumes/Untitled/FPS_workspace/consumer-ui-trunk/.project
--'  166  17  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
--'  1  0  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
--'  166  17  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
--'  1  0  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
--'  16  15  /Volumes/Untitled/FPS_workspace/consumer-ui-trunk/.project
--'  1  0  /Volumes/Untitled/FPS_workspace/consumer-ui-trunk/.project
--'  166  17  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
--'  1  0  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
--'  166  17  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
--'  1  0  ~/Dropbox/cleanspark/fps-site-config-refactor/pom.xml
+-'  99  8  ~/dotfiles/vim/vimrc
+-'  101  1  ~/dotfiles/vim/vimrc
+-'  95  0  ~/dotfiles/vim/vimrc
+-'  92  0  ~/dotfiles/vim/vimrc
+-'  89  0  ~/dotfiles/vim/vimrc
+-'  87  0  ~/dotfiles/vim/vimrc
+-'  84  0  ~/dotfiles/vim/vimrc
+-'  74  0  ~/dotfiles/vim/vimrc
+-'  98  0  ~/dotfiles/vim/vimrc
+-'  102  0  ~/dotfiles/vim/vimrc
+-'  106  0  ~/dotfiles/vim/vimrc
+-'  109  0  ~/dotfiles/vim/vimrc
+-'  113  0  ~/dotfiles/vim/vimrc
+-'  115  0  ~/dotfiles/vim/vimrc
+-'  117  0  ~/dotfiles/vim/vimrc
+-'  120  0  ~/dotfiles/vim/vimrc
+-'  123  0  ~/dotfiles/vim/vimrc
+-'  131  0  ~/dotfiles/vim/vimrc
+-'  135  0  ~/dotfiles/vim/vimrc
+-'  139  0  ~/dotfiles/vim/vimrc
+-'  144  0  ~/dotfiles/vim/vimrc
+-'  153  0  ~/dotfiles/vim/vimrc
+-'  158  0  ~/dotfiles/vim/vimrc
+-'  160  0  ~/dotfiles/vim/vimrc
+-'  164  0  ~/dotfiles/vim/vimrc
+-'  167  0  ~/dotfiles/vim/vimrc
+-'  170  0  ~/dotfiles/vim/vimrc
+-'  173  0  ~/dotfiles/vim/vimrc
+-'  175  0  ~/dotfiles/vim/vimrc
+-'  178  0  ~/dotfiles/vim/vimrc
+-'  181  0  ~/dotfiles/vim/vimrc
+-'  185  0  ~/dotfiles/vim/vimrc
+-'  187  0  ~/dotfiles/vim/vimrc
+-'  182  1  ~/dotfiles/vim/vimrc
+-'  71  0  ~/dotfiles/vim/vimrc
+-'  68  0  ~/dotfiles/vim/vimrc
+-'  64  0  ~/dotfiles/vim/vimrc
+-'  60  0  ~/dotfiles/vim/vimrc
+-'  56  0  ~/dotfiles/vim/vimrc
+-'  32  2  ~/dotfiles/vim/vimrc
+-'  73  32  ~/dotfiles/vim/vimrc
 
 # History of marks within files (newest to oldest):
+
+> ~/Dropbox/purescript-sokoban/src/Parser.purs
+	"	72	6
+
+> ~/dotfiles/vim/vimrc
+	"	99	8
+	^	99	9
+	.	99	9
+	+	72	0
+	+	74	0
+	+	73	32
+	+	32	0
+	+	183	0
+	+	181	0
+	+	101	0
+	+	102	0
+	+	99	9
+
+> ~/dotfiles/vim/[Vundle] Installer
+	"	6	0
+	.	1	0
+	+	1	0
+
+> ~/dotfiles/vim/bundle/Vundle.vim/[Vundle] Installer
+	"	6	0
+	.	1	0
+	+	1	0
+
+> ~/dotfiles/vim/bundle/Vundle.vim/.vimrc
+	"	1	0
 
 > ~/code/FPS_Workspace_New/fps-main/src/main/resources/OSGI-INF/blueprint/blueprint.xml
 	"	1	0

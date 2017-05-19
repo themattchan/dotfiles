@@ -29,7 +29,7 @@ set nocompatible              " be iMproved, required
 colorscheme wombat
 if has("gui_running")
 	if has("gui_gtk2")
-		set guifont=Monospace\ 10 
+		set guifont=Monospace\ 10
 	elseif has("gui_macvim")
 		set guifont=Monaco:h12
 	endif
@@ -69,8 +69,8 @@ set softtabstop=4
 au FileType c setl sw=8 sts=8
 au FileType java setl sw=4 sts=4
 
-au FileType haskell sw=4 sts=4 et
-au FileType lithaskell sw=4 sts=4 et
+au FileType haskell sw=2 sts=2 et
+au FileType lithaskell sw=2 sts=2 et
 
 au FileType sh setl sw=2 sts=2 et
 au FileType javascript setl sw=2 sts=2 et
@@ -96,6 +96,8 @@ set history=1000
 " set linebreak
 " set wrap
 
+syntax on
+filetype on
 filetype indent on
 
 set foldenable
@@ -173,6 +175,9 @@ Plugin 'Lokaltog/vim-powerline'
 
 " Yankstack: add a kill ring
 Plugin 'maxbrunsfeld/vim-yankstack'
+
+" PureScript-mode
+Plugin 'purescript-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
