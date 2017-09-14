@@ -1,6 +1,13 @@
 export LDFLAGS="-L/opt/local/lib"
 export SSH_ASKPASS="/usr/bin/ksshaskpass"
 
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent > ~/.ssh-agent-thing
+fi
+if [[ "$SSH_AGENT_PID" == "" ]]; then
+    eval "$(<~/.ssh-agent-thing)"
+fi
+
 # if [ -z "$SSH_AUTH_SOCK" ] ; then
 #   eval `ssh-agent -s`
 #   ssh-add
