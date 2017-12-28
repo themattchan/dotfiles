@@ -143,6 +143,7 @@ export GOPATH="$HOME/go"
 
 typeset -U path
 path=(
+    "/usr/bin/"
     "/usr/local/bin/"
     $RACKET_BIN
     $OPAM_BIN
