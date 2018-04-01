@@ -1,12 +1,14 @@
 #! /bin/sh
 
+FEDORA_VERSION=27
+
 cd;
 
 # full system update
 sudo dnf update -y
 
 # add repos
-sudo dnf install -y --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-24.noarch.rpm
+sudo dnf install -y --nogpgcheck "http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-${FEDORA_VERSION}.noarch.rpm"
 sudo rpm -ivh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm
 su -c "curl https://satya164.github.io/fedy/fedy-installer -o fedy-installer && chmod +x fedy-installer && ./fedy-installer"
 rm ./fedy-installer
@@ -40,7 +42,7 @@ sudo dnf install -y gcc gdb kernel-devel
 sudo dnf install -y java-devel maven
 sudo dnf install -y scala sbt
 sudo dnf install -y haskell-platform
-curl -sSL https://s3.amazonaws.com/download.fpcomplete.com/fedora/24/fpco.repo |
+curl -sSL "https://s3.amazonaws.com/download.fpcomplete.com/fedora/${FEDORA_VERSION}/fpco.repo" |
 	sudo tee /etc/yum.repos.d/fpco.repo
 sudo dnf install -y stack
 sudo dnf install -y @ocaml
@@ -111,3 +113,14 @@ chsh -s /bin/zsh $(whoami)
 gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
 xfconf-query -c xsettings -p /Gtk/KeyThemeName -s Emacs
 /usr/bin/setxkbmap -option '' -option 'ctrl:nocaps'
+ 
+#  gtf 1920 1200 60 -x
+# 
+#   # 1920x1200 @ 60.00 Hz (GTF) hsync: 74.52 kHz; pclk: 193.16 MHz
+#   Modeline "1920x1200_60.00"  193.16  1920 2048 2256 2592  1200 1201 1204 1242  -HSync +Vsync
+# 
+# [matt@localhost ~]$ xrandr --newmode "1920x1200_60.00"  193.16  1920 2048 2256 2592  1200 1201 1204 1242  -HSync +Vsync
+# [matt@localhost ~]$ xrandr --addmode eDP-1 "1920x1200_60.00"
+# [matt@localhost ~]$ xrandr --output eDP-1 --mode 1920x1200_60.00
+# [matt@localhost ~]$ 
+# 
