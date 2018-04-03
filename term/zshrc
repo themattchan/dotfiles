@@ -118,6 +118,11 @@ TS_ACTIVATOR="$HOME/activator"
 
 export MANPATH="/opt/local/share/man/:$MANPATH"
 export INFOPATH="/opt/local/share/info/:$INFOPATH"
+
+export NVM_DIR="/home/matt/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+
 # export PKG_CONFIG_PATH=$(join                                    \
 #                          '/usr/X11/lib/pkgconfig'               \
 #                          '/usr/local/lib/pkgconfig'              \
@@ -148,6 +153,7 @@ path=(
     "/usr/bin/"
 ##    $NIX_PATH
     "/usr/local/bin/"
+    $NVM_DIR
     $RACKET_BIN
     $OPAM_BIN
     $OCAML_TOPLEVEL_PATH
@@ -171,9 +177,6 @@ fi
 # if command -v tmux>/dev/null; then
 #   [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
 # fi
-
-export NVM_DIR="/home/matt/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # if [[ $systype == "Linux" ]]; then
 #     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
