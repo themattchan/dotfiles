@@ -1,1 +1,2 @@
 export LDFLAGS="-L/opt/local/lib"
+export PATH="$HOME/.cargo/bin:$PATH"

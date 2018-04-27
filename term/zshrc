@@ -12,12 +12,17 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+if [[ "$TERM" == 'dumb' ]]; then
+  PROMPT='%2~ %% '
+fi
+
 # set emacs keybindings
 bindkey -e
 
 # set the terminal type
 export TERM=xterm-256color
-export LANG=en_US.UTF-8
+export LANG='en_US.UTF-8'
+export LC_ALL='en_US.UTF-8'
 
 # Lets set some options
 setopt correctall
@@ -142,6 +147,7 @@ export GOPATH="$HOME/go"
 
 typeset -U path
 path=(
+    "$HOME/platform-tools"
     "/usr/local/bin/"
     $RACKET_BIN
     $OPAM_BIN
@@ -170,3 +176,10 @@ fi
 
 export NVM_DIR="/home/matt/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+
+if [ -n "$INSIDE_EMACS" ]; then
+  chpwd() { print -P "\033AnSiTc %d" }
+  print -P "\033AnSiTu %n"
+  print -P "\033AnSiTc %d"
+fi

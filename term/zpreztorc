@@ -13,7 +13,9 @@
 # zstyle ':prezto:*:*' case-sensitive 'yes'
 
 # Color output (auto set to 'no' on dumb terminals).
+#if [[ ! ("$TERM" == 'dumb' || -n "$INSIDE_EMACS" ) ]]; then
 zstyle ':prezto:*:*' color 'yes'
+#fi
 
 # Set the Zsh modules to load (man zshmodules).
 # zstyle ':prezto:load' zmodule 'attr' 'stat'
@@ -42,51 +44,6 @@ zstyle ':prezto:load' pmodule \
   'tmux' \
   'ssh' \
   'prompt'
-
-#
-# Editor
-#
-
-# Set the key mapping style to 'emacs' or 'vi'.
-zstyle ':prezto:module:editor' key-bindings 'emacs'
-
-# Auto convert .... to ../..
-# zstyle ':prezto:module:editor' dot-expansion 'yes'
-
-#
-# Git
-#
-
-# Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'.
-# zstyle ':prezto:module:git:status:ignore' submodules 'all'
-
-#
-# GNU Utility
-#
-
-# Set the command prefix on non-GNU systems.
-# zstyle ':prezto:module:gnu-utility' prefix 'g'
-
-#
-# History Substring Search
-#
-
-# Set the query found color.
-# zstyle ':prezto:module:history-substring-search:color' found ''
-
-# Set the query not found color.
-# zstyle ':prezto:module:history-substring-search:color' not-found ''
-
-# Set the search globbing flags.
-# zstyle ':prezto:module:history-substring-search' globbing-flags ''
-
-#
-# Pacman
-#
-
-# Set the Pacman frontend.
-# zstyle ':prezto:module:pacman' frontend 'yaourt'
-
 #
 # Prompt
 #
@@ -94,14 +51,9 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
-if [ "$INSIDE_EMACS" ]; then
-	local _current_dir="%{$fg[blue]%}%2~%{$reset_color%} " #2 levels deep
-	local _return_status="%{$fg[red]%}%(?..⍉)%{$reset_color%}"
-	PROMPT='$(_user_host) ${_current_dir} % >  '
-	PROMPT2='%{$fg[grey]%}<%{$reset_color%} '
-else
-	zstyle ':prezto:module:prompt' theme 'sorin'
-fi
+#if [[ ! ( "$TERM" == 'dumb' || -n "$INSIDE_EMACS" ) ]]; then
+zstyle ':prezto:module:prompt' theme 'sorin'
+#fi
 
 #
 # Ruby

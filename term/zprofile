@@ -74,3 +74,6 @@
 # if [[ ! -d "$TMPPREFIX" ]]; then
 #   mkdir -p "$TMPPREFIX"
 # fi
+
+export PATH="$HOME/.cargo/bin:$PATH"
+export GPG_TTY=$(tty)
