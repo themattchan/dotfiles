@@ -8,7 +8,7 @@ function join {
 }
 
 ## prezto
-if [[ -z ${INSIDE_EMACS} && -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
@@ -189,12 +189,6 @@ export NVM_DIR="/home/matt/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 
-if [ -n "$INSIDE_EMACS" ]; then
-  chpwd() { print -P "\033AnSiTc %d" }
-  print -P "\033AnSiTu %n"
-  print -P "\033AnSiTc %d"
-fi
-
 # if [[ $systype == "Linux" ]]; then
 #     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 # fi
@@ -222,4 +216,3 @@ export PATH="/usr/local/opt/bison/bin:$PATH"
 # if [ -e /Users/matt/.nix-profile/etc/profile.d/nix.sh ]; then source /Users/matt/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 # export NIX_REMOTE=
 # NIX_PATH="nixpkgs=/nix/store/qk1q2rwq9qzhi49hx7whji90bqk8kf9y-nixpkgs-7ae9da426924537755ce9164fd5b5f81ce16a1c3-src:${NIX_PATH}"
-
