@@ -1,3 +1,7 @@
+emulate sh
+source ~/.profile
+emulate zsh
+
 # #
 # # Executes commands at login pre-zshrc.
 # #

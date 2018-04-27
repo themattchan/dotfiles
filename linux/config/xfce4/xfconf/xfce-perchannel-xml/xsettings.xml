@@ -2,11 +2,11 @@
 
 <channel name="xsettings" version="1.0">
   <property name="Net" type="empty">
-    <property name="ThemeName" type="string" value="Adwaita"/>
-    <property name="IconThemeName" type="string" value="Mist"/>
+    <property name="ThemeName" type="string" value="Breeze"/>
+    <property name="IconThemeName" type="string" value="Adwaita"/>
     <property name="DoubleClickTime" type="empty"/>
     <property name="DoubleClickDistance" type="empty"/>
-    <property name="DndDragThreshold" type="empty"/>
+    <property name="DndDragThreshold" type="int" value="8"/>
     <property name="CursorBlink" type="bool" value="true"/>
     <property name="CursorBlinkTime" type="int" value="1234"/>
     <property name="SoundThemeName" type="empty"/>
@@ -23,7 +23,7 @@
   <property name="Gtk" type="empty">
     <property name="CanChangeAccels" type="empty"/>
     <property name="ColorPalette" type="empty"/>
-    <property name="FontName" type="empty"/>
+    <property name="FontName" type="string" value="Sans 9"/>
     <property name="IconSizes" type="empty"/>
     <property name="KeyThemeName" type="string" value="Emacs"/>
     <property name="ToolbarStyle" type="empty"/>

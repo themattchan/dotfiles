@@ -10,8 +10,8 @@
   <property name="SYN260200_06CB78C9_Touchpad" type="empty">
     <property name="RightHanded" type="bool" value="true"/>
     <property name="ReverseScrolling" type="bool" value="true"/>
-    <property name="Threshold" type="int" value="4"/>
-    <property name="Acceleration" type="double" value="8.000000"/>
+    <property name="Threshold" type="int" value="30"/>
+    <property name="Acceleration" type="double" value="2.500000"/>
     <property name="Properties" type="empty">
       <property name="libinput_Tapping_Enabled" type="int" value="1"/>
       <property name="Synaptics_Edge_Scrolling" type="array">
@@ -39,6 +39,7 @@
         <value type="int" value="3"/>
         <value type="int" value="2"/>
       </property>
+      <property name="Device_Enabled" type="int" value="1"/>
     </property>
   </property>
   <property name="DisableTouchpadWhileTyping" type="bool" value="true"/>
