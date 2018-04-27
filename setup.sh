@@ -56,11 +56,12 @@ function set_zsh
 function install_osx
 {
     if [[ $(uname -s) == "Darwin" ]]; then
-        source "$DOTFILES/osx/osx"
         cp -R "$DOTFILES/osx/KeyBindings" "$HOME/Library/"
+        source "$DOTFILES/osx/osx"
     fi
 }
 
-# install_zprezto
-# install_dotfiles
-set_zsh
+#install_zprezto
+#install_dotfiles
+#set_zsh
+install_osx

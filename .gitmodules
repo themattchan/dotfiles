@@ -1,6 +1,6 @@
 [submodule "emacs.d"]
 	path = emacs.d
-	url = https://github.com/themattchan/emacs.d.git
+	url = git@github.com:themattchan/emacs.d.git
 [submodule "linux/config/awesome"]
 	path = linux/config/awesome
 	url = https://github.com/themattchan/awesome-config.git

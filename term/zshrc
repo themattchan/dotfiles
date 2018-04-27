@@ -114,7 +114,7 @@ OCAML_TOPLEVEL_PATH="$HOME/.opam/system/lib/toplevel"
 #                       "$HOME/.opam/system/lib/stublibs" \
 #                       "/usr/lib/ocaml/stublibs" )
 CABAL_BIN="$HOME/Library/Haskell/bin"
-#STACK_BIN="$HOME/.local/bin/:$HOME/.stack/programs/x86_64-osx/ghc-8.0.2/bin"
+STACK_BIN="$HOME/.local/bin/:$HOME/.stack/programs/x86_64-osx/ghc-8.0.2/bin"
 ANDROID_HOME="$HOME/Library/Android/sdk"
 
 export CLASSPATH="$HOME/.jars/:."
@@ -157,7 +157,7 @@ typeset -U path
 path=(
     "$HOME/platform-tools"
     "/usr/bin/"
-##    $NIX_PATH
+    ##    $NIX_PATH
     "/usr/local/bin/"
     $NVM_DIR
     $RACKET_BIN
@@ -166,6 +166,7 @@ path=(
     $CAML_LD_LIBRARY_PATH
     $SCALA_HOME
     $TS_ACTIVATOR
+    $STACK_BIN
     $CABAL_BIN
     "$GOPATH/bin"
     $MAC_ONLY
