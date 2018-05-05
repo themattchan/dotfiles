@@ -156,9 +156,9 @@ export GOPATH="$HOME/go"
 typeset -U path
 path=(
     "$HOME/platform-tools"
+    "/usr/local/bin/"
     "/usr/bin/"
     ##    $NIX_PATH
-    "/usr/local/bin/"
     $NVM_DIR
     $RACKET_BIN
     $OPAM_BIN
