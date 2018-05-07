@@ -1,4 +1,4 @@
-#### matt's .zshrc #############################################################
+#### matt's .zshrc #############################################################gg
 
 systype=$(uname -s)
 
@@ -175,7 +175,7 @@ path=(
 export PATH
 
 # Load opam if installed
-if [[ -s "$HOME/.opam/opam-init/init.zsh" ]]; then
+if (which opam &> /dev/null) && [[ -s "$HOME/.opam/opam-init/init.zsh" ]]; then
     . "$HOME/.opam/opam-init/init.sh" > /dev/null 2> /dev/null || true
     eval `opam config env`
 fi
