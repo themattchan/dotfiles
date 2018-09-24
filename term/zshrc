@@ -150,6 +150,8 @@ elif [[ $systype == "Linux" ]]; then
     MAC_ONLY=""
     RACKET_BIN="/usr/local/racket/bin"
     export SSH_ASKPASS="/usr/bin/ksshaskpass"
+    alias pbcopy='xsel --clipboard --input'
+    alias pbpaste='xsel --clipboard --output'
 fi
 
 export GOPATH="$HOME/go"
