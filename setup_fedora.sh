@@ -14,6 +14,7 @@ dnf config-manager --add-repo https://download.opensuse.org/repositories/home:sn
 dnf config-manager --add-repo https://build.opensuse.org/project/show/home:paolorotolo:numix
 dnf config-manager --add-repo https://download.opensuse.org/repositories/home:manuelschneid3r/Fedora_28/home:manuelschneid3r.repo
 dnf install -y --nogpgcheck "http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-${FEDORA_VERSION}.noarch.rpm"
+dnf copr enable -y heliocastro/hack-fonts
 rpm -ivh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm
 su -c "curl https://satya164.github.io/fedy/fedy-installer -o fedy-installer && chmod +x fedy-installer && ./fedy-installer"
 rm ./fedy-installer
@@ -53,7 +54,7 @@ MY_PKGS+=" thunarx-python Thunar-devel libthunarx-2-dev"
 MY_PKGS+=" pass qtpass plank albert"
 
 # interface stuff
-MY_PKGS+="moka-icon-theme numix"
+MY_PKGS+="moka-icon-theme numix hack-fonts"
 
 # compilers, etc
 MY_PKGS+=" gcc gdb kernel-devel"
@@ -136,6 +137,8 @@ xfconf-query -c xsettings -p /Gtk/KeyThemeName -s Emacs
 xfconf-query -c xfwm4 -p /general/theme -s "Numix"
 xfconf-query -c xsettings -p /Net/ThemeName -s "Numix"
 xfconf-query -c xsettings -p /Net/IconThemeName -s "Moka"
+xfconf-query -c xsettings -p /Gtk/MonospaceFontName -s "Hack 9"
+
 
 #  gtf 1920 1200 60 -x
 #
