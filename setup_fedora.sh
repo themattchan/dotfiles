@@ -134,10 +134,14 @@ gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
 xfconf-query -c xsettings -p /Gtk/KeyThemeName -s Emacs
 /usr/bin/setxkbmap -option '' -option 'ctrl:nocaps'
 
+xfconf-query -c xsettings -p /Net/EnableEventSounds -s "false"
+xfconf-query -c xsettings -p /Net/EnableInputFeedbackSounds -s "false"
+
 xfconf-query -c xfwm4 -p /general/theme -s "Numix"
 xfconf-query -c xsettings -p /Net/ThemeName -s "Numix"
 xfconf-query -c xsettings -p /Net/IconThemeName -s "Moka"
 xfconf-query -c xsettings -p /Gtk/MonospaceFontName -s "Hack 9"
+xfconf-query -c xsettings -p /Gtk/KeyThemeName -s "Emacs"
 
 
 #  gtf 1920 1200 60 -x
