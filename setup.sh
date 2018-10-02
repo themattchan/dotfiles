@@ -1,7 +1,7 @@
 #! /bin/sh
 
-EXTERNAL="${ZDOTDIR:-$HOME}/dotfiles/external"
 DOTFILES="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+EXTERNAL="$DOTFILES/external"
 
 function install_dotfiles
 {
