@@ -9,15 +9,15 @@ function join {
 }
 
 ## prezto
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+if [[ -s "$EXTERNAL/zprezto/init.zsh" ]]; then
+  source "$EXTERNAL/zprezto/init.zsh"
 fi
 
 if [[ "$TERM" == 'dumb' ]]; then
   PROMPT='%2~ %% '
 fi
 
-source $EXTERNAL/z/z.sh
+. $EXTERNAL/z/z.sh
 
 # set emacs keybindings
 bindkey -e
