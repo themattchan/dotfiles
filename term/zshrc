@@ -17,17 +17,17 @@ if [[ "$TERM" == 'dumb' ]]; then
   PROMPT='%2~ %% '
 fi
 
+## z -- fast directory navigation
 . $EXTERNAL/z/z.sh
 
-# set emacs keybindings
+# use emacs keybindings
 bindkey -e
 
-# set the terminal type
+# set terminal type
 export TERM=xterm-256color
 export LANG='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
 
-# Lets set some options
 setopt correctall
 setopt autocd
 setopt auto_resume
@@ -37,11 +37,9 @@ setopt completeinword
 setopt no_beep
 unsetopt caseglob
 
-# colors
 autoload -U colors && colors
 autoload -U promptinit && promptinit
 
-# Set some ZSH styles
 zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
 zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
 
@@ -75,7 +73,6 @@ alias nano="qem"
 # unfuck irssi scrolling
 alias irssi='TERM=screen-256color irssi'
 
-# cd, because typing the backslash is A LOT of work!!
 alias .='cd ../'
 alias ..='cd ../../'
 alias ...='cd ../../../'
@@ -99,7 +96,7 @@ alias sl='ls'
 # cats - cat with syntax highlighting
 function pygmentize_cat {
     for arg in "$@"; do
-        pygmentize -g "${arg}" 2> /dev/null || /bin/cat "${arg}"
+        pygmentize -g "${arg}" 2> /dev/null || cat "${arg}"
     done
 }
 ## check that pygmentize is installed, then alias cats
@@ -201,11 +198,6 @@ fi
 
 export NVM_DIR="/home/matt/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
-
-# if [[ $systype == "Linux" ]]; then
-#     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-# fi
 
 PATH="/Users/matt/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/Users/matt/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
