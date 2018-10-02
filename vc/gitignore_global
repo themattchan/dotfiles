@@ -11,3 +11,7 @@
 *.class
 a.out
 core/
+output/
+bower_components/
+node_modules/
+.liquid/

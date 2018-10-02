@@ -18,11 +18,10 @@ export PATH="$HOME/.cargo/bin:$PATH"
 #/usr/bin/xmodmap $HOME/.Xmodmap
 
 
-# if [ -e /Users/matt/.nix-profile/etc/profile.d/nix.sh ]; then source /Users/matt/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-# export NIX_REMOTE=
+if [ -e /Users/matt/.nix-profile/etc/profile.d/nix.sh ]; then source /Users/matt/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+export NIX_REMOTE=
 
-# NIX_PATH="nixpkgs=/nix/store/736gw89v4cja4py9qx3i2w77prpisyrl-nixpkgs-74286e:${NIX_PATH}"
-# export SSL_CERT_FILE=/Users/matt/.nix-profile/etc/ssl/certs/ca-bundle.crt
+export SSL_CERT_FILE=/Users/matt/.nix-profile/etc/ssl/certs/ca-bundle.crt
 
 
 

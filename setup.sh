@@ -1,5 +1,6 @@
 #! /bin/sh
 
+EXTERNAL="${ZDOTDIR:-$HOME}/dotfiles/external"
 DOTFILES="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 function install_dotfiles
@@ -29,7 +30,7 @@ function install_dotfiles
 
 function install_zprezto
 {
-    local ZP_DIR="${ZDOTDIR:-$HOME}/.zprezto"
+    local ZP_DIR="$EXTERNAL/zprezto"
 
     git clone --recursive https://github.com/sorin-ionescu/prezto.git $ZP_DIR
 
@@ -39,6 +40,11 @@ function install_zprezto
     do
         ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
     done
+}
+
+function install_z {
+    local Z_DIR="$EXTERNAL/z"
+    git clone https://github.com/rupa/z
 }
 
 function install_peda

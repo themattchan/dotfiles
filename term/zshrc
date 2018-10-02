@@ -1,6 +1,7 @@
 #### matt's .zshrc #############################################################gg
 
 systype=$(uname -s)
+EXTERNAL="${ZDOTDIR:-$HOME}/dotfiles/external"
 
 function join {
     local strs=( "$@" )
@@ -15,6 +16,8 @@ fi
 if [[ "$TERM" == 'dumb' ]]; then
   PROMPT='%2~ %% '
 fi
+
+source $EXTERNAL/z/z.sh
 
 # set emacs keybindings
 bindkey -e

@@ -57,3 +57,7 @@
 	insteadOf = ssh://git@github.com/ghc/packages/
 [url "git@github.com:/ghc/packages-"]
 	insteadOf = git@github.com:/ghc/packages/
+[github]
+	user = themattchan
+[rerere]
+	enabled = true
