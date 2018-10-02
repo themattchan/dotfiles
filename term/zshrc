@@ -99,11 +99,20 @@ alias sl='ls'
 # cats - cat with syntax highlighting
 function pygmentize_cat {
     for arg in "$@"; do
-    pygmentize -g "${arg}" 2> /dev/null || /bin/cat "${arg}"
+        pygmentize -g "${arg}" 2> /dev/null || /bin/cat "${arg}"
     done
 }
 ## check that pygmentize is installed, then alias cats
 command -v pygmentize > /dev/null && alias cats=pygmentize_cat
+
+# toggle hdpi magnification on linux
+if [[ $systype == "Linux" ]]; then
+    function toggle_hdpi_display {
+        local dpi=-1
+        ((dpi=$(xfconf-query -c xsettings -p /Xft/DPI) == -1 ? 150 : -1 ))
+        xfconf-query -c xsettings -p /Xft/DPI -s $dpi
+    }
+fi
 
 #### Paths #####################################################################
 
@@ -153,6 +162,8 @@ elif [[ $systype == "Linux" ]]; then
     MAC_ONLY=""
     RACKET_BIN="/usr/local/racket/bin"
     export SSH_ASKPASS="/usr/bin/ksshaskpass"
+    alias pbcopy='xsel --clipboard --input'
+    alias pbpaste='xsel --clipboard --output'
 fi
 
 export GOPATH="$HOME/go"
