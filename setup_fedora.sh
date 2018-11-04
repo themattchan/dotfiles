@@ -2,7 +2,7 @@
 
 ## RUN THIS AS SUDO
 
-FEDORA_VERSION=28
+FEDORA_VERSION=29
 
 cd;
 
@@ -22,8 +22,11 @@ dnf install -y curl
 curl -sSL "https://s3.amazonaws.com/download.fpcomplete.com/fedora/${FEDORA_VERSION}/fpco.repo" | tee /etc/yum.repos.d/fpco.repo
 
 ## dnf groups
+dnf install @gnome
+dnf install i3 dmenu
 # xfce
-dnf group install -y "Xfce Desktop"
+#dnf group install -y "Xfce Desktop"
+
 # dev tools and command line things
 dnf group install -y "Development Tools"
 
@@ -31,16 +34,16 @@ dnf group install -y "Development Tools"
 MY_PKGS+=" htop ntp pavucontrol util-linux-user gdouros-symbola-fonts"
 
 # xfce panel plugins, why the fuck aren't these bundled together
-MY_PKGS+=" xfce4-battery-plugin xfce4-cellmodem-plugin"
-MY_PKGS+=" xfce4-clipman-plugin xfce4-cpufreq-plugin xfce4-cpugraph-plugin"
-MY_PKGS+=" xfce4-datetime-plugin xfce4-dict-plugin xfce4-diskperf-plugin"
-MY_PKGS+=" xfce4-embed-plugin xfce4-eyes-plugin xfce4-fsguard-plugin"
-MY_PKGS+=" xfce4-genmon-plugin xfce4-mailwatch-plugin xfce4-mount-plugin"
-MY_PKGS+=" xfce4-mpc-plugin xfce4-netload-plugin xfce4-notes-plugin"
-MY_PKGS+=" xfce4-places-plugin xfce4-screenshooter-plugin xfce4-sensors-plugin"
-MY_PKGS+=" xfce4-smartbookmark-plugin xfce4-systemload-plugin xfce4-timer-plugin"
-MY_PKGS+=" xfce4-time-out-plugin xfce4-verve-plugin xfce4-wavelan-plugin"
-MY_PKGS+=" xfce4-weather-plugin xfce4-whiskermenu-plugin xfce4-xkb-plugin"
+# MY_PKGS+=" xfce4-battery-plugin xfce4-cellmodem-plugin"
+# MY_PKGS+=" xfce4-clipman-plugin xfce4-cpufreq-plugin xfce4-cpugraph-plugin"
+# MY_PKGS+=" xfce4-datetime-plugin xfce4-dict-plugin xfce4-diskperf-plugin"
+# MY_PKGS+=" xfce4-embed-plugin xfce4-eyes-plugin xfce4-fsguard-plugin"
+# MY_PKGS+=" xfce4-genmon-plugin xfce4-mailwatch-plugin xfce4-mount-plugin"
+# MY_PKGS+=" xfce4-mpc-plugin xfce4-netload-plugin xfce4-notes-plugin"
+# MY_PKGS+=" xfce4-places-plugin xfce4-screenshooter-plugin xfce4-sensors-plugin"
+# MY_PKGS+=" xfce4-smartbookmark-plugin xfce4-systemload-plugin xfce4-timer-plugin"
+# MY_PKGS+=" xfce4-time-out-plugin xfce4-verve-plugin xfce4-wavelan-plugin"
+# MY_PKGS+=" xfce4-weather-plugin xfce4-whiskermenu-plugin xfce4-xkb-plugin"
 
 # dev tools and command qline things
 MY_PKGS+=" zsh git emacs the_silver_searcher"

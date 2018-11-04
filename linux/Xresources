@@ -1,7 +1,7 @@
 !.Xresources
 
 ! X org settings
-Xft.dpi: 96
+Xft.dpi: 150
 Xft.rgba: rgb
 Xft.hinting: true
 Xft.autohint: 0

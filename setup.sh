@@ -44,7 +44,7 @@ function install_zprezto
 
 function install_z {
     local Z_DIR="$EXTERNAL/z"
-    git clone https://github.com/rupa/z
+    git clone https://github.com/rupa/z $Z_DIR
 }
 
 function install_peda
@@ -70,4 +70,4 @@ function install_osx
 #install_zprezto
 #install_dotfiles
 #set_zsh
-install_osx
+install_z
