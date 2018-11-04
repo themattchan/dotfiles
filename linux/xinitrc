@@ -13,7 +13,5 @@ fi
 
 /usr/bin/xmodmap $HOME/.Xmodmap
 
-xset r rate 150 30
-
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 #choose. last as default
