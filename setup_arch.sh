@@ -31,14 +31,3 @@ PKGS+=" qpdfview"
 PKGS+=" z3"
 
 sudo pacman -Syu --needed ${PKGS}
-
-
-gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
-xfconf-query -c xsettings -p /Gtk/KeyThemeName -s Emacs
-/usr/bin/setxkbmap -option '' -option 'ctrl:nocaps'
-
-
-tllocalmgr install cm-super lm lmodern mdframed etoolbox needspace secdot tabu \
-           varwidth multirow units siunitx algorithmicx hyphenat enumitem \
-           paralist biblatex biblatex-ieee logreq xstring
-sudo texhash
