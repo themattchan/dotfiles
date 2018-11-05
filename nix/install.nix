@@ -12,6 +12,7 @@ in {
    inherit (pkgs)
      spotify
      rofi-unwrapped
+     neofetch
      ;
 
    # fonts
