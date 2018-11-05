@@ -21,6 +21,11 @@ with import <nixpkgs>{};
   #  npm = pkgs.npm;
   };
 
+  st = (pkgs.st.overrideAttrs (attrs: {
+      configFile = builtins.readFile ./st/config.h;
+      patches = [ ./st/st-scrollback-0.8.diff ./st/st-scrollback-mouse-0.8.diff ];
+    }));
+
   apps = {
     inherit (pkgs)
        firefox
