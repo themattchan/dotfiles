@@ -23,7 +23,7 @@ curl -sSL "https://s3.amazonaws.com/download.fpcomplete.com/fedora/${FEDORA_VERS
 
 ## dnf groups
 dnf install @gnome
-dnf install i3 dmenu
+dnf install i3 i3lock dmenu
 # xfce
 #dnf group install -y "Xfce Desktop"
 
