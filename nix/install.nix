@@ -1,16 +1,3 @@
-# install it all
-# nix-env --install --file install.nix
-
-# install specific
-# nix-env --install --file install.nix --attr <name>
-
-# show installed
-# nix-env -q
-
-# have to put
-# { allowUnfree = true; }
-# in ./config/nixpkgs/config.nix
-
 with import <nixpkgs>{};
 {
   polybar = pkgs.polybar.override {
