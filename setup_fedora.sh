@@ -62,23 +62,6 @@ MY_PKGS+="moka-icon-theme numix hack-fonts"
 # compilers, etc
 MY_PKGS+=" gcc gdb kernel-devel"
 
-# LaTeX
-MY_PKGS+=" texlive-scheme-basic"
-MY_PKGS+=" texlive-collection-latex"
-MY_PKGS+=" texlive-collection-latexextra"
-MY_PKGS+=" texlive-collection-latexrecommended"
-MY_PKGS+=" texlive-collection-mathextra"
-MY_PKGS+=" texlive-collection-genericextra"
-MY_PKGS+=" texlive-collection-genericrecommended"
-MY_PKGS+=" texlive-collection-bibtexextra"
-MY_PKGS+=" texlive-collection-basic"
-MY_PKGS+=" texlive-collection-binextra"
-MY_PKGS+=" texlive-collection-fontsextra"
-MY_PKGS+=" texlive-collection-fontsrecommended"
-MY_PKGS+=" texlive-collection-fontutils"
-MY_PKGS+=" texlive-collection-formatsextra"
-MY_PKGS+=" latexmk"
-
 # media player + codecs
 MY_PKGS+=" vlc"
 MY_PKGS+=" gstreamer-ffmpeg"

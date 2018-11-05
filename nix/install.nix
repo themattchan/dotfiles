@@ -13,6 +13,10 @@ in {
 
   ghc = pkgs.haskellPackages.ghcWithPackages (p: [ p.aeson p.network p.lens p.lens-aeson ]);
 
+  latex = pkgs.texlive.combine {
+    inherit (pkgs.texlive) scheme-basic latexmk;
+  };
+
   inherit (pkgs)
      spotify
      rofi-unwrapped
