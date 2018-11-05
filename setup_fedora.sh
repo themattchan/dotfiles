@@ -54,21 +54,13 @@ MY_PKGS+=" elinks irssi wget curl"
 # generally useful programs
 MY_PKGS+=" nautilus nautilus-dropbox libgnome hfsplus-tools"
 MY_PKGS+=" thunarx-python Thunar-devel libthunarx-2-dev"
-MY_PKGS+=" pass qtpass plank albert"
+MY_PKGS+=" qtpass plank albert"
 
 # interface stuff
 MY_PKGS+="moka-icon-theme numix hack-fonts"
 
 # compilers, etc
 MY_PKGS+=" gcc gdb kernel-devel"
-MY_PKGS+=" java-openjdk-devel maven"
-MY_PKGS+=" scala sbt"
-MY_PKGS+=" haskell-platform"
-MY_PKGS+=" stack"
-MY_PKGS+=" @ocaml"
-MY_PKGS+=" coq"
-MY_PKGS+=" z3"
-MY_PKGS+=" sbcl"
 
 # LaTeX
 MY_PKGS+=" texlive-scheme-basic"

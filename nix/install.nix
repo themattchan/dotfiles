@@ -3,20 +3,34 @@ let pkgs = import <nixpkgs> {};
 in {
    polybar = pkgs.polybar.override {
       i3Support = true;
-#      mpdSupport = true;
+      mpdSupport = true;
       alsaSupport = true;
       pulseSupport = true;
       githubSupport = true;
    };
 
-   inherit (pkgs)
+  pass = pkgs.pass.withExtensions (p: [ p.pass-import ]);
+
+  ghc = pkgs.haskellPackages.ghcWithPackages (p: [ p.aeson p.network p.lens p.lens-aeson ]);
+
+  inherit (pkgs)
      spotify
      rofi-unwrapped
      neofetch
-     ;
+     pandoc
+     jq
 
-   # fonts
-   inherit (pkgs)
+     ## development
+     coq
+     ocaml
+     sbcl
+     sbt
+     scala
+     stack
+     z3
+     openjdk
+
+     # fonts
      hack-font
      unifont
      siji
