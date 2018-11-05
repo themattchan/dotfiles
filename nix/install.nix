@@ -34,17 +34,26 @@ with import <nixpkgs>{};
   #  npm = pkgs.npm;
   };
 
-  inherit (pkgs)
-     firefox
-     chromium
-     dropbox-cli
-     spotify
-     rofi-unwrapped
-     neofetch
-     pandoc
-     jq
+  apps = {
+    inherit (pkgs)
+       firefox
+       chromium
+       dropbox-cli
+       spotify
+       ;
+  };
 
-     ## development
+  utils = {
+    inherit (pkgs)
+       neofetch
+       jq
+       pandoc
+       rofi-unwrapped
+       ;
+  };
+
+  development = {
+    inherit (pkgs)
      coq
      ocaml
      sbcl
@@ -55,14 +64,13 @@ with import <nixpkgs>{};
      openjdk
      purescript
      ;
+  };
 
-  ## ln -sf ~/.nix-profile/share/fonts/ ~/.local/share/fonts/nix-fonts
   fonts = {
     inherit (pkgs)
      hack-font
      unifont
      siji
-#     font-awesome-ttf
      font-awesome_5
      ;
 
