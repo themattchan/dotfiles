@@ -21,9 +21,10 @@ with import <nixpkgs>{};
   #  npm = pkgs.npm;
   };
 
-  st = (pkgs.st.overrideAttrs (attrs: {
+  st = (pkgs.st.overrideAttrs (oldAttrs: {
       configFile = builtins.readFile ./st/config.h;
       patches = [ ./st/st-scrollback-0.8.diff ./st/st-scrollback-mouse-0.8.diff ];
+      buildInputs = oldAttrs.buildInputs ++ [pkgs.hack-font];
     }));
 
   apps = {
