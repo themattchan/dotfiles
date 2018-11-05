@@ -10,5 +10,7 @@ in {
    };
 
    inherit (pkgs)
-     rofi-unwrapped;
+     spotify
+     rofi-unwrapped
+     ;
 }
