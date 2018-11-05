@@ -54,7 +54,7 @@ MY_PKGS+=" elinks irssi wget curl"
 # generally useful programs
 MY_PKGS+=" nautilus nautilus-dropbox libgnome hfsplus-tools"
 MY_PKGS+=" thunarx-python Thunar-devel libthunarx-2-dev"
-MY_PKGS+=" qtpass plank albert"
+MY_PKGS+=" plank albert"
 
 # interface stuff
 MY_PKGS+="moka-icon-theme numix hack-fonts"
