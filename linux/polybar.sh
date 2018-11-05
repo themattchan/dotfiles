@@ -11,8 +11,7 @@ killall -q -r polybar
 # Wait until the processes have been shut down
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
-# Launch bar1 and bar2
-polybar --config=$CONFIG top
+polybar --config=$CONFIG -l info top
 ##polybar --config=$CONFIG bottom ;
 
 echo "Bars launched..."
