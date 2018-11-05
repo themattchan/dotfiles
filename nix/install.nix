@@ -29,6 +29,7 @@ with import <nixpkgs>{};
        abiword
        libreoffice
        ;
+    inherit (pkgs.gnome3) cheese;
   };
 
   # utils and systemsy things
@@ -56,7 +57,7 @@ with import <nixpkgs>{};
      coq
      ocaml
      openjdk
-     purescript
+#     purescript
      python2
      python3
      sbcl
@@ -64,15 +65,14 @@ with import <nixpkgs>{};
      scala
      stack
      z3
+     nodejs-10_x
      ;
 
-    ghc = pkgs.haskellPackages.ghcWithPackages (p: [ p.aeson p.network p.lens p.lens-aeson ]);
+    ghc = pkgs.pkgs.haskellPackages.ghcWithPackages (p: [ p.aeson p.network p.lens p.lens-aeson]);
 
-    javascript = {
-      node = pkgs.nodejs-10_x;
-    #  npm = pkgs.npm;
-    };
+    inherit (pkgs.nodePackages) bower;
 
+#    inherit (pkgs.haskellPackages) purescript;
   };
 
   fonts = {
