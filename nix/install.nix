@@ -20,8 +20,6 @@ with import <nixpkgs>{};
 
   };
 
-  pass = pkgs.pass.withExtensions (p: [ p.pass-import ]);
-
   apps = {
     inherit (pkgs)
        firefox
@@ -45,6 +43,8 @@ with import <nixpkgs>{};
     inherit (pkgs.xfce4-13)
        thunar
        ;
+
+    pass = pkgs.pass.withExtensions (p: [ p.pass-import ]);
   };
 
   latex = pkgs.texlive.combine {
