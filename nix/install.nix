@@ -13,4 +13,12 @@ in {
      spotify
      rofi-unwrapped
      ;
+
+   # fonts
+   inherit (pkgs)
+     hack-font
+     unifont
+     siji
+     font-awesome_5
+     ;
 }
