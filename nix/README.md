@@ -1,7 +1,7 @@
 ## how to use nix
 
 `nix` is a confusing and obtuse piece of shit but it does a passable job of
-abstraction away the greater pain of configuring fiddly linux bullshit.
+abstracting away the greater pain of configuring fiddly linux bullshit.
 
 install it all
 
