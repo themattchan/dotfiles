@@ -30,4 +30,4 @@ have to put
 { allowUnfree = true; }
 ```
 
-in `./config/nixpkgs/config.nix`
+in `~/.config/nixpkgs/config.nix`
