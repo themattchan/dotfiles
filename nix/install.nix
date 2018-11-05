@@ -1,31 +1,26 @@
 with import <nixpkgs>{};
 {
-  polybar = pkgs.polybar.override {
-      i3Support = true;
-#      mpdSupport = true;
-      alsaSupport = true;
-      pulseSupport = true;
-#      githubSupport = true;
+
+  wm = {
+    inherit (pkgs) i3 i3lock i3status;
+
+    polybar = pkgs.polybar.override {
+        i3Support = true;
+  #      mpdSupport = true;
+        alsaSupport = true;
+        pulseSupport = true;
+  #      githubSupport = true;
+    };
+
+    st = (pkgs.st.overrideAttrs (oldAttrs: {
+        configFile = builtins.readFile ./st/config.h;
+        patches = [ ./st/st-scrollback-0.8.diff ./st/st-scrollback-mouse-0.8.diff ];
+        buildInputs = oldAttrs.buildInputs ++ [pkgs.hack-font];
+      }));
+
   };
 
   pass = pkgs.pass.withExtensions (p: [ p.pass-import ]);
-
-  ghc = pkgs.haskellPackages.ghcWithPackages (p: [ p.aeson p.network p.lens p.lens-aeson ]);
-
-  latex = pkgs.texlive.combine {
-    inherit (pkgs.texlive) scheme-basic latexmk;
-  };
-
-  javascript = {
-    node = pkgs.nodejs-10_x;
-  #  npm = pkgs.npm;
-  };
-
-  st = (pkgs.st.overrideAttrs (oldAttrs: {
-      configFile = builtins.readFile ./st/config.h;
-      patches = [ ./st/st-scrollback-0.8.diff ./st/st-scrollback-mouse-0.8.diff ];
-      buildInputs = oldAttrs.buildInputs ++ [pkgs.hack-font];
-    }));
 
   apps = {
     inherit (pkgs)
@@ -33,38 +28,59 @@ with import <nixpkgs>{};
        chromium
        dropbox-cli
        spotify
+       abiword
+       libreoffice
        ;
   };
 
+  # utils and systemsy things
   utils = {
     inherit (pkgs)
-       neofetch
        jq
+       neofetch
        pandoc
        rofi-unwrapped
+       scrot
        ;
+    inherit (pkgs.xfce4-13)
+       thunar
+       ;
+  };
+
+  latex = pkgs.texlive.combine {
+    inherit (pkgs.texlive) scheme-basic latexmk;
   };
 
   development = {
     inherit (pkgs)
      coq
      ocaml
+     openjdk
+     purescript
+     python2
+     python3
      sbcl
      sbt
      scala
      stack
      z3
-     openjdk
-     purescript
      ;
+
+    ghc = pkgs.haskellPackages.ghcWithPackages (p: [ p.aeson p.network p.lens p.lens-aeson ]);
+
+    javascript = {
+      node = pkgs.nodejs-10_x;
+    #  npm = pkgs.npm;
+    };
+
   };
 
   fonts = {
     inherit (pkgs)
-     hack-font
-     unifont
-     siji
      font-awesome_5
+     hack-font
+     siji
+     unifont
      ;
 
    # postInstall = ''
