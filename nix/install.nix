@@ -5,7 +5,7 @@ with import <nixpkgs>{};
 # themes go in /share/sddm/theme
 #https://github.com/NixOS/nixpkgs/blob/release-18.09/nixos/modules/services/x11/display-managers/sddm.nix#L268
   wm = {
-    inherit (pkgs) i3 i3lock i3status j4-dmenu-desktop;
+    inherit (pkgs) i3 i3lock i3status j4-dmenu-desktop lemonbar-xft;
 
     polybar = pkgs.polybar.override {
         i3Support = true;

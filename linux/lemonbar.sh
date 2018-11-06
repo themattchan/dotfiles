@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then source $HOME/.nix-profile/etc/profile.d/nix.sh; fi
+
 Clock(){
 	DATE=$(date "+%m.%d.%y")
 	TIME=$(date "+%I:%M")
@@ -87,7 +89,18 @@ Language(){
 	fi
 }
 
+
 while true; do
-	echo -e "%{c}$(ActiveWindow)" "%{r}$(Wifi)  $(Battery)  $(Sound)  $(Clock)"
-	sleep 0.1s
-done
+    echo -e "%{c}$(ActiveWindow)" "%{r}$(Wifi)  $(Battery)  $(Sound)  $(Clock)"
+    sleep 2;
+done |
+lemonbar -p -B#c0262626 -F#A0A0A0 \
+ -f FiraMono:size=16\
+ -f FontAwesome:size=16\
+ |
+ zsh
+
+wait
+# while true; do
+# 	sleep 0.1s
+# done
