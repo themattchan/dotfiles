@@ -1,6 +1,9 @@
 with import <nixpkgs>{};
 {
 
+# reminder:: install sddm with simplicity theme on nixos
+# themes go in /share/sddm/theme
+#https://github.com/NixOS/nixpkgs/blob/release-18.09/nixos/modules/services/x11/display-managers/sddm.nix#L268
   wm = {
     inherit (pkgs) i3 i3lock i3status;
 
