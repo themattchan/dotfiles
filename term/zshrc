@@ -124,18 +124,9 @@ OCAML_TOPLEVEL_PATH="$HOME/.opam/system/lib/toplevel"
 #                       "/usr/lib/ocaml/stublibs" )
 CABAL_BIN="$HOME/Library/Haskell/bin"
 STACK_BIN="$HOME/.local/bin/:$HOME/.stack/programs/x86_64-osx/ghc-8.0.2/bin"
-ANDROID_HOME="$HOME/Library/Android/sdk"
-
-export CLASSPATH="$HOME/.jars/:."
-SCALA_HOME="/Library/Scala"
-TS_ACTIVATOR="$HOME/activator"
 
 export MANPATH="/opt/local/share/man/:$MANPATH"
 export INFOPATH="/opt/local/share/info/:$INFOPATH"
-
-export NVM_DIR="/home/matt/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
 
 # export PKG_CONFIG_PATH=$(join                                    \
 #                          '/usr/X11/lib/pkgconfig'               \
@@ -144,32 +135,24 @@ export NVM_DIR="/home/matt/.nvm"
 #                          )
 
 # TODO: guard this and only set it if it is set
-##NIX_PATH="$NIX_LINK/bin:$NIX_LINK/sbin"
+NIX_PATH="$NIX_LINK/bin:$NIX_LINK/sbin"
 
 if [[ $systype == "Darwin" ]]; then
    MAC_ONLY="/Library/Developer/:/opt/local/bin/:/usr/local/bin/:$HOME/bin/"
-    # MAC_ONLY=$(join                 \
-    #            "/Library/Developer" \
-    #            "/opt/local/bin"     \          # macports
-    #            '/usr/local/bin'	\
-    #            "$HOME/bin"          \
-    #         )
-    RACKET_BIN="/Applications/Racket/bin"
+   RACKET_BIN="/Applications/Racket/bin"
 elif [[ $systype == "Linux" ]]; then
-    MAC_ONLY=""
-    RACKET_BIN="/usr/local/racket/bin"
-    export SSH_ASKPASS="/usr/bin/ksshaskpass"
-    alias pbcopy='xsel --clipboard --input'
-    alias pbpaste='xsel --clipboard --output'
+   MAC_ONLY=""
+   RACKET_BIN="/usr/local/racket/bin"
+   export SSH_ASKPASS="/usr/bin/ksshaskpass"
+   alias pbcopy='xsel --clipboard --input'
+   alias pbpaste='xsel --clipboard --output'
 fi
 
-export GOPATH="$HOME/go"
 typeset -U path
 path=(
-    "$HOME/platform-tools"
     "/usr/local/bin/"
     "/usr/bin/"
-    ##    $NIX_PATH
+    NIX_PATH
     $NVM_DIR
     $RACKET_BIN
     $OPAM_BIN
@@ -196,17 +179,6 @@ fi
 #   [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
 # fi
 
-export NVM_DIR="/home/matt/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
-PATH="/Users/matt/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/Users/matt/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/Users/matt/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/Users/matt/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/Users/matt/perl5"; export PERL_MM_OPT;
-eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
-export PATH="/usr/local/opt/bison/bin:$PATH"
-
 # In order for gpg to find gpg-agent, gpg-agent must be running, and there must be an env
 # variable pointing GPG to the gpg-agent socket. This little script, which must be sourced
 # in your shell's init script (ie, .bash_profile, .zshrc, whatever), will either start
@@ -219,6 +191,7 @@ export PATH="/usr/local/opt/bison/bin:$PATH"
 # else
 #     eval $(gpg-agent --daemon ~/.gnupg/.gpg-agent-info)
 # fi
+
 if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then source $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 # export NIX_REMOTE=
 # NIX_PATH="nixpkgs=/nix/store/qk1q2rwq9qzhi49hx7whji90bqk8kf9y-nixpkgs-7ae9da426924537755ce9164fd5b5f81ce16a1c3-src:${NIX_PATH}"
