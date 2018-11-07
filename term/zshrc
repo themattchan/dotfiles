@@ -192,6 +192,8 @@ fi
 #     eval $(gpg-agent --daemon ~/.gnupg/.gpg-agent-info)
 # fi
 
-if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then source $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-# export NIX_REMOTE=
-# NIX_PATH="nixpkgs=/nix/store/qk1q2rwq9qzhi49hx7whji90bqk8kf9y-nixpkgs-7ae9da426924537755ce9164fd5b5f81ce16a1c3-src:${NIX_PATH}"
+if [ NIX_REMOTE="daemon" && -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
+    source $HOME/.nix-profile/etc/profile.d/nix.sh;
+elif [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+ . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
