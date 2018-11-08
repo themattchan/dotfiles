@@ -9,8 +9,8 @@ function join {
 }
 
 ## prezto
-if [[ -s "$EXTERNAL/zprezto/init.zsh" ]]; then
-  source "$EXTERNAL/zprezto/init.zsh"
+if [[ -s "$EXTERNAL/prezto/init.zsh" ]]; then
+  source "$EXTERNAL/prezto/init.zsh"
 fi
 
 if [[ "$TERM" == 'dumb' ]]; then

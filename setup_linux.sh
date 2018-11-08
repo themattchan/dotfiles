@@ -1,5 +1,16 @@
 #! /bin/sh
 
+# link shit
+
+pushd linux
+ln -s dunstrc $HOME/.dunstrc
+ln -s xinitrc $HOME/.xinitrc
+ln -s Xmodmap $HOME/.Xmodmap
+ln -s xprofile $HOME/.xprofile
+ln -s Xresources $HOME/.Xresources
+ln -s i3.config $HOME/.config/i3/config
+popd
+
 # setup things
 chsh -s /bin/zsh $(whoami)
 
