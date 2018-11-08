@@ -15,7 +15,7 @@ function install_dotfiles
 
         echo "linking files in $subdir into home"
         for file in $DOTFILES/$subdir/*; do
-        ln -s $file ~/.$(basename $file)
+            ln -s $file ~/.$(basename $file)
         done
     done
 
