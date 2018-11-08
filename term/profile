@@ -1,3 +1,4 @@
+# -*- mode: shell-script; -*-
 systype=$(uname -s)
 
 # NOTE: Dotfile load order
@@ -69,15 +70,10 @@ export PATH=\
 /usr/local/bin/:\
 /usr/bin/:\
 $NIX_PATH:\
-$NVM_DIR:\
 $RACKET_BIN:\
 $OPAM_BIN:\
 $OCAML_TOPLEVEL_PATH:\
-$CAML_LD_LIBRARY_PATH:\
-$SCALA_HOME:\
-$TS_ACTIVATOR:\
 $STACK_BIN:\
 $CABAL_BIN:\
-$GOPATH/bin:\
 $MAC_ONLY:\
 $PATH
