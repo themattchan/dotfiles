@@ -1,5 +1,7 @@
 #! /bin/sh
 
+shopt -s extglob
+
 DOTFILES="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 EXTERNAL="$DOTFILES/external"
 
@@ -38,8 +40,7 @@ function install_external
 
     #setopt EXTENDED_GLOB
     pushd zprezto
-    shopt -s extglob
-    for file in $(ls ./runcoms/!(README*)); do
+     for file in $(ls ./runcoms/!(README*)); do
         ln -sf "$(pwd)/${file:2}" "$HOME/.$(basename $file)"
     done
     popd
