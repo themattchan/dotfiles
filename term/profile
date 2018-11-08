@@ -41,9 +41,6 @@ OCAML_TOPLEVEL_PATH="$HOME/.opam/system/lib/toplevel"
 CABAL_BIN="$HOME/Library/Haskell/bin"
 STACK_BIN="$HOME/.local/bin/:$HOME/.stack/programs/x86_64-osx/ghc-8.0.2/bin"
 
-export MANPATH="/opt/local/share/man/:$MANPATH"
-export INFOPATH="/opt/local/share/info/:$INFOPATH"
-
 if [[ $systype == "Darwin" ]]; then
    MAC_ONLY="/Library/Developer/:/opt/local/bin/:/usr/local/bin/:$HOME/bin/"
    RACKET_BIN="/Applications/Racket/bin"
@@ -77,3 +74,11 @@ $STACK_BIN:\
 $CABAL_BIN:\
 $MAC_ONLY:\
 $PATH
+
+export MANPATH=\
+/opt/local/share/man/:\
+$MANPATH
+
+export INFOPATH=\
+/opt/local/share/info/:\
+$INFOPATH
