@@ -1,3 +1,0 @@
-[submodule "linux/xmonad"]
-	path = linux/xmonad
-	url = git@github.com:themattchan/xmonad-config.git

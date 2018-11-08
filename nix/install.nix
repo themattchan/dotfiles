@@ -1,15 +1,19 @@
 with import <nixpkgs>{};
 {
-
 # reminder:: install sddm with simplicity theme on nixos
 # themes go in /share/sddm/theme
 #https://github.com/NixOS/nixpkgs/blob/release-18.09/nixos/modules/services/x11/display-managers/sddm.nix#L268
-  wm = {
-    inherit (pkgs) i3 i3lock i3status j4-dmenu-desktop lemonbar-xft;
+    inherit (pkgs)
+      i3
+      i3lock
+      i3status
+      j4-dmenu-desktop
+      lemonbar-xft
+      ;
 
     polybar = pkgs.polybar.override {
         i3Support = true;
-  #      mpdSupport = true;
+        mpdSupport = true;
         alsaSupport = true;
         pulseSupport = true;
   #      githubSupport = true;
@@ -21,9 +25,6 @@ with import <nixpkgs>{};
         buildInputs = oldAttrs.buildInputs ++ [pkgs.hack-font];
       }));
 
-  };
-
-  apps = {
     inherit (pkgs)
        firefox
        chromium
@@ -33,11 +34,10 @@ with import <nixpkgs>{};
        libreoffice
        ;
     inherit (pkgs.gnome3) cheese;
-  };
 
   # utils and systemsy things
-  utils = {
     inherit (pkgs)
+       emacs
        jq
        neofetch
        pandoc
@@ -49,13 +49,11 @@ with import <nixpkgs>{};
        ;
 
     pass = pkgs.pass.withExtensions (p: [ p.pass-import ]);
-  };
 
   latex = pkgs.texlive.combine {
     inherit (pkgs.texlive) scheme-basic latexmk;
   };
 
-  development = {
     inherit (pkgs)
      coq
      ocaml
@@ -75,10 +73,14 @@ with import <nixpkgs>{};
 
     inherit (pkgs.nodePackages) bower;
 
-#    inherit (pkgs.haskellPackages) purescript;
-  };
+    inherit (pkgs.gnome3) adwaita-icon-theme gnome-terminal;
 
-  fonts = {
+#    inherit (pkgs.haskellPackages) purescript;
+
+    inherit (pkgs)
+      moka-icon-theme
+      numix-gtk-theme;
+
     inherit (pkgs)
      font-awesome_5
      hack-font
@@ -92,6 +94,5 @@ with import <nixpkgs>{};
    #   ln -sf ~/.nix-profile/share/fonts/ ~/.local/share/fonts/nix-fonts
    #   fc-cache -rv
    # '';
-  };
 
 }

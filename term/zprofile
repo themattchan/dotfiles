@@ -79,19 +79,18 @@ emulate zsh
 #   mkdir -p "$TMPPREFIX"
 # fi
 
-export PATH="$HOME/.cargo/bin:$PATH"
 export GPG_TTY=$(tty)
 
 
-if [ -e /Users/matt/.nix-profile/etc/profile.d/nix.sh ]; then
-    source /Users/matt/.nix-profile/etc/profile.d/nix.sh
-    export NIX_REMOTE=
-
-    NIX_PATH="nixpkgs=/nix/store/qk1q2rwq9qzhi49hx7whji90bqk8kf9y-nixpkgs-7ae9da426924537755ce9164fd5b5f81ce16a1c3-src:${NIX_PATH}"
-    NIX_PATH="${NIX_PATH}:ssh-config-file=${HOME}/.ssh/config:ssh-auth-sock=${SSH_AUTH_SOCK}"
-    export SSL_CERT_FILE=/Users/matt/.nix-profile/etc/ssl/certs/ca-bundle.crt
-    export GIT_SSL_CAINFO=$SSL_CERT_FILE
-fi
+# if [ -e /Users/matt/.nix-profile/etc/profile.d/nix.sh ]; then
+#     source /Users/matt/.nix-profile/etc/profile.d/nix.sh
+#     export NIX_REMOTE=
+# 
+#     NIX_PATH="nixpkgs=/nix/store/qk1q2rwq9qzhi49hx7whji90bqk8kf9y-nixpkgs-7ae9da426924537755ce9164fd5b5f81ce16a1c3-src:${NIX_PATH}"
+#     NIX_PATH="${NIX_PATH}:ssh-config-file=${HOME}/.ssh/config:ssh-auth-sock=${SSH_AUTH_SOCK}"
+#     export SSL_CERT_FILE=/Users/matt/.nix-profile/etc/ssl/certs/ca-bundle.crt
+#     export GIT_SSL_CAINFO=$SSL_CERT_FILE
+# fi
 # [ -f ~/.gpg-agent-info ] && source ~/.gpg-agent-info
 # if [ -S "${GPG_AGENT_INFO%%:*}" ]; then
 #   export GPG_AGENT_INFO
