@@ -1,13 +1,30 @@
 ### osx
 
-run all the functions in `setup.sh`
+```
+setup.sh
+```
 
 ### linux
 
-to install things, either `sudo setup_arch.sh` or `sudo setup_fedora.sh`
+either
 
-then run `setup_linux.sh` to get the settings
+```
+sudo setup_arch.sh
 
-and `setup.sh` to link the dotfiles
+sudo setup_fedora.sh
+```
 
-install nix, then `cd nix; nix-env --file install.nix --install`
+then
+
+```
+setup_linux.sh
+
+setup.sh
+```
+
+### install nix provisioned software
+
+```
+curl https://nixos.org/nix/install | sh
+cd nix; nix-env --file install.nix --install
+```
