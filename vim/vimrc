@@ -158,28 +158,28 @@ set wildignore+=*~,*.swp,*.tmp
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+"set rtp+=~/.vim/bundle/Vundle.vim
+"call vundle#begin()
 
 " Emacs keys are a must
 " Plugin 'andrep/vimacs'
 
 " VimMarkDown: syntax for markdown
-Plugin 'plasticboy/vim-markdown'
+"Plugin 'plasticboy/vim-markdown'
 
 " Powerline: fancy command line
-Plugin 'Lokaltog/vim-powerline'
+"Plugin 'Lokaltog/vim-powerline'
 
 " Plugin 'kien/ctrlp.vim'
 
 " Yankstack: add a kill ring
-Plugin 'maxbrunsfeld/vim-yankstack'
+"Plugin 'maxbrunsfeld/vim-yankstack'
 
 " PureScript-mode
-Plugin 'purescript-vim'
+"Plugin 'purescript-vim'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
+"call vundle#end()            " required
 filetype plugin indent on    " required
 
 " init powerline
