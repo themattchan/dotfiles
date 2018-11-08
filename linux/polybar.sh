@@ -6,7 +6,7 @@ if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then source $HOME/.nix-profil
 CONFIG=$HOME/dotfiles/linux/polybar.config
 
 # Terminate already running bar instances
-killall -q -r polybar
+pkill polybar
 
 # Wait until the processes have been shut down
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done

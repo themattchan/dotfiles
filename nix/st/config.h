@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Hack:pixelsize=28:antialias=true:autohint=true";
+static char *font = "DejaVu Sans Mono:style=Regular:pixelsize=28:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*

@@ -7,8 +7,10 @@ Xft.hinting: true
 Xft.autohint: 0
 Xft.antialias: true
 Xft.lcdfilter: lcddefault
-Xcursor.theme: DMZ-White
 Xft.hintstyle: hintslight
+
+Xcursor.theme: breeze_cursors
+Xcursor.size: 64
 
 ! Xterm settings
 xterm*utf8:true
