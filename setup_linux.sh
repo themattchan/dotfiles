@@ -1,5 +1,7 @@
 #! /bin/sh
 
+git clone git@github.com:themattchan/xmonad-config.git $HOME/.xmonad
+
 # link shit
 
 pushd linux
