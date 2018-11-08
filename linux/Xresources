@@ -37,8 +37,8 @@ xterm*charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35
 xterm*dynamicColors:true
 xterm*background:black
 xterm*foreground:gray
-xterm*faceName:Inconsolata:size=10:antialias=true
-xterm*font: inconsolata-10
+xterm*faceName:Hack:size=18:antialias=true
+xterm*font: hack-18
 xterm*xftAntialias: true
 xterm*renderFont: true
 ! tango color scheme

@@ -4,12 +4,21 @@ with import <nixpkgs>{};
 # reminder:: install sddm with simplicity theme on nixos
 # themes go in /share/sddm/theme
 #https://github.com/NixOS/nixpkgs/blob/release-18.09/nixos/modules/services/x11/display-managers/sddm.nix#L268
+    polybar = pkgs.polybar.override {
+        i3Support = true;
+        mpdSupport = true;
+        alsaSupport = true;
+        pulseSupport = true;
+  #      githubSupport = true;
+    };
+
+
   wm = {
     inherit (pkgs) i3 i3lock i3status j4-dmenu-desktop lemonbar-xft;
 
     polybar = pkgs.polybar.override {
         i3Support = true;
-  #      mpdSupport = true;
+        mpdSupport = true;
         alsaSupport = true;
         pulseSupport = true;
   #      githubSupport = true;
@@ -78,6 +87,11 @@ with import <nixpkgs>{};
 #    inherit (pkgs.haskellPackages) purescript;
   };
 
+  ui = {
+    inherit (pkgs)
+      moka-icon-theme
+      numix-gtk-theme;
+  };
   fonts = {
     inherit (pkgs)
      font-awesome_5

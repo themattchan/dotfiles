@@ -134,9 +134,6 @@ export INFOPATH="/opt/local/share/info/:$INFOPATH"
 #                          '/usr/local/opt/libxml2/lib/pkgconfig' \
 #                          )
 
-# TODO: guard this and only set it if it is set
-NIX_PATH="$NIX_LINK/bin:$NIX_LINK/sbin"
-
 if [[ $systype == "Darwin" ]]; then
    MAC_ONLY="/Library/Developer/:/opt/local/bin/:/usr/local/bin/:$HOME/bin/"
    RACKET_BIN="/Applications/Racket/bin"
@@ -192,8 +189,8 @@ fi
 #     eval $(gpg-agent --daemon ~/.gnupg/.gpg-agent-info)
 # fi
 
-if [ NIX_REMOTE="daemon" && -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
+if [ "$NIX_REMOTE" = 'daemon' ] && [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+      . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+elif [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
     source $HOME/.nix-profile/etc/profile.d/nix.sh;
-elif [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
- . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
 fi
