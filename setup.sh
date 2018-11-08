@@ -6,7 +6,7 @@ EXTERNAL="$DOTFILES/external"
 function install_dotfiles
 {
     local declare -a TO_LINK=('vim')
-    local declare -a TO_LINK_SUBDIR=('term' 'vc' 'linux')
+    local declare -a TO_LINK_SUBDIR=('term' 'vc')
 
     for subdir in "${TO_LINK_SUBDIR[@]}"; do
         if [[ $(uname -s) != "Linux" && $subdir  == 'linux' ]]; then
@@ -15,13 +15,13 @@ function install_dotfiles
 
         echo "linking files in $subdir into home"
         for file in $DOTFILES/$subdir/*; do
-            ln -s $file ~/.$(basename $file)
+            ln -sf $file ~/.$(basename $file)
         done
     done
 
     for file in "${TO_LINK[@]}"; do
         echo "Linking file in $file into home"
-        ln -s $DOTFILES/$file ~/.$file
+        ln -sf $DOTFILES/$file ~/.$file
     done
 
     if [[ $(uname -s) == "Darwin" ]]; then
@@ -34,13 +34,13 @@ function install_dotfiles
 function install_external
 {
     cd $EXTERNAL
-    git clone --recursive https://github.com/sorin-ionescu/prezto.git
+    git clone --recursive https://github.com/sorin-ionescu/prezto.git zprezto
 
     #setopt EXTENDED_GLOB
-    pushd prezto
+    pushd zprezto
     shopt -s extglob
-    for file in "./runcoms/!(README*)"; do
-        ln -s "$file" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+    for file in $(ls ./runcoms/!(README*)); do
+        ln -sf "$(pwd)/${file:2}" "$HOME/.$(basename $file)"
     done
     popd
 
@@ -52,4 +52,4 @@ install_external
 install_dotfiles
 
 #    sudo usermod -s $(which zsh) $(whoami)
-sudo chsh -s $(which zsh) $(whoami)
+#sudo chsh -s $(which zsh) $(whoami)
