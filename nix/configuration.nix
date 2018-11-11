@@ -147,6 +147,10 @@
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
+  # enable dconf
+  programs.dconf.enable = true;
+  services.dbus.packages = [ pkgs.gnome3.dconf ];
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
@@ -168,6 +172,16 @@
       sddm.enableHidpi=true;
       sddm.theme="simplicity";
     };
+
+    # desktopManager = {
+    #   default = "xfce";
+    #   xterm.enable = false;
+    #   xfce = {
+    #     enable = true;
+    #     noDesktop = true;
+    #     enableXfwm = false;
+    #   };
+    # };
 
     # set capslock to control
     xkbOptions = "ctrl:nocaps";

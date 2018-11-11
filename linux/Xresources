@@ -9,8 +9,9 @@ Xft.antialias: true
 Xft.lcdfilter: lcddefault
 Xft.hintstyle: hintslight
 
-Xcursor.theme: breeze_cursors
-Xcursor.size: 64
+!Xcursor.theme: breeze_cursors
+Xcursor.theme: Vanilla-DMZ-AA
+Xcursor.size: 128
 
 ! Xterm settings
 xterm*utf8:true

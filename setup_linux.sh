@@ -2,15 +2,14 @@
 
 git clone git@github.com:themattchan/xmonad-config.git $HOME/.xmonad
 
-# link shit
-
 pushd linux
-ln -s dunstrc $HOME/.dunstrc
-ln -s xinitrc $HOME/.xinitrc
-ln -s Xmodmap $HOME/.Xmodmap
-ln -s xprofile $HOME/.xprofile
-ln -s Xresources $HOME/.Xresources
-ln -s i3.config $HOME/.config/i3/config
+ln -s $(pwd)/dunstrc $HOME/.dunstrc
+ln -s $(pwd)/xinitrc $HOME/.xinitrc
+ln -s $(pwd)/Xmodmap $HOME/.Xmodmap
+ln -s $(pwd)/xprofile $HOME/.xprofile
+ln -s $(pwd)/Xresources $HOME/.Xresources
+ln -s $(pwd)/i3.config $HOME/.config/i3/config
+ln -s $(pwd)/rofi.config $HOME/.config/rofi/config
 popd
 
 # setup things
