@@ -5,13 +5,15 @@
 { config, builtins, pkgs, ... }:
 
 {
+  nixpkgs.config.allowUnfree = true;
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   security.audit.enable = false;
   networking.hostName = "adrastea"; # Define your hostname.
- # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
 
   # Configure network proxy if necessary
@@ -105,6 +107,10 @@
   # started in user sessions.
   # programs.mtr.enable = true;
 
+  # List services that you want to enable:
+
+  services.nixosManual.showManual = true;
+
   # enable the gpg-agent
   # need to `ssh-add` the keys from `~/.ssh`!!
   programs.gnupg.agent = {
@@ -113,13 +119,8 @@
   };
   programs.ssh.startAgent = false;
 
-  # List services that you want to enable:
-
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
-  nixpkgs.config = {
-    allowUnfree = true;
-  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -142,7 +143,6 @@
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  services.nixosManual.showManual = true;
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
@@ -181,10 +181,11 @@
     ];
   };
 
+  # Power management.
   services.acpid.enable = true;
   powerManagement.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Add my user account
   users.extraUsers.matt = {
     isNormalUser = true;
     uid = 1000;
@@ -192,9 +193,12 @@
     group = "users";
     extraGroups = [ "wheel" "networkmanager" ];
   };
+
   users.defaultUserShell = pkgs.zsh;
 
   programs.zsh.enable = true;
+
+  # For brightness control.
   programs.light.enable = true;
 
   # This value determines the NixOS release with which your system is to be
