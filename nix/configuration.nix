@@ -129,6 +129,7 @@
   # networking.firewall.enable = false;
 
   # Enable CUPS to print documents.
+  # cups administration page: http://localhost:631/
   # https://nixos.wiki/wiki/Printing
   services.printing = {
     enable = true;
