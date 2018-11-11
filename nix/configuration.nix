@@ -196,6 +196,15 @@
      hack-font
      siji
      unifont
+
+     noto-fonts-cjk
+     arphic-uming
+     source-han-sans-traditional-chinese
+     source-han-serif-traditional-chinese
+
+     source-code-pro
+     source-sans-pro
+     source-serif-pro
     ];
   };
 
