@@ -128,7 +128,15 @@
   # networking.firewall.enable = false;
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  # https://nixos.wiki/wiki/Printing
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      gutenprint
+      gutenprintBin
+      brlaser
+    ];
+  };
 
   # Enable sound.
   sound.enable = true;
