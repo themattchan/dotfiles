@@ -56,13 +56,12 @@ with import <nixpkgs>{};
     inherit (pkgs)
      coq
      ocaml
-     openjdk
-#     purescript
+     openjdk10
+#     purescript psc-package
      python2
      python3
      sbcl
-     sbt
-     scala
+     scala sbt scalafmt
      stack
      z3
      nodejs-10_x
@@ -83,6 +82,12 @@ with import <nixpkgs>{};
       p.transformers
       p.unordered-containers
       p.warp
+
+# p.spdx needs to be jailbroken for this shit to work...
+      # p.psc-ide
+      # p.ghcid
+      # p.Cabal_2_2_0_1
+      # p.cabal2nix
     ]);
 
     inherit (pkgs.nodePackages) bower;
