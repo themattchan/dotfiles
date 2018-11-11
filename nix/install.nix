@@ -1,3 +1,4 @@
+let unstable = import <unstable>{}; in
 with import <nixpkgs>{};
 {
     inherit (pkgs)
@@ -35,7 +36,7 @@ with import <nixpkgs>{};
     # utils and systemsy things
     inherit (pkgs)
        emacs
-       jq
+#       jq
        neofetch
        pandoc
        rofi-unwrapped
@@ -46,7 +47,7 @@ with import <nixpkgs>{};
     inherit (pkgs.xfce4-13)
        thunar
        ;
-
+    jq = unstable.jq;
     pass = pkgs.pass.withExtensions (p: [ p.pass-import ]);
 
     latex = pkgs.texlive.combine {
@@ -65,7 +66,10 @@ with import <nixpkgs>{};
      stack
      z3
      nodejs-10_x
+     gcc
      ;
+
+ #   inherit (pkgs.llvmPackages) libcxxClang libcxxStdenv;
 
     ghc = pkgs.pkgs.haskellPackages.ghcWithPackages (p: [
       p.aeson
