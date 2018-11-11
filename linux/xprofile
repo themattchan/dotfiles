@@ -1,12 +1,12 @@
-eval `ssh-agent`
+# eval `ssh-agent`
 
-ssh-add
+# ssh-add
 
 /usr/bin/xmodmap $HOME/.Xmodmap
 
 xset r rate 200 30
 
-~/.dropbox-dist/dropboxd &
+# ~/.dropbox-dist/dropboxd &
 
 
 ## 16:10 aspect ratios because xrandr is fucked

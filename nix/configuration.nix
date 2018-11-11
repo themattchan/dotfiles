@@ -5,11 +5,6 @@
 { config, builtins, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -52,6 +47,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
    environment.systemPackages = with pkgs; [
+     cacert
      coreutils
      curl
      dmenu
@@ -63,8 +59,10 @@
      i3
      i3lock
      i3status
+     neofetch
      networkmanager_openvpn
      networkmanagerapplet
+     scrot
      tree
      unzip
      vim
@@ -72,25 +70,28 @@
      wget
      which
      xdg_utils
-     xterm
-     xfce.xfconf
-     zip
      xfce.thunar
+     xfce.xfconf
+     xterm
+     zip
+
      # one of these is needed for nm-applet icons
      gnome3.adwaita-icon-theme
      hicolor-icon-theme
-     neofetch
-     scrot
-     plasma5.sddm-kcm
 
      (sddm.overrideAttrs (oldAttrs: {
        postInstall =
-         let 
+         let
            simplicityTheme = fetchGit {
              url = "https://gitlab.com/isseigx/simplicity-sddm-theme.git";
+             rev = "403ba49019b519bfab99988f848a96e96f62b9c0";
            };
-           chiliTheme = fetchGit {
-             url = "https://github.com/MarianArlt/sddm-chili.git";
+	   ## this needs some Qt bullshit...
+           chiliTheme = fetchFromGitHub {
+	     owner = "MarianArlt";
+	     repo = "sddm-chili";
+	     rev = "6516d50176c3b34df29003726ef9708813d06271";
+	     sha256 = "036fxsa7m8ymmp3p40z671z163y6fcsa9a641lrxdrw225ssq5f3";
            };
 	 in
          ''
@@ -103,7 +104,14 @@
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
+
+  # enable the gpg-agent
+  # need to `ssh-add` the keys from `~/.ssh`!!
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+  programs.ssh.startAgent = false;
 
   # List services that you want to enable:
 
@@ -131,25 +139,25 @@
   services.xserver = {
     enable = true;
     layout = "us";
+    dpi = 150;
+
     # Enable touchpad support.
     libinput = {
       enable = true;
-#      clickMethod = "buttonareas";
       tapping = false;
       naturalScrolling = true;
     };
-    dpi = 150;
+
     windowManager.default = "i3";
     windowManager.i3.enable = true;
 
     displayManager = {
       sddm.enable = true;
       sddm.enableHidpi=true;
-#      sddm.packages = [ callPackage ./chiliTheme.nix {} ];
-      sddm.theme="chili";
+      sddm.theme="simplicity";
     };
-#    desktopManager.xfce.enable = true;
 
+    # set capslock to control
     xkbOptions = "ctrl:nocaps";
   };
 
