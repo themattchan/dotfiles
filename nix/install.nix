@@ -1,8 +1,5 @@
 with import <nixpkgs>{};
 {
-# reminder:: install sddm with simplicity theme on nixos
-# themes go in /share/sddm/theme
-#https://github.com/NixOS/nixpkgs/blob/release-18.09/nixos/modules/services/x11/display-managers/sddm.nix#L268
     inherit (pkgs)
       i3
       i3lock
@@ -16,7 +13,6 @@ with import <nixpkgs>{};
         mpdSupport = true;
         alsaSupport = true;
         pulseSupport = true;
-  #      githubSupport = true;
     };
 
     st = (pkgs.st.overrideAttrs (oldAttrs: {
@@ -32,10 +28,11 @@ with import <nixpkgs>{};
        spotify
        abiword
        libreoffice
+       evince
        ;
     inherit (pkgs.gnome3) cheese;
 
-  # utils and systemsy things
+    # utils and systemsy things
     inherit (pkgs)
        emacs
        jq
@@ -43,16 +40,18 @@ with import <nixpkgs>{};
        pandoc
        rofi-unwrapped
        scrot
+       aspell
        ;
+    inherit (pkgs.aspellDicts) en;
     inherit (pkgs.xfce4-13)
        thunar
        ;
 
     pass = pkgs.pass.withExtensions (p: [ p.pass-import ]);
 
-  latex = pkgs.texlive.combine {
-    inherit (pkgs.texlive) scheme-basic latexmk;
-  };
+    latex = pkgs.texlive.combine {
+      inherit (pkgs.texlive) scheme-basic latexmk;
+    };
 
     inherit (pkgs)
      coq
@@ -75,8 +74,6 @@ with import <nixpkgs>{};
 
     inherit (pkgs.gnome3) adwaita-icon-theme gnome-terminal;
 
-#    inherit (pkgs.haskellPackages) purescript;
-
     inherit (pkgs)
       moka-icon-theme
       numix-gtk-theme;
@@ -87,12 +84,5 @@ with import <nixpkgs>{};
      siji
      unifont
      ;
-
-   # postInstall = ''
-   #   echo "refresh font cache"
-   #   mkdir -p  ~/.local/share/fonts/
-   #   ln -sf ~/.nix-profile/share/fonts/ ~/.local/share/fonts/nix-fonts
-   #   fc-cache -rv
-   # '';
 
 }

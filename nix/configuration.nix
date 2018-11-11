@@ -36,7 +36,8 @@
  #   XCURSOR_PATH = "$HOME/.icons";
   };
 
-  environment.sessionVariables.GTK_PATH = "${config.system.path}/lib/gtk-3.0:${config.system.path}/lib/gtk-2.0";
+  environment.sessionVariables.GTK_PATH =
+    "${config.system.path}/lib/gtk-3.0:${config.system.path}/lib/gtk-2.0";
 # environment.profileRelativeEnvVars.XCURSOR_PATH = [ "/share/icons" ];
 
   environment.etc."Xmodmap".text = ''
@@ -64,6 +65,7 @@
      neofetch
      networkmanager_openvpn
      networkmanagerapplet
+     nmap
      scrot
      tree
      unzip
@@ -88,18 +90,19 @@
              url = "https://gitlab.com/isseigx/simplicity-sddm-theme.git";
              rev = "403ba49019b519bfab99988f848a96e96f62b9c0";
            };
-	   ## this needs some Qt bullshit...
+     ## this needs some Qt bullshit...
            chiliTheme = fetchFromGitHub {
-	     owner = "MarianArlt";
-	     repo = "sddm-chili";
-	     rev = "6516d50176c3b34df29003726ef9708813d06271";
-	     sha256 = "036fxsa7m8ymmp3p40z671z163y6fcsa9a641lrxdrw225ssq5f3";
+             owner = "MarianArlt";
+             repo = "sddm-chili";
+             rev = "6516d50176c3b34df29003726ef9708813d06271";
+             sha256 = "036fxsa7m8ymmp3p40z671z163y6fcsa9a641lrxdrw225ssq5f3";
            };
-	 in
+         in
          ''
-	   cp -r ${simplicityTheme.outPath}/simplicity $out/share/sddm/themes/
-	   cp -r ${chiliTheme.outPath} $out/share/sddm/themes/chili
-         ''+oldAttrs.postInstall;
+         cp -r ${simplicityTheme.outPath}/simplicity $out/share/sddm/themes/
+         cp -r ${chiliTheme.outPath} $out/share/sddm/themes/chili
+         ''
+         + oldAttrs.postInstall;
      }))
    ];
 
