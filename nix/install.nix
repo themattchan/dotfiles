@@ -15,11 +15,11 @@ with import <nixpkgs>{};
         pulseSupport = true;
     };
 
-    st = (pkgs.st.overrideAttrs (oldAttrs: {
+    st = pkgs.st.overrideAttrs (oldAttrs: {
         configFile = builtins.readFile ./st/config.h;
         patches = [ ./st/st-scrollback-0.8.diff ./st/st-scrollback-mouse-0.8.diff ];
         buildInputs = oldAttrs.buildInputs ++ [pkgs.hack-font];
-      }));
+    });
 
     inherit (pkgs)
        firefox
@@ -68,7 +68,22 @@ with import <nixpkgs>{};
      nodejs-10_x
      ;
 
-    ghc = pkgs.pkgs.haskellPackages.ghcWithPackages (p: [ p.aeson p.network p.lens p.lens-aeson]);
+    ghc = pkgs.pkgs.haskellPackages.ghcWithPackages (p: [
+      p.aeson
+      p.containers
+      p.comonad
+      p.lens
+      p.lens-aeson
+      p.machines
+      p.mtl
+      p.network
+      p.profunctors
+      p.recursion-schemes
+      p.servant
+      p.transformers
+      p.unordered-containers
+      p.warp
+    ]);
 
     inherit (pkgs.nodePackages) bower;
 
