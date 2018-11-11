@@ -90,7 +90,7 @@
              url = "https://gitlab.com/isseigx/simplicity-sddm-theme.git";
              rev = "403ba49019b519bfab99988f848a96e96f62b9c0";
            };
-     ## this needs some Qt bullshit...
+           ## this needs some Qt bullshit...
            chiliTheme = fetchFromGitHub {
              owner = "MarianArlt";
              repo = "sddm-chili";
