@@ -74,6 +74,8 @@
      w3m
      wget
      which
+     xautolock
+     xscreensaver
      xdg_utils
      xfce.thunar
      xfce.xfconf
