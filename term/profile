@@ -47,7 +47,6 @@ if [[ $systype == "Darwin" ]]; then
 elif [[ $systype == "Linux" ]]; then
    MAC_ONLY=""
    RACKET_BIN="/usr/local/racket/bin"
-   export SSH_ASKPASS="/usr/bin/ksshaskpass"
 fi
 
 if [ "$NIX_REMOTE" = 'daemon' ] && [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then

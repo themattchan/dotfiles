@@ -214,6 +214,13 @@
   # Power management.
   services.acpid.enable = true;
   powerManagement.enable = true;
+  services.tlp = {
+      enable = true;
+      extraConfig = ''
+        START_CHARGE_THRESH_BAT0=25
+        STOP_CHARGE_THRESH_BAT0=96
+      '';
+    };
 
   # Add my user account
   users.extraUsers.matt = {
@@ -221,7 +228,7 @@
     uid = 1000;
     home = "/home/matt";
     group = "users";
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "input" "audio" "networkmanager" ];
   };
 
   users.defaultUserShell = pkgs.zsh;
