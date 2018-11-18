@@ -31,7 +31,7 @@ with import <nixpkgs>{};
        evince
        geeqie
        ;
-    inherit (pkgs.gnome3) cheese nautilus adwaita-icon-theme gnome-terminal;
+    inherit (pkgs.gnome3) cheese shotwell nautilus adwaita-icon-theme gnome-terminal;
 
     # utils and systemsy things
     inherit (pkgs)
@@ -45,6 +45,8 @@ with import <nixpkgs>{};
        aspell
        rclone
        ghostscript
+       mpd mpc ncmpcpp gmpc
+       vlc
        ;
     inherit (pkgs.aspellDicts) en;
     inherit (pkgs.xfce)

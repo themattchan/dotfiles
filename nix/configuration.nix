@@ -87,7 +87,7 @@
      xfce.thunar
      xfce.xfconf
      xterm
-     xmodmap
+     xorg.xmodmap
      zip
      xdg_utils
      shared-mime-info
@@ -126,6 +126,13 @@
   # List services that you want to enable:
 
   services.nixosManual.showManual = true;
+
+  services.autofs = {
+    enable = true;
+    autoMaster = ''
+    /media /etc/autofs/auto.media
+    '';
+  };
 
   # enable the gpg-agent
   # need to `ssh-add` the keys from `~/.ssh`!!
