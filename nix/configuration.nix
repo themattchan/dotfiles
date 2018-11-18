@@ -150,8 +150,11 @@
     ];
   };
 
-  # turn bluetooth control on
-  hardware.bluetooth.enable = true;
+  # enable bluetooth, but turn off by default
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = false;
+  };
 
   # Enable sound.
   sound.enable = true;
