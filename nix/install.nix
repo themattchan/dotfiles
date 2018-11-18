@@ -25,7 +25,6 @@ with import <nixpkgs>{};
     inherit (pkgs)
        firefox
        chromium
-       dropbox-cli
        spotify
        abiword
        libreoffice
@@ -42,10 +41,12 @@ with import <nixpkgs>{};
        rofi-unwrapped
        scrot
        aspell
+       rclone
        ;
     inherit (pkgs.aspellDicts) en;
-    inherit (pkgs.xfce4-13)
+    inherit (pkgs.xfce)
        thunar
+       thunar-dropbox-plugin
        ;
     jq = unstable.jq;
     pass = pkgs.pass.withExtensions (p: [ p.pass-import ]);

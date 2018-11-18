@@ -56,6 +56,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
    environment.systemPackages = with pkgs; [
+     arandr
      binutils
      blueman
      cacert
@@ -237,17 +238,25 @@
 
   services.thinkfan = {
     enable = true;
-    #  find /sys/devices -type f -name 'temp*_input'
-    sensors = ''
-      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp3_input
-      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp4_input
-      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input
-      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp5_input
-      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp2_input
-      hwmon /sys/devices/virtual/hwmon/hwmon4/temp1_input
-      hwmon /sys/devices/virtual/hwmon/hwmon0/temp1_input
-      hwmon /sys/devices/virtual/hwmon/hwmon1/temp1_input
-    '';
+    # find /sys/devices -type f -name \'temp*_input\' | sed -r -e \'s/^/hwmon /\'
+    sensors =
+      ''
+        hwmon /sys/class/hwmon/hwmon0/temp1_input
+        hwmon /sys/class/hwmon/hwmon0/temp2_input
+        hwmon /sys/class/hwmon/hwmon0/temp3_input
+        hwmon /sys/class/hwmon/hwmon0/temp4_input
+        hwmon /sys/class/hwmon/hwmon0/temp5_input
+      '';
+  };
+
+  hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs; [
+      vaapiIntel
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+    driSupport32Bit = true;
   };
 
   # Power management.
