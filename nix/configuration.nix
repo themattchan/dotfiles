@@ -133,7 +133,6 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
-##  options.track
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -183,16 +182,6 @@
       sddm.enable = true;
       sddm.enableHidpi=true;
       sddm.theme="simplicity";
-
-      # sessionCommands = ''
-      #   xscreensaver -nosplash -log /dev/null &
-      #   xautolock -time 5 \
-      #             -locker "xscreensaver-command -lock" \
-      #             -nowlocker "xscreensaver-command -lock" \
-      #             -killtime 10 \
-      #             -killer "systemctl suspend-then-hibernate" \
-      #             -detectsleep &
-      # '';
     };
     # desktopManager = {
     #   default = "xfce";
@@ -207,11 +196,7 @@
     # set capslock to control
     xkbOptions = "ctrl:nocaps";
   };
-  # options.xsession.pointerCursor = {
-  #  package = pkgs.vanilla-dmz;
-  #  name="Vanilla-DMZ";
-  #  size=64;
-  # };
+
   fonts = {
     enableCoreFonts = true;
     enableFontDir = true;
