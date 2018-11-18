@@ -1,6 +1,3 @@
 - printing
 - don't ask for SSH passphrase on login
-- cursor size
-https://github.com/rycee/home-manager/blob/master/modules/xcursor.nix#L56-L73
-https://www.reddit.com/r/NixOS/comments/8c2cab/tiny_mouse_cursor_size_under_xmonad/
 - st install
