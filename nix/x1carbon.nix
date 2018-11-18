@@ -12,8 +12,8 @@
     enable = true;
     device = "TPPS/2 Elan TrackPoint";
     emulateWheel = true;
-    sensitivity = 150; # default 128, 0--255
-    speed = 50; # default 97, 0--255
+    sensitivity = 30; # default 128, 0--255
+    speed = 10; # default 97, 0--255
   };
 
   services.thinkfan = {

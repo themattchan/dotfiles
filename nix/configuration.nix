@@ -129,7 +129,7 @@
     enable = true;
     enableSSHSupport = true;
   };
-  programs.ssh.startAgent = true;
+  programs.ssh.startAgent = false;
 
   # Enable the OpenSSH daemon.
   # can start this manually with:
