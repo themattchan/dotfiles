@@ -30,7 +30,7 @@ with import <nixpkgs>{};
        libreoffice
        evince
        ;
-    inherit (pkgs.gnome3) cheese nautilus;
+    inherit (pkgs.gnome3) cheese nautilus adwaita-icon-theme gnome-terminal;
 
     # utils and systemsy things
     inherit (pkgs)
@@ -98,8 +98,6 @@ with import <nixpkgs>{};
     ]);
 
     inherit (pkgs.nodePackages) bower;
-
-    inherit (pkgs.gnome3) adwaita-icon-theme gnome-terminal;
 
     inherit (pkgs)
       breeze-gtk
