@@ -20,6 +20,7 @@ ensure_ln_s $(pwd)/gtkrc-2.0-kde4               $HOME/.gtkrc-2.0-kde4
 ensure_ln_s $(pwd)/gtk-3.0-settings.ini         $HOME/.config/gtk-3.0/settings.ini
 ensure_ln_s $(pwd)/icons.default.index.theme    $HOME/.icons/default/index.theme
 ensure_ln_s $(pwd)/xsettings.xml                $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
+ensure_ln_s $(pwd)/mpd.conf                     $HOME/.config/mpd/mpd.conf
 popd
 
 # setup things
