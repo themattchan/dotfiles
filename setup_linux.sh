@@ -4,21 +4,22 @@ git clone git@github.com:themattchan/xmonad-config.git $HOME/.xmonad
 
 ensure_ln_s() {
     mkdir -p $(dirname $2)
-    ln -s $1 $2
+    ln -sf $1 $2
 }
 
 pushd linux
-ensure_ln_s $(pwd)/dunstrc $HOME/.dunstrc
-ensure_ln_s $(pwd)/xinitrc $HOME/.xinitrc
-ensure_ln_s $(pwd)/Xmodmap $HOME/.Xmodmap
-ensure_ln_s $(pwd)/xprofile $HOME/.xprofile
-ensure_ln_s $(pwd)/Xresources $HOME/.Xresources
-ensure_ln_s $(pwd)/i3.config $HOME/.config/i3/config
-ensure_ln_s $(pwd)/rofi.config $HOME/.config/rofi/config
-ensure_ln_s $(pwd)/gtkrc-2.0 $HOME/.gtkrc-2.0
-ensure_ln_s $(pwd)/gtkrc-2.0-kde4 $HOME/.gtkrc-2.0-kde4
-ensure_ln_s $(pwd)/gtk-3.0-settings.ini $HOME/.config/gtk-3.0/settings.ini
-ensure_ln_s $(pwd)/icons.default.index.theme $HOME/.icons/default/index.theme
+ensure_ln_s $(pwd)/dunstrc                      $HOME/.dunstrc
+ensure_ln_s $(pwd)/xinitrc                      $HOME/.xinitrc
+ensure_ln_s $(pwd)/Xmodmap                      $HOME/.Xmodmap
+ensure_ln_s $(pwd)/xprofile                     $HOME/.xprofile
+ensure_ln_s $(pwd)/Xresources                   $HOME/.Xresources
+ensure_ln_s $(pwd)/i3.config                    $HOME/.config/i3/config
+ensure_ln_s $(pwd)/rofi.config                  $HOME/.config/rofi/config
+ensure_ln_s $(pwd)/gtkrc-2.0                    $HOME/.gtkrc-2.0
+ensure_ln_s $(pwd)/gtkrc-2.0-kde4               $HOME/.gtkrc-2.0-kde4
+ensure_ln_s $(pwd)/gtk-3.0-settings.ini         $HOME/.config/gtk-3.0/settings.ini
+ensure_ln_s $(pwd)/icons.default.index.theme    $HOME/.icons/default/index.theme
+ensure_ln_s $(pwd)/xsettings.xml                $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
 popd
 
 # setup things

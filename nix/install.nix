@@ -100,6 +100,8 @@ with import <nixpkgs>{};
     inherit (pkgs.gnome3) adwaita-icon-theme gnome-terminal;
 
     inherit (pkgs)
+      breeze-gtk
+      breeze-icons
       moka-icon-theme
       numix-gtk-theme;
 
