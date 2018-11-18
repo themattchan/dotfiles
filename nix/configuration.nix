@@ -46,6 +46,9 @@
     clear control
     keycode 66 = Control_L
     add control = Control_L Control_R
+
+    # printsc -> mod4
+    keycode 107 = Super_R
   '';
 
   # List packages installed in system profile. To search, run:
@@ -84,6 +87,7 @@
      xfce.thunar
      xfce.xfconf
      xterm
+     xmodmap
      zip
      xdg_utils
      shared-mime-info
