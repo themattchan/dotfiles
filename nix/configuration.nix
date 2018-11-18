@@ -224,6 +224,8 @@
 
   hardware.bluetooth.enable = true;
 
+  services.fwupd.enable = true;
+
   # trackpoint
   hardware.trackpoint = {
     enable = true;
