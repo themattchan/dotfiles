@@ -29,12 +29,14 @@ with import <nixpkgs>{};
        abiword
        libreoffice
        evince
+       geeqie
        ;
     inherit (pkgs.gnome3) cheese nautilus adwaita-icon-theme gnome-terminal;
 
     # utils and systemsy things
     inherit (pkgs)
        emacs
+       silver-searcher
 #       jq
        neofetch
        pandoc
@@ -42,6 +44,7 @@ with import <nixpkgs>{};
        scrot
        aspell
        rclone
+       ghostscript
        ;
     inherit (pkgs.aspellDicts) en;
     inherit (pkgs.xfce)

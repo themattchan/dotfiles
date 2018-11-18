@@ -85,6 +85,8 @@
      xfce.xfconf
      xterm
      zip
+     xdg_utils
+     shared-mime-info
 
      # one of these is needed for nm-applet icons
      gnome3.adwaita-icon-theme
@@ -127,10 +129,12 @@
     enable = true;
     enableSSHSupport = true;
   };
-  programs.ssh.startAgent = false;
+  programs.ssh.startAgent = true;
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  # can start this manually with:
+  #    systemctl start sshd
+  services.openssh.enable = false;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

@@ -94,6 +94,9 @@ alias hist='history | cut -c8- | sort | uniq -c | sort -rn | head'
 alias ducks='du -cks * |sort -rn |head -11'
 alias sl='ls'
 
+# this is aliased in zprezto and is shadowing the ghostscript exe.
+unalias gs
+
 if [[ $systype == "Linux" ]]; then
    alias pbcopy='xsel --clipboard --input'
    alias pbpaste='xsel --clipboard --output'
