@@ -5,10 +5,6 @@
 { config, lib, builtins, pkgs, ... }:
 
 {
-  imports = [
-    ./nixos-hardware/lenovo/thinkpad/x1/6th-gen/default.nix
-  ];
-
   nixpkgs.config.allowUnfree = true;
 
   # Use the systemd-boot EFI boot loader.
@@ -16,7 +12,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   security.audit.enable = false;
-  networking.hostName = "adrastea"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
 
@@ -102,17 +97,17 @@
              url = "https://gitlab.com/isseigx/simplicity-sddm-theme.git";
              rev = "403ba49019b519bfab99988f848a96e96f62b9c0";
            };
-           ## this needs some Qt bullshit...
-           chiliTheme = fetchFromGitHub {
-             owner = "MarianArlt";
-             repo = "sddm-chili";
-             rev = "6516d50176c3b34df29003726ef9708813d06271";
-             sha256 = "036fxsa7m8ymmp3p40z671z163y6fcsa9a641lrxdrw225ssq5f3";
-           };
+           # ## this needs some Qt bullshit...
+           # chiliTheme = fetchFromGitHub {
+           #   owner = "MarianArlt";
+           #   repo = "sddm-chili";
+           #   rev = "6516d50176c3b34df29003726ef9708813d06271";
+           #   sha256 = "036fxsa7m8ymmp3p40z671z163y6fcsa9a641lrxdrw225ssq5f3";
+           # };
          in
          ''
          cp -r ${simplicityTheme.outPath}/simplicity $out/share/sddm/themes/
-         cp -r ${chiliTheme.outPath} $out/share/sddm/themes/chili
+#         cp -r ${chiliTheme.outPath} $out/share/sddm/themes/chili
          ''
          + oldAttrs.postInstall;
      }))
@@ -155,6 +150,9 @@
     ];
   };
 
+  # turn bluetooth control on
+  hardware.bluetooth.enable = true;
+
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
@@ -168,7 +166,6 @@
   services.xserver = {
     enable = true;
     layout = "us";
-    dpi = 210;
 
     # Enable touchpad support.
 #    synaptics.enable = true;
@@ -204,7 +201,6 @@
     enableCoreFonts = true;
     enableFontDir = true;
     enableGhostscriptFonts = true;
-    fontconfig.dpi = 210;
 
     fonts = with pkgs; [
      font-awesome_5
@@ -223,41 +219,8 @@
     ];
   };
 
-  hardware.bluetooth.enable = true;
-
+  # linux vendor firmware update service
   services.fwupd.enable = true;
-
-  # trackpoint
-  hardware.trackpoint = {
-    enable = true;
-    device = "TPPS/2 Elan TrackPoint";
-    emulateWheel = true;
-    sensitivity = 150; # default 128, 0--255
-    speed = 50; # default 97, 0--255
-  };
-
-  services.thinkfan = {
-    enable = true;
-    # find /sys/devices -type f -name \'temp*_input\' | sed -r -e \'s/^/hwmon /\'
-    sensors =
-      ''
-        hwmon /sys/class/hwmon/hwmon0/temp1_input
-        hwmon /sys/class/hwmon/hwmon0/temp2_input
-        hwmon /sys/class/hwmon/hwmon0/temp3_input
-        hwmon /sys/class/hwmon/hwmon0/temp4_input
-        hwmon /sys/class/hwmon/hwmon0/temp5_input
-      '';
-  };
-
-  hardware.opengl = {
-    enable = true;
-    extraPackages = with pkgs; [
-      vaapiIntel
-      vaapiVdpau
-      libvdpau-va-gl
-    ];
-    driSupport32Bit = true;
-  };
 
   # Power management.
   services.acpid.enable = true;
