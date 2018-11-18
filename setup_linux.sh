@@ -16,6 +16,7 @@ ensure_ln_s $(pwd)/Xresources $HOME/.Xresources
 ensure_ln_s $(pwd)/i3.config $HOME/.config/i3/config
 ensure_ln_s $(pwd)/rofi.config $HOME/.config/rofi/config
 ensure_ln_s $(pwd)/gtkrc-2.0 $HOME/.gtkrc-2.0
+ensure_ln_s $(pwd)/gtkrc-2.0-kde4 $HOME/.gtkrc-2.0-kde4
 ensure_ln_s $(pwd)/gtk-3.0-settings.ini $HOME/.config/gtk-3.0/settings.ini
 ensure_ln_s $(pwd)/icons.default.index.theme $HOME/.icons/default/index.theme
 popd
