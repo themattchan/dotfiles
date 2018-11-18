@@ -75,6 +75,7 @@
      networkmanagerapplet
      nmap
      scrot
+     thinkfan
      tree
      unzip
      vim
@@ -230,6 +231,21 @@
     emulateWheel = true;
     sensitivity = 150; # default 128, 0--255
     speed = 50; # default 97, 0--255
+  };
+
+  services.thinkfan = {
+    enable = true;
+    #  find /sys/devices -type f -name 'temp*_input'
+    sensors = ''
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp3_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp4_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp5_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp2_input
+      hwmon /sys/devices/virtual/hwmon/hwmon4/temp1_input
+      hwmon /sys/devices/virtual/hwmon/hwmon0/temp1_input
+      hwmon /sys/devices/virtual/hwmon/hwmon1/temp1_input
+    '';
   };
 
   # Power management.
