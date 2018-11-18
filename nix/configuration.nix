@@ -57,6 +57,7 @@
   # $ nix search wget
    environment.systemPackages = with pkgs; [
      binutils
+     blueman
      cacert
      coreutils
      curl
@@ -218,6 +219,17 @@
      source-sans-pro
      source-serif-pro
     ];
+  };
+
+  hardware.bluetooth.enable = true;
+
+  # trackpoint
+  hardware.trackpoint = {
+    enable = true;
+    device = "TPPS/2 Elan TrackPoint";
+    emulateWheel = true;
+    sensitivity = 150; # default 128, 0--255
+    speed = 50; # default 97, 0--255
   };
 
   # Power management.
