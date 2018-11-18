@@ -47,6 +47,9 @@ function install_external
 
     # z
     git clone https://github.com/rupa/z z
+
+    # nixos-hardware
+    (cd ..; git clone https://github.com/NixOS/nixos-hardware.git nix/nixos-hardware)
 }
 
 install_external

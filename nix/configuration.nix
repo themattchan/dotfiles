@@ -2,9 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, builtins, pkgs, ... }:
+{ config, lib, builtins, pkgs, ... }:
 
 {
+  imports = [
+    ./nixos-hardware/lenovo/thinkpad/x1/6th-gen/default.nix
+  ];
+
   nixpkgs.config.allowUnfree = true;
 
   # Use the systemd-boot EFI boot loader.
@@ -33,7 +37,9 @@
   environment.variables = {
     EDITOR="emacs";
     XCURSOR_SIZE="32";
- #   XCURSOR_PATH = "$HOME/.icons";
+#   XCURSOR_PATH = "$HOME/.icons";
+    # GDK_SCALE = lib.mkDefault "2";
+    # GDK_DPI_SCALE= lib.mkDefault "0.5";
   };
 
   environment.sessionVariables.GTK_PATH =
@@ -127,6 +133,7 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+##  options.track
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -152,15 +159,17 @@
 
   # enable dconf
   programs.dconf.enable = true;
+  services.dbus.enable = true;
   services.dbus.packages = [ pkgs.gnome3.dconf ];
 
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
     layout = "us";
-    dpi = 150;
+    dpi = 210;
 
     # Enable touchpad support.
+#    synaptics.enable = true;
     libinput = {
       enable = true;
       tapping = false;
@@ -174,8 +183,17 @@
       sddm.enable = true;
       sddm.enableHidpi=true;
       sddm.theme="simplicity";
-    };
 
+      # sessionCommands = ''
+      #   xscreensaver -nosplash -log /dev/null &
+      #   xautolock -time 5 \
+      #             -locker "xscreensaver-command -lock" \
+      #             -nowlocker "xscreensaver-command -lock" \
+      #             -killtime 10 \
+      #             -killer "systemctl suspend-then-hibernate" \
+      #             -detectsleep &
+      # '';
+    };
     # desktopManager = {
     #   default = "xfce";
     #   xterm.enable = false;
@@ -189,11 +207,17 @@
     # set capslock to control
     xkbOptions = "ctrl:nocaps";
   };
-
+  # options.xsession.pointerCursor = {
+  #  package = pkgs.vanilla-dmz;
+  #  name="Vanilla-DMZ";
+  #  size=64;
+  # };
   fonts = {
     enableCoreFonts = true;
     enableFontDir = true;
     enableGhostscriptFonts = true;
+    fontconfig.dpi = 210;
+
     fonts = with pkgs; [
      font-awesome_5
      hack-font
@@ -214,13 +238,8 @@
   # Power management.
   services.acpid.enable = true;
   powerManagement.enable = true;
-  services.tlp = {
-      enable = true;
-      extraConfig = ''
-        START_CHARGE_THRESH_BAT0=25
-        STOP_CHARGE_THRESH_BAT0=96
-      '';
-    };
+  services.logind.extraConfig = "HandleLidSwitch=suspend-then-hiernate";
+#   services.logind.lidSwitch = "hybrid-sleep";
 
   # Add my user account
   users.extraUsers.matt = {
