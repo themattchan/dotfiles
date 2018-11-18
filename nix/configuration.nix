@@ -225,7 +225,7 @@
   # Power management.
   services.acpid.enable = true;
   powerManagement.enable = true;
-  services.logind.extraConfig = "HandleLidSwitch=suspend-then-hiernate";
+  services.logind.extraConfig = "HandleLidSwitch=suspend-then-hibernate";
 #   services.logind.lidSwitch = "hybrid-sleep";
 
   # Add my user account
