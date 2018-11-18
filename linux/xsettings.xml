@@ -26,6 +26,8 @@
     <property name="FontName" type="string" value="Sans 9"/>
     <property name="MonospaceFontName" type="string" value="Hack 9"/>
     <property name="IconSizes" type="empty"/>
+    <property name="ThemeName" type="string" value="Adwaita"/>
+    <property name="IconThemeName" type="string" value="Moka"/>
     <property name="KeyThemeName" type="string" value="Emacs"/>
     <property name="ToolbarStyle" type="string" value="icons"/>
     <property name="ToolbarIconSize" type="empty"/>

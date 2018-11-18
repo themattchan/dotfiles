@@ -30,7 +30,7 @@ with import <nixpkgs>{};
        libreoffice
        evince
        ;
-    inherit (pkgs.gnome3) cheese;
+    inherit (pkgs.gnome3) cheese nautilus;
 
     # utils and systemsy things
     inherit (pkgs)
@@ -47,6 +47,8 @@ with import <nixpkgs>{};
     inherit (pkgs.xfce)
        thunar
        thunar-dropbox-plugin
+       gtk-xfce-engine
+       xfce4-icon-theme
        ;
     jq = unstable.jq;
     pass = pkgs.pass.withExtensions (p: [ p.pass-import ]);
