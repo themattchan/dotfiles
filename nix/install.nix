@@ -30,6 +30,7 @@ with import <nixpkgs>{};
        libreoffice
        evince
        geeqie
+       clementineUnfree
        ;
     inherit (pkgs.gnome3) cheese shotwell nautilus adwaita-icon-theme gnome-terminal;
 
@@ -45,8 +46,9 @@ with import <nixpkgs>{};
        aspell
        rclone
        ghostscript
-       mpd mpc ncmpcpp gmpc
+       mpd mpc_cli ncmpcpp gmpc
        vlc
+       transmission-gtk
        ;
     inherit (pkgs.aspellDicts) en;
     inherit (pkgs.xfce)

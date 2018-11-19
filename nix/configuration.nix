@@ -24,6 +24,15 @@
     consoleFont = "Lat2-Terminus16";
     consoleKeyMap = "us";
     defaultLocale = "en_US.UTF-8";
+#     supportedLocales = [
+# "en_GB.UTF-8/UTF-8"
+# "yue_HK/UTF-8"
+# "zh_HK/BIG5-HKSCS"
+# "zh_HK.UTF-8/UTF-8"
+# "zh_TW/BIG5"
+# "zh_TW.EUC-TW/EUC-TW"
+# "zh_TW.UTF-8/UTF-8"
+#     ];
   };
 
   # Set your time zone.
@@ -91,6 +100,7 @@
      zip
      xdg_utils
      shared-mime-info
+     sshfsFuse
 
      # one of these is needed for nm-applet icons
      gnome3.adwaita-icon-theme

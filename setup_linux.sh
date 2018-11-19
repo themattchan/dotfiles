@@ -1,7 +1,5 @@
 #! /bin/sh
 
-git clone git@github.com:themattchan/xmonad-config.git $HOME/.xmonad
-
 ensure_ln_s() {
     mkdir -p $(dirname $2)
     ln -sf $1 $2
@@ -23,26 +21,29 @@ ensure_ln_s $(pwd)/xsettings.xml                $HOME/.config/xfce4/xfconf/xfce-
 ensure_ln_s $(pwd)/mpd.conf                     $HOME/.config/mpd/mpd.conf
 popd
 
-# setup things
-chsh -s /bin/zsh $(whoami)
+# git clone git@github.com:themattchan/xmonad-config.git $HOME/.xmonad
 
-gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
-xfconf-query -c xsettings -p /Gtk/KeyThemeName -s Emacs
-/usr/bin/setxkbmap -option '' -option 'ctrl:nocaps'
+# # setup things
+# chsh -s /bin/zsh $(whoami)
 
-xfconf-query -c xsettings -p /Net/EnableEventSounds -s "false"
-xfconf-query -c xsettings -p /Net/EnableInputFeedbackSounds -s "false"
+# gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
 
-xfconf-query -c xfwm4 -p /general/theme -s "Numix"
-xfconf-query -c xsettings -p /Net/ThemeName -s "Numix"
-xfconf-query -c xsettings -p /Net/IconThemeName -s "Moka"
-xfconf-query -c xsettings -p /Gtk/MonospaceFontName -s "Hack 9"
-xfconf-query -c xsettings -p /Gtk/KeyThemeName -s "Emacs"
+# /usr/bin/setxkbmap -option '' -option 'ctrl:nocaps'
 
-tllocalmgr install cm-super lm lmodern mdframed etoolbox needspace secdot tabu \
-           varwidth multirow units siunitx algorithmicx hyphenat enumitem \
-           paralist biblatex biblatex-ieee logreq xstring
-sudo texhash
+
+# xfconf-query -c xsettings -p /Gtk/KeyThemeName -s Emacs
+# xfconf-query -c xsettings -p /Net/EnableEventSounds -s "false"
+# xfconf-query -c xsettings -p /Net/EnableInputFeedbackSounds -s "false"
+# xfconf-query -c xfwm4 -p /general/theme -s "Numix"
+# xfconf-query -c xsettings -p /Net/ThemeName -s "Numix"
+# xfconf-query -c xsettings -p /Net/IconThemeName -s "Moka"
+# xfconf-query -c xsettings -p /Gtk/MonospaceFontName -s "Hack 9"
+# xfconf-query -c xsettings -p /Gtk/KeyThemeName -s "Emacs"
+
+# tllocalmgr install cm-super lm lmodern mdframed etoolbox needspace secdot tabu \
+#            varwidth multirow units siunitx algorithmicx hyphenat enumitem \
+#            paralist biblatex biblatex-ieee logreq xstring
+# sudo texhash
 
 
 #  gtf 1920 1200 60 -x
