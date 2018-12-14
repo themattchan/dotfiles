@@ -32,7 +32,7 @@ with import <nixpkgs>{};
        geeqie
        clementineUnfree
        ;
-    inherit (pkgs.gnome3) cheese shotwell nautilus adwaita-icon-theme gnome-terminal;
+    inherit (pkgs.gnome3) cheese shotwell nautilus adwaita-icon-theme gnome-terminal gnome-mines;
 
     # utils and systemsy things
     inherit (pkgs)
@@ -77,6 +77,8 @@ with import <nixpkgs>{};
      z3
      nodejs-10_x
      gcc
+     cabal2nix
+     cabal-install
      ;
 
  #   inherit (pkgs.llvmPackages) libcxxClang libcxxStdenv;
@@ -102,6 +104,7 @@ with import <nixpkgs>{};
       # p.ghcid
       # p.Cabal_2_2_0_1
       # p.cabal2nix
+      p.regex-tdfa
     ]);
 
     inherit (pkgs.nodePackages) bower;

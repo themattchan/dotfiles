@@ -78,11 +78,17 @@
      i3
      i3lock
      i3status
+     lsof
      neofetch
      networkmanager_openvpn
      networkmanagerapplet
      nmap
+     pavucontrol
+     pamixer
+     paprefs
      scrot
+     shared-mime-info
+     sshfsFuse
      thinkfan
      tree
      unzip
@@ -91,16 +97,14 @@
      wget
      which
      xautolock
-     xscreensaver
+     xdg_utils
      xdg_utils
      xfce.thunar
      xfce.xfconf
-     xterm
      xorg.xmodmap
+     xscreensaver
+     xterm
      zip
-     xdg_utils
-     shared-mime-info
-     sshfsFuse
 
      # one of these is needed for nm-applet icons
      gnome3.adwaita-icon-theme
@@ -172,6 +176,7 @@
       gutenprint
       gutenprintBin
       brlaser
+##      (callPackage ./dcpl2550dw.nix {})
     ];
   };
 
@@ -184,7 +189,7 @@
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
-
+  hardware.pulseaudio.extraConfig = "load-module module-switch-on-connect";
   # enable dconf
   programs.dconf.enable = true;
   services.dbus.enable = true;

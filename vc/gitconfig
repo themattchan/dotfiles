@@ -1,6 +1,6 @@
 [user]
 	name = Matthew Chan
-	email = matt@awakenetworks.com
+	email = matt@themattchan.com
 	signingkey = FE057CE656AC446D436BB28313EE5A028E70C579
 [core]
 	excludesfile = ~/.gitignore_global
