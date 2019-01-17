@@ -1,8 +1,6 @@
+let unstable = import <unstable>{}; in
 with import <nixpkgs>{};
 {
-# reminder:: install sddm with simplicity theme on nixos
-# themes go in /share/sddm/theme
-#https://github.com/NixOS/nixpkgs/blob/release-18.09/nixos/modules/services/x11/display-managers/sddm.nix#L268
     inherit (pkgs)
       i3
       i3lock
@@ -16,14 +14,13 @@ with import <nixpkgs>{};
         mpdSupport = true;
         alsaSupport = true;
         pulseSupport = true;
-  #      githubSupport = true;
     };
 
-    st = (pkgs.st.overrideAttrs (oldAttrs: {
+    st = pkgs.st.overrideAttrs (oldAttrs: {
         configFile = builtins.readFile ./st/config.h;
         patches = [ ./st/st-scrollback-0.8.diff ./st/st-scrollback-mouse-0.8.diff ];
         buildInputs = oldAttrs.buildInputs ++ [pkgs.hack-font];
-      }));
+    });
 
     inherit (pkgs)
        firefox
@@ -32,50 +29,74 @@ with import <nixpkgs>{};
        spotify
        abiword
        libreoffice
+       evince
        ;
     inherit (pkgs.gnome3) cheese;
 
-  # utils and systemsy things
+    # utils and systemsy things
     inherit (pkgs)
        emacs
-       jq
+#       jq
        neofetch
        pandoc
        rofi-unwrapped
        scrot
+       aspell
        ;
+    inherit (pkgs.aspellDicts) en;
     inherit (pkgs.xfce4-13)
        thunar
        ;
-
+    jq = unstable.jq;
     pass = pkgs.pass.withExtensions (p: [ p.pass-import ]);
 
-  latex = pkgs.texlive.combine {
-    inherit (pkgs.texlive) scheme-basic latexmk;
-  };
+    latex = pkgs.texlive.combine {
+      inherit (pkgs.texlive) scheme-basic latexmk;
+    };
 
     inherit (pkgs)
      coq
      ocaml
-     openjdk
-#     purescript
+     openjdk10
+#     purescript psc-package
      python2
      python3
      sbcl
-     sbt
-     scala
+     scala sbt scalafmt
      stack
      z3
      nodejs-10_x
+     gcc
      ;
 
-    ghc = pkgs.pkgs.haskellPackages.ghcWithPackages (p: [ p.aeson p.network p.lens p.lens-aeson]);
+ #   inherit (pkgs.llvmPackages) libcxxClang libcxxStdenv;
+
+    ghc = pkgs.pkgs.haskellPackages.ghcWithPackages (p: [
+      p.aeson
+      p.containers
+      p.comonad
+      p.lens
+      p.lens-aeson
+      p.machines
+      p.mtl
+      p.network
+      p.profunctors
+      p.recursion-schemes
+      p.servant
+      p.transformers
+      p.unordered-containers
+      p.warp
+
+# p.spdx needs to be jailbroken for this shit to work...
+      # p.psc-ide
+      # p.ghcid
+      # p.Cabal_2_2_0_1
+      # p.cabal2nix
+    ]);
 
     inherit (pkgs.nodePackages) bower;
 
     inherit (pkgs.gnome3) adwaita-icon-theme gnome-terminal;
-
-#    inherit (pkgs.haskellPackages) purescript;
 
     inherit (pkgs)
       moka-icon-theme
@@ -87,12 +108,5 @@ with import <nixpkgs>{};
      siji
      unifont
      ;
-
-   # postInstall = ''
-   #   echo "refresh font cache"
-   #   mkdir -p  ~/.local/share/fonts/
-   #   ln -sf ~/.nix-profile/share/fonts/ ~/.local/share/fonts/nix-fonts
-   #   fc-cache -rv
-   # '';
 
 }
