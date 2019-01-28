@@ -15,6 +15,9 @@ fi
 
 if [[ "$TERM" == 'dumb' ]]; then
   PROMPT='%2~ %% '
+## else
+##   PROMPT="$PROMPT
+## ${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{4}$ "
 fi
 
 ## z -- fast directory navigation
@@ -143,3 +146,16 @@ source .profile
 # else
 #     eval $(gpg-agent --daemon ~/.gnupg/.gpg-agent-info)
 # fi
+
+findup () {
+    local x=`pwd`
+    while [ "$x" != "/" ] ; do
+	      x=`dirname "$x"`
+        find "$x" -maxdepth 1 -name release.nix
+    done
+    echo $x
+}
+
+deploy () {
+    nix-deploy system --to $1.awake.cloud --switch --path $(nix-build --no-out-link --attr aws-ec2-minimal $(findup 'release.nix'))
+}

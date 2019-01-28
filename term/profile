@@ -35,7 +35,6 @@ systype=$(uname -s)
 #export MITSCHEME_LIBRARY_PATH=/Applications/mit-scheme.app/Contents/Resources
 #export MIT_SCHEME_EXE=/usr/local/scheme/
 #export DYLD_LIBRARY_PATH=/opt/local/lib/:/opt/local/bin/lib
-
 OPAM_BIN="$HOME/.opam/system/bin"
 OCAML_TOPLEVEL_PATH="$HOME/.opam/system/lib/toplevel"
 CABAL_BIN="$HOME/Library/Haskell/bin"
@@ -50,12 +49,10 @@ elif [[ $systype == "Linux" ]]; then
    export SSH_ASKPASS="/usr/bin/ksshaskpass"
 fi
 
-if [ "$NIX_REMOTE" = 'daemon' ] && [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-      . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-elif [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
-    source $HOME/.nix-profile/etc/profile.d/nix.sh;
-fi
 
+export NIX_BUILD_HOOK=~/.nix-profile/libexec/nix/build-remote.pl
+export NIX_CURRENT_LOAD=~/.nix-current-load
+export NIX_REMOTE_SYSTEMS=~/.remote-systems.conf
 
 #export NIX_REMOTE=
 
@@ -66,7 +63,6 @@ fi
 export PATH=\
 /usr/local/bin/:\
 /usr/bin/:\
-$NIX_PATH:\
 $RACKET_BIN:\
 $OPAM_BIN:\
 $OCAML_TOPLEVEL_PATH:\
@@ -74,6 +70,13 @@ $STACK_BIN:\
 $CABAL_BIN:\
 $MAC_ONLY:\
 $PATH
+
+# prepend nix provided executables to PATH
+if [ "$NIX_REMOTE" = 'daemon' ] && [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+      . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+elif [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
+    source $HOME/.nix-profile/etc/profile.d/nix.sh;
+fi
 
 export MANPATH=\
 /opt/local/share/man/:\
