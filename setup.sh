@@ -27,6 +27,11 @@ function install_dotfiles
     done
 }
 
+function install_hosts
+{
+    sudo (cat hosts <(curl https://someonewhocares.org/hosts/hosts) > /etc/hosts)
+}
+
 function install_zprezto
 {
     local ZP_DIR="${ZDOTDIR:-$HOME}/.zprezto"
