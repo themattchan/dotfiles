@@ -1,7 +1,7 @@
 [user]
 	name = Matthew Chan
-	email = matt@themattchan.com
-	signingkey = 4EBC8427
+	email = matt@awakenetworks.com
+	signingkey = FE057CE656AC446D436BB28313EE5A028E70C579
 [core]
 	excludesfile = ~/.gitignore_global
 	autocrlf = input
@@ -12,8 +12,9 @@
     guitool = ediff
 [merge]
 	tool = emerge
+	squash = true
 [push]
-	default = matching
+	default = current
 [branch]
 	autosetuprebase = always
 [color]
@@ -25,9 +26,11 @@
 	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
 	co = checkout
 	br = branch
-	ci = commit
+	au = add -u
+	cc = commit
 	cam = commit -am
 	st = status
+	ds = diff --stat
 	pl = pull
 	pu = push
 	unstage = reset HEAD --
@@ -41,6 +44,20 @@
 	clean = git media clean %f
 	smudge = git media smudge %f
 [commit]
-	gpgsign = true
-[gpg]
-	program = gpg
+#	gpgsign = true
+# [gpg]
+# 	program = /usr/local/MacGPG2/bin/gpg
+[url "git://github.com/ghc/packages-"]
+	insteadOf = git://github.com/ghc/packages/
+[url "http://github.com/ghc/packages-"]
+	insteadOf = http://github.com/ghc/packages/
+[url "https://github.com/ghc/packages-"]
+	insteadOf = https://github.com/ghc/packages/
+[url "ssh://git@github.com/ghc/packages-"]
+	insteadOf = ssh://git@github.com/ghc/packages/
+[url "git@github.com:/ghc/packages-"]
+	insteadOf = git@github.com:/ghc/packages/
+[github]
+	user = themattchan
+[rerere]
+	enabled = true

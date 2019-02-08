@@ -26,7 +26,6 @@ set nocompatible              " be iMproved, required
 " noremap <C-g>  <C-c>
 
 " interface
-colorscheme wombat
 if has("gui_running")
 	if has("gui_gtk2")
 		set guifont=Monospace\ 10
@@ -47,7 +46,7 @@ set shortmess+=I
 set background=dark
 set cursorline
 set lazyredraw
-set number
+"set number
 set showcmd
 set showmatch  " highlight matching parens
 let g:session_autosave = 'no'
@@ -62,8 +61,8 @@ set textwidth=79
 set smartindent
 set autoindent
 
-set tabstop=4
-set softtabstop=4
+set tabstop=2
+set softtabstop=2
 " set expandtab "tabs to spaces
 
 au FileType c setl sw=8 sts=8
@@ -92,9 +91,6 @@ set smartcase
 
 set hidden
 set history=1000
-
-" set linebreak
-" set wrap
 
 syntax on
 filetype on
@@ -159,29 +155,61 @@ set wildignore+=*~,*.swp,*.tmp
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+"set rtp+=~/.vim/bundle/Vundle.vim
+"call vundle#begin()
 
 " Emacs keys are a must
 " Plugin 'andrep/vimacs'
 
 " VimMarkDown: syntax for markdown
-Plugin 'plasticboy/vim-markdown'
+"Plugin 'plasticboy/vim-markdown'
 
 " Powerline: fancy command line
-Plugin 'Lokaltog/vim-powerline'
+"Plugin 'Lokaltog/vim-powerline'
 
 " Plugin 'kien/ctrlp.vim'
 
 " Yankstack: add a kill ring
-Plugin 'maxbrunsfeld/vim-yankstack'
+"Plugin 'maxbrunsfeld/vim-yankstack'
 
 " PureScript-mode
-Plugin 'purescript-vim'
+"Plugin 'purescript-vim'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
+"call vundle#end()            " required
 filetype plugin indent on    " required
 
 " init powerline
 let g:Powerline_symbols = 'compatible'
+
+
+"" gpg
+
+" Don't save backups of *.gpg files
+set backupskip+=*.gpg
+" To avoid that parts of the file is saved to .viminfo when yanking or
+" deleting, empty the 'viminfo' option.
+set viminfo=
+
+augroup encrypted
+  au!
+  " Disable swap files, and set binary file format before reading the file
+  autocmd BufReadPre,FileReadPre *.gpg
+    \ setlocal noswapfile bin
+  " Decrypt the contents after reading the file, reset binary file format
+  " and run any BufReadPost autocmds matching the file name without the .gpg
+  " extension
+  autocmd BufReadPost,FileReadPost *.gpg
+    \ execute "'[,']!gpg --decrypt --default-recipient-self" |
+    \ setlocal nobin |
+    \ execute "doautocmd BufReadPost " . expand("%:r")
+  " Set binary file format and encrypt the contents before writing the file
+  autocmd BufWritePre,FileWritePre *.gpg
+    \ setlocal bin |
+    \ '[,']!gpg --encrypt --default-recipient-self
+  " After writing the file, do an :undo to revert the encryption in the
+  " buffer, and reset binary file format
+  autocmd BufWritePost,FileWritePost *.gpg
+    \ silent u |
+    \ setlocal nobin
+augroup END

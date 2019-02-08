@@ -1,2 +1,0 @@
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-if [[ -s /home/user/.rvm/scripts/rvm ]] ; then source /home/user/.rvm/scripts/rvm ; fi

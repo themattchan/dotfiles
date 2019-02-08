@@ -1,30 +1,35 @@
 #! /bin/sh
 
+shopt -s extglob
+
 DOTFILES="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+EXTERNAL="$DOTFILES/external"
 
 function install_dotfiles
 {
-    local declare -a TO_LINK=('irssi' 'vim' 'emacs.d')
-    local declare -a TO_LINK_SUBDIR=('term' 'vc' 'linux')
+    local declare -a TO_LINK=('vim')
+    local declare -a TO_LINK_SUBDIR=('term' 'vc')
 
-    for subdir in "${TO_LINK_SUBDIR[@]}"
-    do
+    for subdir in "${TO_LINK_SUBDIR[@]}"; do
         if [[ $(uname -s) != "Linux" && $subdir  == 'linux' ]]; then
             continue
         fi
 
         echo "linking files in $subdir into home"
-        for file in $DOTFILES/$subdir/*
-        do
-        ln -s $file ~/.$(basename $file)
+        for file in $DOTFILES/$subdir/*; do
+            ln -sf $file ~/.$(basename $file)
         done
     done
 
-    for file in "${TO_LINK[@]}"
-    do
+    for file in "${TO_LINK[@]}"; do
         echo "Linking file in $file into home"
-        ln -s $DOTFILES/$file ~/.$file
+        ln -sf $DOTFILES/$file ~/.$file
     done
+
+    if [[ $(uname -s) == "Darwin" ]]; then
+        cp -R "$DOTFILES/osx/KeyBindings" "$HOME/Library/"
+        source "$DOTFILES/osx/osx"
+    fi
 }
 
 function install_hosts
@@ -32,40 +37,24 @@ function install_hosts
     sudo (cat hosts <(curl https://someonewhocares.org/hosts/hosts) > /etc/hosts)
 }
 
-function install_zprezto
+function install_external
 {
-    local ZP_DIR="${ZDOTDIR:-$HOME}/.zprezto"
-
-    git clone --recursive https://github.com/sorin-ionescu/prezto.git $ZP_DIR
+    cd $EXTERNAL
+    git clone --recursive https://github.com/sorin-ionescu/prezto.git zprezto
 
     #setopt EXTENDED_GLOB
-    shopt -s extglob
-    for rcfile in "$ZP_DIR/runcoms/!(README*)"
-    do
-        ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+    pushd zprezto
+     for file in $(ls ./runcoms/!(README*)); do
+        ln -sf "$(pwd)/${file:2}" "$HOME/.$(basename $file)"
     done
+    popd
+
+    # z
+    git clone https://github.com/rupa/z z
 }
 
-function install_peda
-{
-    git clone https://github.com/longld/peda.git ~/.peda
-    echo "source ~/.peda/peda.py" >> ~/.gdbinit
-}
+install_external
+install_dotfiles
 
-function set_zsh
-{
 #    sudo usermod -s $(which zsh) $(whoami)
-    sudo chsh -s $(which zsh) $(whoami)
-}
-
-function install_osx
-{
-    if [[ $(uname -s) == "Darwin" ]]; then
-        source "$DOTFILES/osx/osx"
-        cp -R "$DOTFILES/osx/KeyBindings" "$HOME/Library/"
-    fi
-}
-
-# install_zprezto
-# install_dotfiles
-set_zsh
+#sudo chsh -s $(which zsh) $(whoami)

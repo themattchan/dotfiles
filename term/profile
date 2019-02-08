@@ -1,17 +1,87 @@
-export LDFLAGS="-L/opt/local/lib"
-export PATH="$HOME/.cargo/bin:$PATH"
+# -*- mode: shell-script; -*-
+systype=$(uname -s)
 
-export SSH_ASKPASS="/usr/bin/ksshaskpass"
+# NOTE: Dotfile load order
+#
+# A then B then C
+#
+# +----------------+-----------+-----------+------+
+# |                |Interactive|Interactive|Script|
+# |                |login      |non-login  |      |
+# +----------------+-----------+-----------+------+
+# |/etc/profile    |   A       |           |      |
+# +----------------+-----------+-----------+------+
+# |/etc/bash.bashrc|           |    A      |      |
+# +----------------+-----------+-----------+------+
+# |~/.bashrc       |           |    B      |      |
+# +----------------+-----------+-----------+------+
+# |~/.bash_profile |   B1      |           |      |
+# +----------------+-----------+-----------+------+
+# |~/.bash_login   |   B2      |           |      |
+# +----------------+-----------+-----------+------+
+# |~/.profile      |   B3      |           |      |
+# +----------------+-----------+-----------+------+
+# |BASH_ENV        |           |           |  A   |
+# +----------------+-----------+-----------+------+
+# |                |           |           |      |
+# +----------------+-----------+-----------+------+
+# |                |           |           |      |
+# +----------------+-----------+-----------+------+
+# |~/.bash_logout  |    C      |           |      |
+# +----------------+-----------+-----------+------+
 
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    ssh-agent > ~/.ssh-agent-thing
+#### Paths #####################################################################
+
+#export MITSCHEME_LIBRARY_PATH=/Applications/mit-scheme.app/Contents/Resources
+#export MIT_SCHEME_EXE=/usr/local/scheme/
+#export DYLD_LIBRARY_PATH=/opt/local/lib/:/opt/local/bin/lib
+OPAM_BIN="$HOME/.opam/system/bin"
+OCAML_TOPLEVEL_PATH="$HOME/.opam/system/lib/toplevel"
+CABAL_BIN="$HOME/Library/Haskell/bin"
+STACK_BIN="$HOME/.local/bin/:$HOME/.stack/programs/x86_64-osx/ghc-8.0.2/bin"
+
+if [[ $systype == "Darwin" ]]; then
+   MAC_ONLY="/Library/Developer/:/opt/local/bin/:/usr/local/bin/:$HOME/bin/"
+   RACKET_BIN="/Applications/Racket/bin"
+elif [[ $systype == "Linux" ]]; then
+   MAC_ONLY=""
+   RACKET_BIN="/usr/local/racket/bin"
+   export SSH_ASKPASS="/usr/bin/ksshaskpass"
 fi
-if [[ "$SSH_AGENT_PID" == "" ]]; then
-    eval "$(<~/.ssh-agent-thing)"
+
+
+export NIX_BUILD_HOOK=~/.nix-profile/libexec/nix/build-remote.pl
+export NIX_CURRENT_LOAD=~/.nix-current-load
+export NIX_REMOTE_SYSTEMS=~/.remote-systems.conf
+
+#export NIX_REMOTE=
+
+##########################################
+## !!! IMPORTANT: No leading spaces !!! ##
+##########################################
+
+export PATH=\
+/usr/local/bin/:\
+/usr/bin/:\
+$RACKET_BIN:\
+$OPAM_BIN:\
+$OCAML_TOPLEVEL_PATH:\
+$STACK_BIN:\
+$CABAL_BIN:\
+$MAC_ONLY:\
+$PATH
+
+# prepend nix provided executables to PATH
+if [ "$NIX_REMOTE" = 'daemon' ] && [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+      . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+elif [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
+    source $HOME/.nix-profile/etc/profile.d/nix.sh;
 fi
 
-# if [ -z "$SSH_AUTH_SOCK" ] ; then
-#   eval `ssh-agent -s`
-#   ssh-add
-# fi
-/usr/bin/xmodmap $HOME/.Xmodmap
+export MANPATH=\
+/opt/local/share/man/:\
+$MANPATH
+
+export INFOPATH=\
+/opt/local/share/info/:\
+$INFOPATH
