@@ -11,18 +11,46 @@ fe80::1%lo0	localhost
 
 
 # Block Facebook IPv4
-127.0.0.1   www.facebook.com
-127.0.0.1   facebook.com
-127.0.0.1   login.facebook.com
-127.0.0.1   www.login.facebook.com
-127.0.0.1   fbcdn.net
-127.0.0.1   www.fbcdn.net
-127.0.0.1   fbcdn.com
-127.0.0.1   www.fbcdn.com
-127.0.0.1   static.ak.fbcdn.net
-127.0.0.1   static.ak.connect.facebook.com
-127.0.0.1   connect.facebook.net
-127.0.0.1   www.connect.facebook.net
+## https://gist.github.com/thomasbilk/1506210/2d20f47bbcca75b2f78d6909c1637501000d846f
+127.0.0.1 api.ak.facebook.com
+127.0.0.1 api.connect.facebook.com
+127.0.0.1 api.facebook.com
+127.0.0.1 app.facebook.com
+127.0.0.1 apps.facebook.com
+127.0.0.1 ar-ar.facebook.com
+127.0.0.1 badge.facebook.com
+127.0.0.1 blog.facebook.com
+127.0.0.1 connect.facebook.com
+127.0.0.1 connect.facebook.net
+127.0.0.1 de-de.facebook.com
+127.0.0.1 developers.facebook.com
+127.0.0.1 es-la.facebook.com
+127.0.0.1 external.ak.fbcdn.net
+127.0.0.1 facebook.com
+127.0.0.1 facebook.de
+127.0.0.1 facebook.fr
+127.0.0.1 fb.me
+127.0.0.1 fbcdn.com
+127.0.0.1 fbcdn.net
+127.0.0.1 fr-fr.facebook.com
+127.0.0.1 hi-in.facebook.com
+127.0.0.1 it-it.facebook.com
+127.0.0.1 ja-jp.facebook.com
+127.0.0.1 login.facebook.com
+127.0.0.1 profile.ak.fbcdn.net
+127.0.0.1 pt-br.facebook.com
+127.0.0.1 ssl.connect.facebook.com
+127.0.0.1 static.ak.connect.facebook.com
+127.0.0.1 static.ak.fbcdn.net
+127.0.0.1 www.connect.facebook.net
+127.0.0.1 www.facebook.com
+127.0.0.1 www.facebook.de
+127.0.0.1 www.facebook.fr
+127.0.0.1 www.fbcdn.com
+127.0.0.1 www.fbcdn.net
+127.0.0.1 www.login.facebook.com
+127.0.0.1 zh-cn.facebook.com
+
 
 # Block Twitter
 127.0.0.1 www.twitter.com
@@ -31,6 +59,8 @@ fe80::1%lo0	localhost
 127.0.0.1 apps.facebook.com
 127.0.0.1 www.mobile.twitter.com
 127.0.0.1 mobile.twitter.com
+fe80::1%lo0	twitter.com
+fe80::1%lo0	www.twitter.com
 
 #0.0.0.0 www.youtube.com
 #::  www.youtube.com
