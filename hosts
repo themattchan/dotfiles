@@ -28,7 +28,9 @@ fe80::1%lo0	localhost
 127.0.0.1 www.twitter.com
 127.0.0.1 twitter.com
 127.0.0.1 api.twitter.com
-127.0.0.1   apps.facebook.com
+127.0.0.1 apps.facebook.com
+127.0.0.1 www.mobile.twitter.com
+127.0.0.1 mobile.twitter.com
 
 #0.0.0.0 www.youtube.com
 #::  www.youtube.com
