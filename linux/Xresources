@@ -10,8 +10,8 @@ Xft.lcdfilter: lcddefault
 Xft.hintstyle: hintslight
 
 !Xcursor.theme: breeze_cursors
-Xcursor.theme: Vanilla-DMZ-AA
-Xcursor.size: 128
+Xcursor.theme: Adwaita
+Xcursor.size: 32
 
 ! Xterm settings
 xterm*utf8:true

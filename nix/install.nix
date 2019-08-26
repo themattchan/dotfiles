@@ -39,14 +39,14 @@ with import <nixpkgs>{};
 #       jq
        neofetch
        pandoc
-       rofi-unwrapped
+#       rofi-unwrapped
        scrot
        aspell
        ;
     inherit (pkgs.aspellDicts) en;
-    inherit (pkgs.xfce4-13)
-       thunar
-       ;
+    # inherit (pkgs.xfce4-13)
+    #    thunar
+    #    ;
     jq = unstable.jq;
     pass = pkgs.pass.withExtensions (p: [ p.pass-import ]);
 
@@ -57,7 +57,7 @@ with import <nixpkgs>{};
     inherit (pkgs)
      coq
      ocaml
-     openjdk10
+#     openjdk10
 #     purescript psc-package
      python2
      python3

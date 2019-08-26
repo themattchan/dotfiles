@@ -1,11 +1,8 @@
-## how to use nix
+## Nixos configuration
 
-`nix` is a confusing and obtuse piece of shit but it does a passable job of
-abstracting away the greater pain of configuring fiddly linux bullshit.
+**Setup nixos**:
 
-setup nixos:
-
-blow out the contents of `/etc/nixos/configuration.nix`, and add the following to the `imports` section of that file:
+Delete the contents of `/etc/nixos/configuration.nix`, and add the following to the `imports` section of that file:
 
 ```
   imports =
@@ -15,30 +12,40 @@ blow out the contents of `/etc/nixos/configuration.nix`, and add the following t
     ];
 ```
 
-install it all
+## Automatic provisioning of userland software with Nix
+
+Can be used with Nixos or just the Nix package manager on any Linux distro.
+
+**Install all user-local applications**
 
 ```
 nix-env --install --file install.nix
 ```
 
-install a specific section
+**Install a specific application**:
 
 ```
 nix-env --install --file install.nix --attr <name>
 ```
 
-show installed
+**Show installed applications**:
 
 ```
 nix-env -q
 ```
 
-## !!! IMPORTANT
+## Setup for non-nixos linux
 
-on a non-nixos install, have to put
+**Allow unfree**: In `~/.config/nixpkgs/config.nix`, add the following line
 
 ```
 { allowUnfree = true; }
 ```
 
-in `~/.config/nixpkgs/config.nix`
+**Link fonts**: Needed to get the nix provided fonts hooked up (especially important for polybar)
+
+```
+rm -rf ~/.local/share/fonts
+
+ln -s ~/.nix-profile/share/fonts ~/.local/share/fonts
+```

@@ -32,10 +32,10 @@ function install_dotfiles
     fi
 }
 
-function install_hosts
-{
-    sudo (cat hosts <(curl https://someonewhocares.org/hosts/hosts) > /etc/hosts)
-}
+# function install_hosts
+# {
+#     sudo (cat hosts <(curl https://someonewhocares.org/hosts/hosts) > /etc/hosts)
+# }
 
 function install_external
 {

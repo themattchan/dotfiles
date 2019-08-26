@@ -2,7 +2,7 @@
 
 ## RUN THIS AS SUDO
 
-FEDORA_VERSION=29
+FEDORA_VERSION=30
 
 cd;
 
@@ -23,12 +23,12 @@ curl -sSL "https://s3.amazonaws.com/download.fpcomplete.com/fedora/${FEDORA_VERS
 
 ## dnf groups
 dnf install @gnome
-dnf install i3 i3lock dmenu
+dnf install i3 i3lock dmenu rofi
 # xfce
 #dnf group install -y "Xfce Desktop"
 
 # dev tools and command line things
-dnf group install -y "Development Tools"
+dnf install -y @development-tools
 
 # system utilities
 MY_PKGS+=" htop ntp pavucontrol util-linux-user gdouros-symbola-fonts"
@@ -45,10 +45,11 @@ MY_PKGS+=" htop ntp pavucontrol util-linux-user gdouros-symbola-fonts"
 # MY_PKGS+=" xfce4-time-out-plugin xfce4-verve-plugin xfce4-wavelan-plugin"
 # MY_PKGS+=" xfce4-weather-plugin xfce4-whiskermenu-plugin xfce4-xkb-plugin"
 
-# dev tools and command qline things
+# dev tools and command line things
 MY_PKGS+=" zsh git emacs the_silver_searcher"
 MY_PKGS+=" aspell aspell-en"
 MY_PKGS+=" elinks irssi wget curl"
+MK_PKGS+=" cmake gcc-c++ clang git"
 #dnf install -y powertop thinkfan
 
 # generally useful programs
