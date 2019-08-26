@@ -42,6 +42,7 @@ with import <nixpkgs>{};
 #       rofi-unwrapped
        scrot
        aspell
+       light
        ;
     inherit (pkgs.aspellDicts) en;
     # inherit (pkgs.xfce4-13)
@@ -103,10 +104,10 @@ with import <nixpkgs>{};
       numix-gtk-theme;
 
     inherit (pkgs)
-     font-awesome_5
-     hack-font
-     siji
-     unifont
-     ;
+      font-awesome_5
+      hack-font
+      siji
+      unifont
+      ;
 
 }
